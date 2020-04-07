@@ -1,13 +1,10 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "comment")
 public class Comment {
     private Long id;
     private String text;
@@ -16,7 +13,7 @@ public class Comment {
     private User user;
 
     @JsonBackReference(value = "post-comment")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     public Post getPost() {
         return post;

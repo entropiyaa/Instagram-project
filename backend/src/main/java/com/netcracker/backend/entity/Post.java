@@ -1,15 +1,12 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties("comments")
 public class Post {
     private Long id;
     private String photo;
