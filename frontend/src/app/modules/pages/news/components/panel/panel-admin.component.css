@@ -1,23 +1,18 @@
-.toolbar {
+.panel {
   font-family: 'Times New Roman', fantasy;
   background-color: #DB7093;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 60px;
   display: flex;
-  align-items: center;
-}
-
-.title {
-  margin-left: 2%;
-  font-size: 35px;
+  border-radius: 10px;
+  position: absolute;
+  left: 280px;
+  right: 280px;
 }
 
 .items {
   display: flex;
   list-style-type: none;
+  align-items: center;
 }
 
 .items li {
@@ -34,4 +29,10 @@
 
 .spacer {
   flex: 1;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-right: 2%;
 }

@@ -8,4 +8,15 @@ import {Post} from "../models/post";
 })
 export class PostService {
 
+  private postsUrl = '/api/posts';
+
+  constructor(private httpClient: HttpClient) {}
+
+  getPosts(): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(this.postsUrl + '/all');
+  }
+
+  getLatestPosts(): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(this.postsUrl+ '/last');
+  }
 }

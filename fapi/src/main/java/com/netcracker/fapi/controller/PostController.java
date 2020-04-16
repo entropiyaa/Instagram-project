@@ -1,9 +1,12 @@
-package com.netcracker.backend.controller;
+package com.netcracker.fapi.controller;
 
-import com.netcracker.backend.entity.Post;
-import com.netcracker.backend.service.PostService;
+import com.netcracker.fapi.entity.Post;
+import com.netcracker.fapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
@@ -12,11 +15,6 @@ public class PostController {
 
     @Autowired
     private PostService postService;
-
-    @RequestMapping(value = "/{description}", method = RequestMethod.GET)
-    public Post getPostByName(@PathVariable(name = "description") String description) {
-        return postService.find(description);
-    }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<Post> getAllPosts() {

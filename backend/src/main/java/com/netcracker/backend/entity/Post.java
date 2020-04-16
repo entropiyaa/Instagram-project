@@ -92,6 +92,7 @@ public class Post {
 
     @Basic
     @Column(name = "date")
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getDate() {
         return date;
     }

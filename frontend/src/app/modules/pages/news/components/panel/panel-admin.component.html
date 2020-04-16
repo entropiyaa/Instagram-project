@@ -1,0 +1,18 @@
+<div class="panel">
+  <ul class="items">
+    <li (click)="onSelect('all')">all</li>
+    <li (click)="onSelect('latest')">latest</li>
+    <li>subscriptions</li>
+  </ul>
+  <div class="spacer"></div>
+  <div class="search">
+    <label>
+      <input [(ngModel)]="username" placeholder="name"/>
+    </label>
+    <div class="button">
+      <button>search</button>
+    </div>
+  </div>
+</div>
+
+<!--(click)="onSelect()"-->
