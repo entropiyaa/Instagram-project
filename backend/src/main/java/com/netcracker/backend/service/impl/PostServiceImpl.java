@@ -4,6 +4,8 @@ import com.netcracker.backend.entity.Post;
 import com.netcracker.backend.repository.PostRepository;
 import com.netcracker.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,8 +30,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findAll() {
-        return postRepository.findAll();
+    public List<Post> findAll(int pageNumber, int pageSize) {
+        return postRepository.findAll(PageRequest.of(pageNumber, pageSize)).getContent();
     }
 
     @Override

@@ -3,9 +3,8 @@ package com.netcracker.fapi.controller;
 import com.netcracker.fapi.entity.Post;
 import com.netcracker.fapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +15,10 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<Post> getAllPosts() {
-        return postService.findAll();
+    @GetMapping(params = {"page", "size"})
+    public List<Post> getAllPosts(@RequestParam("page") int page,
+                                  @RequestParam("size") int size) {
+        return postService.findAll(page, size);
     }
 
     @RequestMapping(value = "/last", method = RequestMethod.GET)
