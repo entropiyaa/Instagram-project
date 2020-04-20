@@ -1,8 +1,9 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {PostService} from "../../../services/post.service";
 import {Post} from "../../../models/post";
 import {Subscription} from "rxjs";
-// import {Page} from "../../../models/page";
+import {DataService} from "../../../services/data.service";
+import {Item} from "../../../models/item";
 
 @Component({
   selector: 'app-post',
@@ -11,43 +12,74 @@ import {Subscription} from "rxjs";
 })
 export class PostComponent implements OnInit, OnDestroy, OnChanges {
 
-  // public pagePost: Page<Post>;
+  // @Input() selectedItem: string;
   public posts: Post[] = [];
-  public subscriptions: Subscription[] = [];
-  @Input() selectedItem: string;
+  private subscriptions: Subscription[] = [];
+  private selectedItem: Item;
+  public selectedPage;
 
   pageNumber: number = 0;
   pageSize: number = 1;
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private data: DataService) {
   }
 
   ngOnInit(): void {
-    this.getPosts();
+     this.subscriptions.push(this.data.currentItem.subscribe(item => { this.selectedItem = item;
+                                                                              this.changeByItem()}));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // this.changeByItem();
+      // this.changeByItem();
   }
 
-  changeByItem(): void {
-    // if(this.selectedItem == 'latest') {
-    //   this.getLatestPosts();
-    // } else {
-    //   this.getPosts();
-    // }
+  private changeByItem(): void {
+    this.pageNumber = 0;
+    if(this.selectedItem == Item.LATEST) {
+      this.getLatestPosts();
+    } else {
+      this.getPosts();
+    }
   }
 
-  getPosts(): void {
+  public getPosts(): void {
       this.subscriptions.push(this.postService.getPosts(this.pageNumber, this.pageSize)
-                                              .subscribe(posts => { this.posts = posts;
-                                              console.log(posts)}));
+                                              .subscribe(posts => { this.posts = posts; }));
   }
 
-  // getLatestPosts(): void {
-  //   this.subscriptions.push(this.postService.getLatestPosts().subscribe(posts => {
-  //     this.posts = posts; }));
-  // }
+  public getLatestPosts(): void {
+    this.subscriptions.push(this.postService.getLatestPosts(this.pageNumber, this.pageSize)
+                                            .subscribe(posts => { this.posts = posts; }));
+  }
+
+  public next(): void {
+    this.pageNumber++;
+    if(this.selectedItem == Item.ALL) {
+      this.getPosts();
+    } else {
+      this.getLatestPosts();
+    }
+  }
+
+  public previous(): void {
+    if(this.pageNumber > 0) {
+      this.pageNumber--;
+    }
+    if(this.selectedItem == Item.ALL) {
+      this.getPosts();
+    } else {
+      this.getLatestPosts();
+    }
+  }
+
+  public goOver(selectedPage: number): void {
+    this.pageNumber = selectedPage;
+    if(this.selectedItem == Item.ALL) {
+      this.getPosts();
+    } else {
+      this.getLatestPosts();
+    }
+  }
 
   ngOnDestroy() {
     this.subscriptions.forEach(

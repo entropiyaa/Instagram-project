@@ -21,8 +21,9 @@ public class PostController {
         return postService.findAll(page, size);
     }
 
-    @RequestMapping(value = "/last", method = RequestMethod.GET)
-    public List<Post> getPostsByDate() {
-        return postService.findAllByDate();
+    @GetMapping(value = "/last", params = {"page", "size"})
+    public List<Post> getPostsByDate(@RequestParam("page") int page,
+                                     @RequestParam("size") int size) {
+        return postService.findAllByDate(page, size);
     }
 }

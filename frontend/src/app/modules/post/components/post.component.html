@@ -4,3 +4,11 @@
     <div><img src="https://sun9-65.userapi.com/c851432/v851432781/122fe4/vaLtIp5MDV4.jpg" width="360" height="450" alt="Photo"></div>
   </li>
 </ul>
+<button (click)="previous()">previous</button>
+<button (click)="next()">next</button>
+<label>
+  <input [(ngModel)]="selectedPage" placeholder="number of page"/>
+</label>
+<button (click)="goOver(selectedPage)">go over</button>
+{{selectedPage}}
+<div>{{pageNumber}}</div>

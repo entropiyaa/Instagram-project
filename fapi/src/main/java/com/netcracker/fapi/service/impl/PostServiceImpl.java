@@ -25,16 +25,13 @@ public class PostServiceImpl implements PostService {
         String path = backendUrl + "/api/posts" + "?page=" + pageNumber + "&size=" + pageSize;
         Post[] posts = restTemplate.getForObject(path, Post[].class);
         return posts == null ? Collections.emptyList() : Arrays.asList(posts);
-
-
-//        return restTemplate.exchange(path, HttpMethod.GET, null,
-//                new ParameterizedTypeReference<RestResponsePage<Post>>() {}).getBody();
     }
 
     @Override
-    public List<Post> findAllByDate() {
+    public List<Post> findAllByDate(int pageNumber, int pageSize) {
         RestTemplate restTemplate = new RestTemplate();
-        Post[] posts = restTemplate.getForObject(backendUrl + "/api/posts/last", Post[].class);
+        String path = backendUrl + "/api/posts/last" + "?page=" + pageNumber + "&size=" + pageSize;
+        Post[] posts = restTemplate.getForObject(path, Post[].class);
         return posts == null ? Collections.emptyList() : Arrays.asList(posts);
     }
 }

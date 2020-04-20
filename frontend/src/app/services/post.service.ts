@@ -13,14 +13,17 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  getPosts(pageNumber: number, pageSize: number): Observable<Post[]> {
+  public getPosts(pageNumber: number, pageSize: number): Observable<Post[]> {
     const params = new HttpParams()
       .set('page', pageNumber.toString())
       .set('size', pageSize.toString());
     return this.http.get<Post[]>(this.postsUrl, {params});
   }
 
-  // getLatestPosts(): Observable<Post[]> {
-  //   return this.http.get<Post[]>(this.postsUrl+ '/last');
-  // }
+  public getLatestPosts(pageNumber: number, pageSize: number): Observable<Post[]> {
+    const params = new HttpParams()
+      .set('page', pageNumber.toString())
+      .set('size', pageSize.toString());
+    return this.http.get<Post[]>(this.postsUrl+ '/last', {params});
+  }
 }

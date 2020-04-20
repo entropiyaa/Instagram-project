@@ -7,15 +7,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-  selectedItem: string;
+  // selectedItem: string;
 
   constructor() {}
 
   ngOnInit(): void {
   }
 
-  onSelect(item: string) {
-    this.selectedItem = item;
-  }
+  // onSelect($event: string) {
+  //   this.selectedItem = $event;
+  // }
 
 }

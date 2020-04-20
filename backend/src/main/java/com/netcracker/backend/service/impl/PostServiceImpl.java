@@ -4,7 +4,6 @@ import com.netcracker.backend.entity.Post;
 import com.netcracker.backend.repository.PostRepository;
 import com.netcracker.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import java.util.Calendar;
@@ -35,12 +34,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findAllByDate() {
+    public List<Post> findAllByDate(int pageNumber, int pageSize) {
         Date currentDate = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
         calendar.add(Calendar.HOUR_OF_DAY, -12);
         Date limitDate = calendar.getTime();
-        return postRepository.findAllByDateBetween(limitDate, currentDate);
+        return postRepository.findAllByDateBetween(limitDate, currentDate,
+                PageRequest.of(pageNumber, pageSize)).getContent();
     }
 }

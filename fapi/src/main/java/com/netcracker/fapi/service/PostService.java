@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PostService {
     List<Post> findAll(int pageNumber, int pageSize);
-    List<Post> findAllByDate();
+    List<Post> findAllByDate(int pageNumber, int pageSize);
 }

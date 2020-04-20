@@ -3,7 +3,6 @@ package com.netcracker.backend.controller;
 import com.netcracker.backend.entity.Post;
 import com.netcracker.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -25,8 +24,9 @@ public class PostController {
         return postService.findAll(page, size);
     }
 
-    @RequestMapping(value = "/last", method = RequestMethod.GET)
-    public List<Post> getPostsByDate() {
-        return postService.findAllByDate();
+    @GetMapping(value = "/last", params = {"page", "size"})
+    public List<Post> getPostsByDate(@RequestParam("page") int page,
+                                     @RequestParam("size") int size) {
+        return postService.findAllByDate(page, size);
     }
 }
