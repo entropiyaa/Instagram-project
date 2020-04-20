@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { HeaderComponent } from "./components/header.component";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -7,6 +8,7 @@ import { HeaderComponent } from "./components/header.component";
     HeaderComponent
   ],
   imports: [
+    RouterModule
 
   ],
   providers: [],
