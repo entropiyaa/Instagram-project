@@ -1,6 +1,9 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.netcracker.backend.entity.enums.UserRole;
+import com.netcracker.backend.entity.enums.UserStatus;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,8 +14,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String bio;
-    private String role;
-    private String status;
+    private UserRole role;
+    private UserStatus status;
     private List<Post> posts;
     private List<Comment> comments;
     private List<Reaction> reactions;
@@ -122,21 +125,23 @@ public class User {
 
     @Basic
     @Column(name = "role")
-    public String getRole() {
+    @Enumerated(EnumType.STRING)
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
     @Basic
     @Column(name = "status")
-    public String getStatus() {
+    @Enumerated(EnumType.STRING)
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 }

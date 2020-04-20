@@ -1,6 +1,7 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.netcracker.backend.entity.enums.UserReaction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
 @Entity
 public class Reaction {
     private Long id;
-    private String reaction;
+    private UserReaction reaction;
     private Date date;
     private Post post;
     private User user;
@@ -47,11 +48,12 @@ public class Reaction {
 
     @Basic
     @Column(name  = "reaction")
-    public String getReaction() {
+    @Enumerated(EnumType.STRING)
+    public UserReaction getReaction() {
         return reaction;
     }
 
-    public void setReaction(String reaction) {
+    public void setReaction(UserReaction reaction) {
         this.reaction = reaction;
     }
 

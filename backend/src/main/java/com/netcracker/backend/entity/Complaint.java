@@ -1,6 +1,7 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.netcracker.backend.entity.enums.ComplainStatus;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,7 +11,7 @@ public class Complaint {
     private Long id;
     private String cause;
     private Date date;
-    private String status;
+    private ComplainStatus status;
     private Post post;
     private User user;
 
@@ -68,11 +69,12 @@ public class Complaint {
 
     @Basic
     @Column(name = "status")
-    public String getStatus() {
+    @Enumerated(EnumType.STRING)
+    public ComplainStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ComplainStatus status) {
         this.status = status;
     }
 }

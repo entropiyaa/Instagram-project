@@ -1,5 +1,8 @@
 package com.netcracker.fapi.entity;
 
+import com.netcracker.fapi.entity.enums.UserRole;
+import com.netcracker.fapi.entity.enums.UserStatus;
+
 import java.util.List;
 
 public class User {
@@ -8,8 +11,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String bio;
-    private String role;
-    private String status;
+    private UserRole role;
+    private UserStatus status;
     private List<Post> posts;
     private List<Comment> comments;
 //    private List<Reaction> reactions;
@@ -96,19 +99,19 @@ public class User {
         this.bio = bio;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 }
