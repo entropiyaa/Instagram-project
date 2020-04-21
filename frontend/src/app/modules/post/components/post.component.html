@@ -10,5 +10,4 @@
   <input [(ngModel)]="selectedPage" placeholder="number of page"/>
 </label>
 <button (click)="goOver(selectedPage)">go over</button>
-{{selectedPage}}
-<div>{{pageNumber}}</div>
+<div>{{(page.pageNumber+1)}}</div>

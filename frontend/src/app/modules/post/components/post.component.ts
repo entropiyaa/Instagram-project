@@ -4,6 +4,9 @@ import {Post} from "../../../models/post";
 import {Subscription} from "rxjs";
 import {DataService} from "../../../services/data.service";
 import {Item} from "../../../models/item";
+import {Page} from "../../../models/page";
+import {Sort} from "../../../models/sort";
+import {Order} from "../../../models/order";
 
 @Component({
   selector: 'app-post',
@@ -15,17 +18,19 @@ export class PostComponent implements OnInit, OnDestroy, OnChanges {
   // @Input() selectedItem: string;
   public posts: Post[] = [];
   private subscriptions: Subscription[] = [];
+  public page: Page = new Page();
   private selectedItem: Item;
   public selectedPage;
-
-  pageNumber: number = 0;
-  pageSize: number = 1;
 
   constructor(private postService: PostService, private data: DataService) {
   }
 
   ngOnInit(): void {
-     this.subscriptions.push(this.data.currentItem.subscribe(item => { this.selectedItem = item;
+    this.page.pageNumber = 1;
+    this.page.pageSize = 1;
+    this.page.sort = Sort.DATE;
+    this.page.order = Order.ASC;
+    this.subscriptions.push(this.data.currentItem.subscribe(item => { this.selectedItem = item;
                                                                               this.changeByItem()}));
   }
 
@@ -34,7 +39,7 @@ export class PostComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private changeByItem(): void {
-    this.pageNumber = 0;
+    this.page.pageNumber = 0;
     if(this.selectedItem == Item.LATEST) {
       this.getLatestPosts();
     } else {
@@ -43,17 +48,19 @@ export class PostComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public getPosts(): void {
-      this.subscriptions.push(this.postService.getPosts(this.pageNumber, this.pageSize)
-                                              .subscribe(posts => { this.posts = posts; }));
+      this.subscriptions.push(this.postService
+        .getPosts(this.page.pageNumber, this.page.pageSize, this.page.sort, this.page.order)
+        .subscribe(posts => { this.posts = posts; }));
   }
 
   public getLatestPosts(): void {
-    this.subscriptions.push(this.postService.getLatestPosts(this.pageNumber, this.pageSize)
-                                            .subscribe(posts => { this.posts = posts; }));
+    this.subscriptions.push(this.postService
+      .getLatestPosts(this.page.pageNumber, this.page.pageSize, this.page.sort, this.page.order)
+      .subscribe(posts => { this.posts = posts; }));
   }
 
   public next(): void {
-    this.pageNumber++;
+    this.page.pageNumber++;
     if(this.selectedItem == Item.ALL) {
       this.getPosts();
     } else {
@@ -62,8 +69,8 @@ export class PostComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public previous(): void {
-    if(this.pageNumber > 0) {
-      this.pageNumber--;
+    if(this.page.pageNumber > 0) {
+      this.page.pageNumber--;
     }
     if(this.selectedItem == Item.ALL) {
       this.getPosts();
@@ -73,7 +80,11 @@ export class PostComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public goOver(selectedPage: number): void {
-    this.pageNumber = selectedPage;
+    if(selectedPage <= 0) {
+      this.page.pageNumber = 0;
+    } else {
+      this.page.pageNumber = selectedPage - 1;
+    }
     if(this.selectedItem == Item.ALL) {
       this.getPosts();
     } else {

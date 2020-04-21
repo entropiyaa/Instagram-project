@@ -1,4 +1,4 @@
 export enum Item {
-  ALL = 'All',
-  LATEST = 'Latest'
+  ALL = 'all',
+  LATEST = 'latest'
 }

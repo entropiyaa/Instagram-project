@@ -6,6 +6,6 @@ import java.util.List;
 public interface PostService {
     Post find(String description);
     Post findByUserId(Long postId);
-    List<Post> findAll(int pageNumber, int pageSize);
-    List<Post> findAllByDate(int pageNumber, int pageSize);
+    List<Post> findAll(int pageNumber, int pageSize, String sortBy, String order);
+    List<Post> findAllByDate(int pageNumber, int pageSize, String sortBy, String order);
 }

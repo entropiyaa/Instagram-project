@@ -1,10 +1,9 @@
-// export interface Page<T> {
-//   content: T[];
-//   number: number;
-//   size: number;
-//   totalElement: number;
-//   last: boolean;
-//   totalPages: number;
-//   first: boolean;
-//   numberOfElement: number;
-// }
+import {Sort} from "./sort";
+import {Order} from "./order";
+
+export class Page {
+  pageNumber: number;
+  pageSize: number;
+  sort: Sort;
+  order: Order;
+}

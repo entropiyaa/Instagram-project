@@ -6,6 +6,6 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface PostService {
-    List<Post> findAll(int pageNumber, int pageSize);
-    List<Post> findAllByDate(int pageNumber, int pageSize);
+    List<Post> findAll(int pageNumber, int pageSize, String sortBy, String order);
+    List<Post> findAllByDate(int pageNumber, int pageSize, String sortBy, String order);
 }

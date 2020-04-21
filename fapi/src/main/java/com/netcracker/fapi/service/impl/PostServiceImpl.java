@@ -20,17 +20,19 @@ public class PostServiceImpl implements PostService {
     private String backendUrl;
 
     @Override
-    public List<Post> findAll(int pageNumber, int pageSize) {
+    public List<Post> findAll(int pageNumber, int pageSize, String sortBy, String order) {
         RestTemplate restTemplate = new RestTemplate();
-        String path = backendUrl + "/api/posts" + "?page=" + pageNumber + "&size=" + pageSize;
+        String path = backendUrl + "/api/posts" + "?page=" + pageNumber + "&size=" + pageSize
+                                                        + "&sort=" + sortBy + "&order=" + order;
         Post[] posts = restTemplate.getForObject(path, Post[].class);
         return posts == null ? Collections.emptyList() : Arrays.asList(posts);
     }
 
     @Override
-    public List<Post> findAllByDate(int pageNumber, int pageSize) {
+    public List<Post> findAllByDate(int pageNumber, int pageSize, String sortBy, String order) {
         RestTemplate restTemplate = new RestTemplate();
-        String path = backendUrl + "/api/posts/last" + "?page=" + pageNumber + "&size=" + pageSize;
+        String path = backendUrl + "/api/posts/last" + "?page=" + pageNumber + "&size=" + pageSize
+                                                            + "&sort=" + sortBy + "&order=" + order;
         Post[] posts = restTemplate.getForObject(path, Post[].class);
         return posts == null ? Collections.emptyList() : Arrays.asList(posts);
     }

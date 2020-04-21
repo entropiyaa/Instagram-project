@@ -18,15 +18,19 @@ public class PostController {
         return postService.find(description);
     }
 
-    @GetMapping(params = {"page", "size"})
+    @GetMapping(params = {"page", "size", "sort", "order"})
     public List<Post> getAllPosts( @RequestParam("page") int page,
-                                   @RequestParam("size") int size) {
-        return postService.findAll(page, size);
+                                   @RequestParam("size") int size,
+                                   @RequestParam("sort") String sortBy,
+                                   @RequestParam("order") String order) {
+        return postService.findAll(page, size, sortBy, order);
     }
 
-    @GetMapping(value = "/last", params = {"page", "size"})
+    @GetMapping(value = "/last", params = {"page", "size", "sort", "order"})
     public List<Post> getPostsByDate(@RequestParam("page") int page,
-                                     @RequestParam("size") int size) {
-        return postService.findAllByDate(page, size);
+                                     @RequestParam("size") int size,
+                                     @RequestParam("sort") String sortBy,
+                                     @RequestParam("order") String order) {
+        return postService.findAllByDate(page, size, sortBy, order);
     }
 }
