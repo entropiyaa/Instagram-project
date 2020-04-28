@@ -19,7 +19,7 @@ public class Post {
     private User user;
 
     @JsonManagedReference(value = "post-comment")
-    @OneToMany(mappedBy = "post", orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Comment> getComments() {
         return comments;
     }
@@ -29,7 +29,7 @@ public class Post {
     }
 
     @JsonManagedReference(value = "post-reaction")
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",  cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Reaction> getReactions() {
         return reactions;
     }
@@ -39,7 +39,7 @@ public class Post {
     }
 
     @JsonManagedReference(value = "post-complaint")
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",  cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Complaint> getComplaints() {
         return complaints;
     }
@@ -50,7 +50,8 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference(value = "user-post")
+//    @JsonBackReference(value = "user-post")
+    @JsonManagedReference(value = "user-post")
     public User getUser() {
         return user;
     }

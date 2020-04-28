@@ -13,7 +13,7 @@ public class Comment {
     private User user;
 
     @JsonBackReference(value = "post-comment")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     public Post getPost() {
         return post;
@@ -24,7 +24,7 @@ public class Comment {
     }
 
     @JsonBackReference(value = "user-comment")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;

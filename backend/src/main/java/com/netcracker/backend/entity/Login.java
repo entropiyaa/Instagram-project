@@ -13,7 +13,7 @@ public class Login {
     private User user;
 
     @JsonBackReference(value = "login-user")
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;

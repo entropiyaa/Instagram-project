@@ -46,4 +46,9 @@ public class PostController {
     public List<Post> getPostsByUserId(@RequestParam("user") Long userId) {
         return postService.findAllByUserId(userId);
     }
+
+    @DeleteMapping(value = "/{postId}")
+    public void deletePost(@PathVariable(name ="postId") Long postId) {
+        postService.delete(postId);
+    }
 }

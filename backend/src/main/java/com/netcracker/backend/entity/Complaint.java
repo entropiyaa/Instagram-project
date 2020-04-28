@@ -15,7 +15,7 @@ public class Complaint {
     private Post post;
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     @JsonBackReference(value = "post-complaint")
     public Post getPost() {
@@ -26,7 +26,7 @@ public class Complaint {
         this.post = post;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonBackReference(value = "user-complaint")
     public User getUser() {

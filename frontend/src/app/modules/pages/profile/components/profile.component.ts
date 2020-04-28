@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public getCurrentPosts(): void {
     this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(posts => {
       this.posts = posts;
+      console.log(posts);
     }));
   }
 

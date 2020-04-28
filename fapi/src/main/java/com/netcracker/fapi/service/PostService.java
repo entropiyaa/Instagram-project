@@ -11,4 +11,5 @@ public interface PostService {
     PageWrapper findAllByDate(int pageNumber, int pageSize, String sortBy, String order);
     List<Post> findAllByUserId(Long userId);
     Post save(Post post, Long userId);
+    void delete(Long postId);
 }

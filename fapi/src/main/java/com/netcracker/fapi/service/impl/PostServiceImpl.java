@@ -53,4 +53,10 @@ public class PostServiceImpl implements PostService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForEntity(backendUrl + "/api/posts" + "?user=" + userId, post, Post.class).getBody();
     }
+
+    @Override
+    public void delete(Long postId) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendUrl + "/api/posts/" + postId);
+    }
 }

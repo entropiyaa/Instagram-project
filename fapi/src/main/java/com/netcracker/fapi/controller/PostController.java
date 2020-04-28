@@ -45,4 +45,9 @@ public class PostController {
     public Post savePost(@RequestBody Post post, @RequestParam(name = "user") Long userId) {
         return postService.save(post, userId);
     }
+
+    @DeleteMapping(value = "/{postId}")
+    public void deletePost(@PathVariable(name = "postId") Long postId) {
+        postService.delete(postId);
+    }
 }

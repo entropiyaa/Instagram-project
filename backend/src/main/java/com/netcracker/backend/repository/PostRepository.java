@@ -17,4 +17,5 @@ public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
     Page<Post> findAllByDateBetween(Date limitDate, Date currentDate, Pageable pageable);
     Post save(Post post);
     List<Post> findAllByUserId(Long userId);
+    void deleteById(Long postId);
 }
