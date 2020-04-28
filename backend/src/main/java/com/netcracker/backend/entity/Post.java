@@ -19,7 +19,7 @@ public class Post {
     private User user;
 
     @JsonManagedReference(value = "post-comment")
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
     public List<Comment> getComments() {
         return comments;
     }
@@ -48,7 +48,7 @@ public class Post {
         this.complaints = complaints;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference(value = "user-post")
     public User getUser() {

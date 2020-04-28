@@ -15,6 +15,6 @@ import {PostModule} from "../../post/post.module";
     PostModule
   ],
   providers: [],
-  exports: [NewsComponent]
+  exports: [NewsComponent, PanelAdminComponent]
 })
 export class NewsModule {}

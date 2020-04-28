@@ -11,7 +11,6 @@ import {Item} from "../../../../../models/item";
 export class PanelAdminComponent implements OnInit, OnDestroy {
 
   public username: string;
-  // @Output() public selectedItem = new EventEmitter<string>();
   private subscriptions: Subscription[] = [];
   private selectedItem: Item;
   Item = Item;
@@ -21,10 +20,6 @@ export class PanelAdminComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(this.data.currentItem.subscribe(item => this.selectedItem = item));
   }
-
-  // onSelect(item: string) {
-  //   this.selectedItem.emit(item);
-  // }
 
   newItem(item: Item) {
     this.data.changeItem(item);

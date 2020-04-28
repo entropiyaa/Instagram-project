@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import {ProfileComponent} from "./components/profile.component";
+import {ImageLoadModule} from "../../image/image-load.module";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -7,7 +9,8 @@ import {ProfileComponent} from "./components/profile.component";
     ProfileComponent
   ],
   imports: [
-
+    ImageLoadModule,
+    CommonModule
   ],
   providers: [],
   exports: [ProfileComponent]

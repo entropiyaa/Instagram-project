@@ -7,4 +7,5 @@
   background-color: #f5f3f8;
   border-radius: 10px;
   height: 800px;
+  overflow-y: scroll;
 }

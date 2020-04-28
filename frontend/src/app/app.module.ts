@@ -9,6 +9,9 @@ import { FooterModule } from "./modules/footer/footer.module";
 import {PostModule} from "./modules/post/post.module";
 import {HttpClientModule} from "@angular/common/http";
 import {NewsModule} from "./modules/pages/news/news.module";
+import {ProfileModule} from "./modules/pages/profile/profile.module";
+import {LoginModule} from "./modules/pages/login/login.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import {NewsModule} from "./modules/pages/news/news.module";
     FooterModule,
     NewsModule,
     PostModule,
-    HttpClientModule
+    HttpClientModule,
+    ProfileModule,
+    LoginModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

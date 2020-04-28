@@ -1,13 +1,21 @@
 <ul class="posts">
-  <li *ngFor="let post of posts">
+  <li *ngFor="let post of page.content">
       <span class="badge">{{post.id}}</span> {{post.description}} {{post.date | date: 'medium'}}
     <div><img src="https://sun9-65.userapi.com/c851432/v851432781/122fe4/vaLtIp5MDV4.jpg" width="360" height="450" alt="Photo"></div>
   </li>
 </ul>
-<button (click)="previous()">previous</button>
-<button (click)="next()">next</button>
-<label>
-  <input [(ngModel)]="selectedPage" placeholder="number of page"/>
-</label>
-<button (click)="goOver(selectedPage)">go over</button>
-<div>{{(page.pageNumber+1)}}</div>
+<button [disabled]="page.pageNumber < 1" (click)="previous()" mat-icon-button>
+  <mat-icon>chevron_left</mat-icon>
+</button>
+<button [disabled]="page.pageNumber == page.totalPages-1" (click)="next()" mat-icon-button>
+  <mat-icon>chevron_right</mat-icon>
+</button>
+<mat-form-field>
+  <label>
+    <input [(ngModel)]="selectedPage" matInput placeholder="number of page">
+  </label>
+</mat-form-field>
+<button (click)="goOver(selectedPage)" mat-icon-button>
+  <mat-icon>arrow_forward</mat-icon>
+</button>
+{{page.pageNumber+1}}/{{page.totalPages}}

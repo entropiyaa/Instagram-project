@@ -9,6 +9,7 @@ footer {
   right: 0;
   flex-direction: column;
   box-sizing: border-box;
+  /*margin-top: 150px;*/
 }
 
 .text-muted {

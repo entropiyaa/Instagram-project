@@ -1,9 +1,12 @@
 package com.netcracker.backend.controller;
 
+import com.netcracker.backend.dto.pagination.PageWrapper;
 import com.netcracker.backend.entity.Post;
 import com.netcracker.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @RestController
@@ -13,24 +16,34 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping(value = "/{description}", method = RequestMethod.GET)
-    public Post getPostByName(@PathVariable(name = "description") String description) {
-        return postService.find(description);
+    @GetMapping(value = "/{postId}")
+    public Post getPostById(@PathVariable(name = "postId") Long postId) {
+        return postService.findById(postId);
     }
 
     @GetMapping(params = {"page", "size", "sort", "order"})
-    public List<Post> getAllPosts( @RequestParam("page") int page,
-                                   @RequestParam("size") int size,
-                                   @RequestParam("sort") String sortBy,
-                                   @RequestParam("order") String order) {
+    public PageWrapper<Post> getAllPosts(@RequestParam("page") int page,
+                                         @RequestParam("size") int size,
+                                         @RequestParam("sort") String sortBy,
+                                         @RequestParam("order") String order) {
         return postService.findAll(page, size, sortBy, order);
     }
 
-    @GetMapping(value = "/last", params = {"page", "size", "sort", "order"})
-    public List<Post> getPostsByDate(@RequestParam("page") int page,
+    @GetMapping(value = "/latest", params = {"page", "size", "sort", "order"})
+    public PageWrapper<Post> getPostsByDate(@RequestParam("page") int page,
                                      @RequestParam("size") int size,
                                      @RequestParam("sort") String sortBy,
                                      @RequestParam("order") String order) {
         return postService.findAllByDate(page, size, sortBy, order);
+    }
+
+    @PostMapping(params = {"user"})
+    public Post savePost(@RequestBody Post post, @RequestParam("user") Long userId) {
+        return postService.save(post, userId);
+    }
+
+    @GetMapping(params = {"user"})
+    public List<Post> getPostsByUserId(@RequestParam("user") Long userId) {
+        return postService.findAllByUserId(userId);
     }
 }

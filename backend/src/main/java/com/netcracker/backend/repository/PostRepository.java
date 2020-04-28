@@ -7,12 +7,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
-    Post findByDescription(String description);
     Optional<Post> findById(Long postId);
     Page<Post> findAll(Pageable pageable);
     Page<Post> findAllByDateBetween(Date limitDate, Date currentDate, Pageable pageable);
+    Post save(Post post);
+    List<Post> findAllByUserId(Long userId);
 }

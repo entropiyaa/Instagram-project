@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -15,8 +17,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
-    public User getUserByName(@PathVariable(name = "username") String userName) {
-        return userService.find(userName);
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable(name = "userId") Long userId) {
+        return userService.findById(userId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<User> getUsers() {
+        return userService.findAll();
     }
 }
