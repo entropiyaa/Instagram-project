@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public user: User = new User();
   public posts: Post[] = [];
+  public imgURL: any;
 
   constructor(private userService: UserService, private postService: PostService) {}
 
@@ -31,11 +32,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }));
   }
 
+  public onFileChanged(event) {
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = () => {
+      this.imgURL = reader.result;
+    };
+  }
+
   public savePost(): void {
     const post: Post = new Post();
     post.description = "test";
+    post.photo = this.imgURL;
+    post.user.id = this.user.id;
     console.log(post);
-    this.subscriptions.push(this.postService.savePost(post, this.user.id).subscribe(post => {
+    this.subscriptions.push(this.postService.savePost(post).subscribe(post => {
       console.log(post);
     }));
   }

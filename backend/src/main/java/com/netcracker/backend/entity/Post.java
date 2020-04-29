@@ -1,6 +1,5 @@
 package com.netcracker.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.Date;
@@ -48,10 +47,10 @@ public class Post {
         this.complaints = complaints;
     }
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "user_id")
-//    @JsonBackReference(value = "user-post")
-    @JsonManagedReference(value = "user-post")
+//    @JsonManagedReference(value = "user-post")
+//    @JsonIgnore
     public User getUser() {
         return user;
     }
@@ -71,6 +70,7 @@ public class Post {
         this.id = id;
     }
 
+    @Lob
     @Basic
     @Column(name = "photo")
     public String getPhoto() {

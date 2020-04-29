@@ -1,7 +1,7 @@
 <ul class="posts">
   <li *ngFor="let post of page.content">
       <span class="badge">{{post.id}}</span> {{post.user.username}} {{post.description}} {{post.date | date: 'medium'}}
-    <div><img src="https://sun9-65.userapi.com/c851432/v851432781/122fe4/vaLtIp5MDV4.jpg" width="360" height="450" alt="Photo"></div>
+    <div> <img [src]="post.photo"  width="360" height="450" alt="image"> </div>
   </li>
 </ul>
 <button [disabled]="page.pageNumber < 1" (click)="previous()" mat-icon-button>

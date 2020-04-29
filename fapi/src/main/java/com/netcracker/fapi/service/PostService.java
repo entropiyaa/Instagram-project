@@ -10,6 +10,6 @@ public interface PostService {
     PageWrapper findAll(int pageNumber, int pageSize, String sortBy, String order);
     PageWrapper findAllByDate(int pageNumber, int pageSize, String sortBy, String order);
     List<Post> findAllByUserId(Long userId);
-    Post save(Post post, Long userId);
+    Post save(Post post);
     void delete(Long postId);
 }

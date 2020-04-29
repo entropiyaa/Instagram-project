@@ -37,9 +37,9 @@ public class PostController {
         return postService.findAllByDate(page, size, sortBy, order);
     }
 
-    @PostMapping(params = {"user"})
-    public Post savePost(@RequestBody Post post, @RequestParam("user") Long userId) {
-        return postService.save(post, userId);
+    @PostMapping()
+    public Post savePost(@RequestBody Post post) {
+        return postService.save(post);
     }
 
     @GetMapping(params = {"user"})

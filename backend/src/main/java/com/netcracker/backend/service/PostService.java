@@ -9,7 +9,7 @@ public interface PostService {
     Post findById(Long postId);
     PageWrapper<Post> findAll(int pageNumber, int pageSize, String sortBy, String order);
     PageWrapper<Post> findAllByDate(int pageNumber, int pageSize, String sortBy, String order);
-    Post save(Post post, Long userId);
+    Post save(Post post);
     List<Post> findAllByUserId(Long userId);
     void delete(Long postId);
 }

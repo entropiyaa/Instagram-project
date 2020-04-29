@@ -49,9 +49,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post save(Post post, Long userId) {
+    public Post save(Post post) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(backendUrl + "/api/posts" + "?user=" + userId, post, Post.class).getBody();
+        return restTemplate.postForEntity(backendUrl + "/api/posts", post, Post.class).getBody();
     }
 
     @Override

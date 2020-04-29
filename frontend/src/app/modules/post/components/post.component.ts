@@ -49,22 +49,18 @@ export class PostComponent implements OnInit, OnDestroy, OnChanges {
   public getPosts(): void {
       this.subscriptions.push(this.postService
         .getPosts(this.page.pageNumber, this.page.pageSize, this.page.sort, this.page.order)
-        .subscribe(postPage => { this.page.content = postPage.content;
+        .subscribe(postPage => {  console.log(postPage);
+                                       this.page.content = postPage.content;
                                        this.page.totalPages = postPage.totalPages; }));
   }
 
   public getLatestPosts(): void {
     this.subscriptions.push(this.postService
       .getLatestPosts(this.page.pageNumber, this.page.pageSize, this.page.sort, this.page.order)
-      .subscribe(postPage => { this.page.content = postPage.content;
+      .subscribe(postPage => { console.log(postPage);
+                                     this.page.content = postPage.content;
                                      this.page.totalPages = postPage.totalPages; }));
   }
-
-  // public addPost(): void {
-  //   this.subscriptions.push(this.postService.savePost(this.post).subscribe(() => {
-  //
-  //   }));
-  // }
 
   public next(): void {
     if(this.page.pageNumber < this.page.totalPages - 1) {

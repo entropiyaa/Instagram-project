@@ -41,9 +41,9 @@ public class PostController {
         return postService.findAllByUserId(userId);
     }
 
-    @PostMapping(params = {"user"})
-    public Post savePost(@RequestBody Post post, @RequestParam(name = "user") Long userId) {
-        return postService.save(post, userId);
+    @PostMapping()
+    public Post savePost(@RequestBody Post post) {
+        return postService.save(post);
     }
 
     @DeleteMapping(value = "/{postId}")

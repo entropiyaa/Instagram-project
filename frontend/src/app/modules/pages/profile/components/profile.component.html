@@ -1,12 +1,16 @@
 <div class="content" role="main">
   <h1>Profile!!</h1>
   {{user.username}}
-<!--  <app-image-load></app-image-load>-->
   <ul class="posts">
     <li *ngFor="let post of posts">
-      <span class="badge">{{post.id}}</span> {{post.description}} {{post.date | date: 'medium'}}
-      <div><img src="https://sun9-65.userapi.com/c851432/v851432781/122fe4/vaLtIp5MDV4.jpg" width="360" height="450" alt="Photo"></div>
+      <span class="badge">{{post.id}}</span> {{post.user.username}} {{post.description}} {{post.date | date: 'medium'}}
+      <div> <img [src]="post.photo"  width="360" height="450" alt="image"> </div>
     </li>
   </ul>
+  Добавление поста
+  <div>
+    <input type="file" (change)="onFileChanged($event)">
+    <img [src]="imgURL" width="360" height="450" *ngIf="imgURL" alt="image">
+  </div>
   <button (click)="savePost()">Save post</button>
 </div>

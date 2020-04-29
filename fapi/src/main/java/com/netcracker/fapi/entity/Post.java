@@ -58,7 +58,7 @@ public class Post {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(String  photo) {
         this.photo = photo;
     }
 
