@@ -6,12 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from "./modules/header/header.module";
 import { FooterModule } from "./modules/footer/footer.module";
-import {PostModule} from "./modules/post/post.module";
+import {PostsModule} from "./modules/posts/posts.module";
 import {HttpClientModule} from "@angular/common/http";
 import {NewsModule} from "./modules/pages/news/news.module";
 import {ProfileModule} from "./modules/pages/profile/profile.module";
 import {LoginModule} from "./modules/pages/login/login.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PostModule} from "./modules/post/post.module";
 
 @NgModule({
   declarations: [
@@ -24,11 +25,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     HeaderModule,
     FooterModule,
     NewsModule,
-    PostModule,
+    PostsModule,
     HttpClientModule,
     ProfileModule,
     LoginModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PostModule
   ],
   providers: [],
   bootstrap: [AppComponent]

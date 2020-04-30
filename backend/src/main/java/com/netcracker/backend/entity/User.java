@@ -45,8 +45,9 @@ public class User {
         this.posts = posts;
     }
 
-    @JsonManagedReference(value = "user-comment")
+//    @JsonBackReference(value = "user-comments")
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     public List<Comment> getComments() {
         return comments;
     }

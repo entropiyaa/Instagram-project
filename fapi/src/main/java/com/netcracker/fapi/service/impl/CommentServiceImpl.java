@@ -7,6 +7,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -24,23 +26,25 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> findAll() {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(backendUrl + "/api/comments/all", List.class);
+        Comment[] comments = restTemplate.getForObject(backendUrl + "/api/comments", Comment[].class);
+        return comments == null ? Collections.emptyList() : Arrays.asList(comments);
     }
 
     @Override
     public List<Comment> findAllByPostId(Long postId) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(backendUrl + "/api/comments/byPost/" + postId, List.class);
+        Comment[] comments = restTemplate.getForObject(backendUrl + "/api/comments?post=" + postId, Comment[].class);
+        return comments == null ? Collections.emptyList() : Arrays.asList(comments);
     }
 
     @Override
-    public Comment addComment(Comment comment) {
+    public Comment save(Comment comment) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(backendUrl + "/api/comments/", comment, Comment.class);
+        return restTemplate.postForObject(backendUrl + "/api/comments", comment, Comment.class);
     }
 
     @Override
-    public void deleteCommentById(Long commentId) {
+    public void delete(Long commentId) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendUrl + "/api/comments/" + commentId);
     }

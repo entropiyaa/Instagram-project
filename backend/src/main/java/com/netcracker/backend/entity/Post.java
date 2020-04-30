@@ -47,7 +47,7 @@ public class Post {
         this.complaints = complaints;
     }
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id")
 //    @JsonManagedReference(value = "user-post")
 //    @JsonIgnore

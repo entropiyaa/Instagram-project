@@ -48,6 +48,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     console.log(post);
     this.subscriptions.push(this.postService.savePost(post).subscribe(post => {
       console.log(post);
+      this.posts.push(post);
+      this.imgURL = null;
     }));
   }
 

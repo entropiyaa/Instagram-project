@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {Comment} from "../../../models/comment";
 import {CommentService} from "../../../services/comment.service";
 
 @Component({
@@ -16,6 +15,13 @@ export class CommentComponent implements OnInit, OnDestroy {
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {
+    this.getCommentsByPostId(25);
+  }
+
+  public getCommentsByPostId(postId: number): void {
+    this.subscriptions.push(this.commentService.getCommentsByPostId(postId).subscribe(comments => {
+      this.comments = comments;
+    }));
   }
 
   ngOnDestroy() {

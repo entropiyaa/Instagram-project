@@ -1,16 +1,15 @@
-<div class="content" role="main">
-  <h1>Profile!!</h1>
-  {{user.username}}
-  <ul class="posts">
-    <li *ngFor="let post of posts">
-      <span class="badge">{{post.id}}</span> {{post.user.username}} {{post.description}} {{post.date | date: 'medium'}}
-      <div> <img [src]="post.photo"  width="360" height="450" alt="image"> </div>
-    </li>
-  </ul>
-  Добавление поста
-  <div>
-    <input type="file" (change)="onFileChanged($event)">
-    <img [src]="imgURL" width="360" height="450" *ngIf="imgURL" alt="image">
-  </div>
-  <button (click)="savePost()">Save post</button>
+<h1>Profile!!</h1>
+{{user.username}}
+<ul class="posts">
+  <li *ngFor="let post of posts">
+    <span class="badge">{{post.id}}</span> {{post.user.username}} {{post.description}} {{post.date | date: 'medium'}}
+    <div> <img [src]="post.photo"  width="360" height="450" alt="image"> </div>
+  </li>
+</ul>
+Добавление поста
+<div>
+  <input type="file" (change)="onFileChanged($event)">
+  <img [src]="imgURL" width="360" height="450" *ngIf="imgURL" alt="image">
 </div>
+<button (click)="savePost()">Save post</button>
+

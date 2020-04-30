@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import {ProfileComponent} from "./components/profile.component";
 import {CommonModule} from "@angular/common";
+import {PostsModule} from "../../posts/posts.module";
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import {CommonModule} from "@angular/common";
     ProfileComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PostsModule
   ],
   providers: [],
   exports: [ProfileComponent]

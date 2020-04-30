@@ -37,10 +37,9 @@ export class PostService {
     return this.http.get<Post[]>(this.postsUrl+'?user=' + userId);
   }
 
-  // public savePost(post: Post, userId: number): Observable<Post> {
-  //   const params = new HttpParams().set('user', userId.toString());
-  //   return this.http.post<Post>(this.postsUrl, post, {params});
-  // }
+  public getPost(postId: number): Observable<Post> {
+    return this.http.get<Post>(this.postsUrl + '/' + postId);
+  }
 
   public savePost(post: Post): Observable<Post> {
     return this.http.post<Post>(this.postsUrl, post);

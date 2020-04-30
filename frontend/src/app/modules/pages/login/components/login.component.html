@@ -1,8 +1,7 @@
-<div class="content" role="main">
-  <h1>Login component!!</h1>
-  <label>
-    <input [(ngModel)]="userId" placeholder="user">
-  </label>
-  <button (click)="onClick(userId)">Select</button>
-  <p *ngIf="this.userId">{{user.id}} {{user.username}}</p>
-</div>
+<h1>Login component!!</h1>
+<label>
+  <input [(ngModel)]="userId" placeholder="user">
+</label>
+<button (click)="onClick(userId)">Select</button>
+<p *ngIf="this.userId">{{user.id}} {{user.username}}</p>
+

@@ -14,28 +14,28 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = "/{commentId}", method = RequestMethod.GET)
-    public Comment getCommentsById(@PathVariable(name = "commentId") Long commentId) {
+    @GetMapping(value = "/{commentId}")
+    public Comment getCommentById(@PathVariable(name = "commentId") Long commentId) {
         return commentService.findById(commentId);
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @GetMapping
     public List<Comment> getAllComments() {
         return commentService.findAll();
     }
 
-    @RequestMapping(value = "/byPost/{postId}", method = RequestMethod.GET)
-    public List<Comment> getCommentsByPost(@PathVariable(name = "postId") Long postId) {
+    @GetMapping(params = {"post"})
+    public List<Comment> getCommentsByPost(@RequestParam("post") Long postId) {
         return commentService.findAllByPostId(postId);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Comment addComment(@RequestBody Comment comment) {
-        return commentService.addComment(comment);
+    @PostMapping
+    public Comment saveComment(@RequestBody Comment comment) {
+        return commentService.save(comment);
     }
 
-    @RequestMapping(value = "/{commentId}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{commentId}")
     public void deleteComment(@PathVariable(name = "commentId") Long commentId) {
-        commentService.deleteCommentById(commentId);
+        commentService.delete(commentId);
     }
 }

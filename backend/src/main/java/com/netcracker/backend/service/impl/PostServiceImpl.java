@@ -31,7 +31,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post findById(Long postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
-        return optionalPost.orElse(null);
+        if(!optionalPost.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found");
+        }
+        return optionalPost.get();
     }
 
     @Override
@@ -66,6 +69,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(Post post) {
+//        User user = userService.findById(post.getUser().getId());
+//        post.setUser(user);
+//        Date date = new Date();
+//        post.setDate(date);
+//        return postRepository.save(post);
+        if(post.getUser() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(user) is missing");
+        }
         User user = userService.findById(post.getUser().getId());
         post.setUser(user);
         Date date = new Date();

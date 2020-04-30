@@ -1,6 +1,8 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,8 +25,8 @@ public class Comment {
         this.post = post;
     }
 
-    @JsonBackReference(value = "user-comment")
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @JsonManagedReference(value = "user-comments")
+    @ManyToOne
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;

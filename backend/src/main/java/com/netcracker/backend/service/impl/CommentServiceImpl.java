@@ -45,16 +45,22 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment addComment(Comment comment) {
+    public Comment save(Comment comment) {
+        if(comment.getPost() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(post) is missing");
+        }
         Post post = postService.findById(comment.getPost().getId());
         comment.setPost(post);
+        if(comment.getUser() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(user) is missing");
+        }
         User user = userService.findById(comment.getUser().getId());
         comment.setUser(user);
         return commentRepository.save(comment);
     }
 
     @Override
-    public void deleteCommentById(Long commentId) {
+    public void delete(Long commentId) {
         commentRepository.deleteById(commentId);
     }
 }
