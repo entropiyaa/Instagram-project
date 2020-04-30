@@ -10,6 +10,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {CommentModule} from "../comment/comment.module";
+import {PostModule} from "../post/post.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {CommentModule} from "../comment/comment.module";
     MatFormFieldModule,
     MatInputModule,
     CommentModule,
+    PostModule,
   ],
   providers: [PostService],
   exports: [PostsComponent]

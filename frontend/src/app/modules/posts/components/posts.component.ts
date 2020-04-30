@@ -23,7 +23,6 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   public selectedPage;
   public post: Post = new Post();
   private user: User = new User();
-  public currentPosts: Post[] = [];
 
   constructor(private postService: PostService, private data: DataService, private userService: UserService) {
   }
@@ -61,19 +60,6 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe(postPage => { console.log(postPage);
                                      this.page.content = postPage.content;
                                      this.page.totalPages = postPage.totalPages; }));
-  }
-
-  public getCurrentPosts(userId: number): void {
-    this.subscriptions.push(this.postService.getPostsByUserId(userId).subscribe(posts => {
-      this.currentPosts = posts;
-      console.log(posts);
-    }));
-  }
-
-  public getPost(postId: number): void {
-    this.subscriptions.push(this.postService.getPost(postId).subscribe(post => {
-      this.post = post;
-      }));
   }
 
   public next(): void {

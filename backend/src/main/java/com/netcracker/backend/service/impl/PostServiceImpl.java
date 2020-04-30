@@ -69,11 +69,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(Post post) {
-//        User user = userService.findById(post.getUser().getId());
-//        post.setUser(user);
-//        Date date = new Date();
-//        post.setDate(date);
-//        return postRepository.save(post);
         if(post.getUser() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(user) is missing");
         }

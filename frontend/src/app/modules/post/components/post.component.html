@@ -1,2 +1,4 @@
-{{post.id}} {{post.user.username}} {{post.description}} {{post.date | date: 'medium'}}
-<div> <img [src]="post.photo"  width="360" height="450" alt="image"> </div>
+<div class="post">
+  {{post?.id}} {{post?.user?.username}} {{post?.description}} {{post?.date | date: 'medium'}}
+  <div> <img [src]="post.photo"  width="360" height="450" alt="image"> </div>
+</div>
