@@ -7,5 +7,5 @@ export class Page<T> {
   pageNumber: number = 0;
   pageSize: number = 2;
   sort: Sort = Sort.DATE;
-  order: Order = Order.ASC;
+  order: Order = Order.DESC;
 }

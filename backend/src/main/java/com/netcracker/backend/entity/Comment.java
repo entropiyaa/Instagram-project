@@ -15,7 +15,7 @@ public class Comment {
     private User user;
 
     @JsonBackReference(value = "post-comment")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     public Post getPost() {
         return post;
@@ -25,7 +25,6 @@ public class Comment {
         this.post = post;
     }
 
-//    @JsonManagedReference(value = "user-comments")
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User getUser() {

@@ -34,7 +34,6 @@ public class User {
         this.login = login;
     }
 
-//    @JsonBackReference(value = "user-post")
     @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     public List<Post> getPosts() {
@@ -45,7 +44,6 @@ public class User {
         this.posts = posts;
     }
 
-//    @JsonBackReference(value = "user-comments")
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     public List<Comment> getComments() {

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import {PostComponent} from "./components/post.component";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
+import {CommentModule} from "../comment/comment.module";
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {RouterModule} from "@angular/router";
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    CommentModule
   ],
   providers: [],
   exports: [PostComponent]

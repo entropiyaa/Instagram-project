@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import {CommentComponent} from "./components/comment.component";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -7,6 +8,7 @@ import {CommentComponent} from "./components/comment.component";
     CommentComponent
   ],
   imports: [
+    CommonModule
 
   ],
   providers: [],

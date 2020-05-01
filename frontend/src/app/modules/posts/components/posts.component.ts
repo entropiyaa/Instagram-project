@@ -21,7 +21,7 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   public page: Page<Post> = new Page();
   private selectedItem: Item;
   public selectedPage;
-  public post: Post = new Post();
+  // public post: Post = new Post();
   private user: User = new User();
 
   constructor(private postService: PostService, private data: DataService, private userService: UserService) {

@@ -1,6 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {CommentService} from "../../../services/comment.service";
+import {Comment} from "../../../models/comment";
 
 @Component({
   selector: 'app-comment',
@@ -9,18 +10,19 @@ import {CommentService} from "../../../services/comment.service";
 })
 export class CommentComponent implements OnInit, OnDestroy {
 
-  public comments: Comment[] = [];
   private subscriptions: Subscription[] = [];
+  @Input() public commentId: number;
+  public comment: Comment = new Comment();
 
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {
-    this.getCommentsByPostId(25);
+    this.getComment();
   }
 
-  public getCommentsByPostId(postId: number): void {
-    this.subscriptions.push(this.commentService.getCommentsByPostId(postId).subscribe(comments => {
-      this.comments = comments;
+  public getComment(): void {
+    this.subscriptions.push(this.commentService.getComment(this.commentId).subscribe(comment => {
+      this.comment = comment;
     }));
   }
 

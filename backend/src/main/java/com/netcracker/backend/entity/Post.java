@@ -49,8 +49,6 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-//    @JsonManagedReference(value = "user-post")
-//    @JsonIgnore
     public User getUser() {
         return user;
     }
