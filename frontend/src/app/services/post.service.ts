@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Post} from "../models/post";
-import {Sort} from "../models/sort";
-import {Order} from "../models/order";
 import {Page} from "../models/page";
 
 @Injectable({
@@ -15,26 +13,20 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  public getPosts(pageNumber: number, pageSize: number, sort: Sort, order: Order): Observable<Page<Post>> {
-    const params = new HttpParams()
-      .set('page', pageNumber.toString())
-      .set('size', pageSize.toString())
-      .set('sort', sort.toString())
-      .set('order', order.toString());
+  public getPosts(page: Page<Post>): Observable<Page<Post>> {
+    const params = PostService.getParams(page);
     return this.http.get<Page<Post>>(this.postsUrl, {params});
   }
 
-  public getLatestPosts(pageNumber: number, pageSize: number, sort: Sort, order: Order): Observable<Page<Post>> {
-    const params = new HttpParams()
-      .set('page', pageNumber.toString())
-      .set('size', pageSize.toString())
-      .set('sort', sort.toString())
-      .set('order', order.toString());
+  public getLatestPosts(page: Page<Post>): Observable<Page<Post>> {
+    const params = PostService.getParams(page);
     return this.http.get<Page<Post>>(this.postsUrl+ '/latest', {params});
   }
 
-  public getPostsByUserId(userId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(this.postsUrl+'?user=' + userId);
+  public getPostsByUserId(userId: number, page: Page<Post>): Observable<Page<Post>> {
+    const params = PostService.getParams(page);
+    params.set('user', userId.toString());
+    return this.http.get<Page<Post>>(this.postsUrl, {params});
   }
 
   public getPost(postId: number): Observable<Post> {
@@ -43,5 +35,13 @@ export class PostService {
 
   public savePost(post: Post): Observable<Post> {
     return this.http.post<Post>(this.postsUrl, post);
+  }
+
+  private static getParams(page: Page<Post>): HttpParams {
+    return new HttpParams()
+      .set('page', page.pageNumber.toString())
+      .set('size', page.pageSize.toString())
+      .set('sort', page.sort.toString())
+      .set('order', page.order.toString());
   }
 }

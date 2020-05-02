@@ -4,6 +4,7 @@ import {UserService} from "../../../../services/user.service";
 import {Subscription} from "rxjs";
 import {Post} from "../../../../models/post";
 import {PostService} from "../../../../services/post.service";
+import {Page} from "../../../../models/page";
 
 @Component({
   selector: 'app-profile',
@@ -13,22 +14,24 @@ import {PostService} from "../../../../services/post.service";
 export class ProfileComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
+  public page: Page<Post> = new Page();
   public user: User = new User();
-  public posts: Post[] = [];
   public imgURL: any;
 
-  constructor(private userService: UserService, private postService: PostService) {}
+  constructor(private userService: UserService,
+              private postService: PostService) {}
 
   ngOnInit(): void {
     this.subscriptions.push(this.userService.getUser(2).subscribe(user => {
       this.user = user;
-      this.getCurrentPosts(); }));
+      this.getPostsByUserId(); }));
   }
 
-  public getCurrentPosts(): void {
-    this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(posts => {
-      this.posts = posts;
-      console.log(posts);
+  public getPostsByUserId(): void {
+    this.subscriptions.push(this.postService.getPostsByUserId(this.user.id, this.page).subscribe(page => {
+      this.page.content = page.content;
+      this.page.totalPages = page.totalPages;
+      console.log(page);
     }));
   }
 
@@ -48,9 +51,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     console.log(post);
     this.subscriptions.push(this.postService.savePost(post).subscribe(post => {
       console.log(post);
-      this.posts.push(post);
+      this.getPostsByUserId();
       this.imgURL = null;
     }));
+  }
+
+  onChanged(): void {
+    this.getPostsByUserId();
   }
 
   ngOnDestroy() {

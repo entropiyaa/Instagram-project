@@ -42,10 +42,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findAllByUserId(Long userId) {
+    public PageWrapper findAllByUserId(Long id, int pageNumber, int pageSize, String sortBy, String order) {
         RestTemplate restTemplate = new RestTemplate();
-        Post[] posts = restTemplate.getForObject(backendUrl + "api/posts?user=" + userId, Post[].class);
-        return posts == null ? Collections.emptyList() : Arrays.asList(posts);
+        String path = backendUrl + "/api/posts?user=" + id + "&page=" + pageNumber + "&size=" + pageSize
+                + "&sort=" + sortBy + "&order=" + order;
+        return restTemplate.getForObject(path, PageWrapper.class);
     }
 
     @Override

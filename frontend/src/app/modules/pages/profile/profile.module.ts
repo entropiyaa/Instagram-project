@@ -4,6 +4,7 @@ import {CommonModule} from "@angular/common";
 import {PostsModule} from "../../posts/posts.module";
 import {RouterModule} from "@angular/router";
 import {PostModule} from "../../post/post.module";
+import {PagingModule} from "../../paging/paging.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {PostModule} from "../../post/post.module";
     CommonModule,
     PostsModule,
     RouterModule,
-    PostModule
+    PostModule,
+    PagingModule
   ],
   providers: [],
   exports: [ProfileComponent]

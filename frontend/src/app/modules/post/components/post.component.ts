@@ -13,15 +13,13 @@ import {switchMap} from "rxjs/operators";
 export class PostComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  public post: Post = new Post();
-  @Input() public postId: number;
+  @Input() public post: Post = new Post();
+  public postId: number;
 
   constructor(private postService: PostService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.getRouteParam();
-    this.getPost();
   }
 
   public getPost(): void {

@@ -4,6 +4,6 @@
 </div>
 <ul class="comments">
   <li *ngFor="let comment of post.comments">
-      <app-comment [commentId]="comment.id"></app-comment>
+      <app-comment [comment]="comment"></app-comment>
   </li>
 </ul>

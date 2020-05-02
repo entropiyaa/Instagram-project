@@ -42,9 +42,13 @@ public class PostController {
         return postService.save(post);
     }
 
-    @GetMapping(params = {"user"})
-    public List<Post> getPostsByUserId(@RequestParam("user") Long userId) {
-        return postService.findAllByUserId(userId);
+    @GetMapping(params = {"user", "page", "size", "sort", "order"})
+    public PageWrapper<Post> getPostsByUserId(@RequestParam("user") Long id,
+                                              @RequestParam("page") int page,
+                                              @RequestParam("size") int size,
+                                              @RequestParam("sort") String sortBy,
+                                              @RequestParam("order") String order) {
+        return postService.findAllByUserId(id, page, size, sortBy, order);
     }
 
     @DeleteMapping(value = "/{postId}")

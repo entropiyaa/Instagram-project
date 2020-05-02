@@ -11,6 +11,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {CommentModule} from "../comment/comment.module";
 import {PostModule} from "../post/post.module";
+import {PagingModule} from "../paging/paging.module";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {PostModule} from "../post/post.module";
     MatInputModule,
     CommentModule,
     PostModule,
+    PagingModule,
   ],
   providers: [PostService],
   exports: [PostsComponent]

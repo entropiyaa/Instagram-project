@@ -11,13 +11,12 @@ import {Comment} from "../../../models/comment";
 export class CommentComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  @Input() public commentId: number;
-  public comment: Comment = new Comment();
+  public commentId: number;
+  @Input() public comment: Comment = new Comment();
 
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {
-    this.getComment();
   }
 
   public getComment(): void {

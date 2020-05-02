@@ -80,8 +80,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findAllByUserId(Long userId) {
-        return postRepository.findAllByUserId(userId);
+    public PageWrapper<Post> findAllByUserId(Long id, int pageNumber, int pageSize, String sortBy, String order) {
+        PageRequest pageRequest = this.createRequest(pageNumber, pageSize, sortBy, order);
+        Page<Post> page = postRepository.findAllByUserId(id, pageRequest);
+        return new PageWrapper<>(page.getContent(), page.getTotalPages());
     }
 
     @Override
