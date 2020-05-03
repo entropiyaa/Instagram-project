@@ -1,9 +1,14 @@
 <div class="post">
   {{post?.id}} {{post?.user?.username}} {{post?.description}} {{post?.date | date: 'medium'}}
-  <div> <img [src]="post.photo"  width="360" height="450" alt="image"> </div>
+  <div>
+    <img [src]="post.photo"  width="360" height="450" alt="image">
+    <button (click)="deletePost(post)">delete</button>
+  </div>
+<!--  {{post?.comments?.length}} comments-->
 </div>
-<ul class="comments">
-  <li *ngFor="let comment of post.comments">
-      <app-comment [comment]="comment"></app-comment>
-  </li>
-</ul>
+<div class="comments">
+<!--  <app-comment [comments]="post.comments"-->
+<!--               [postId]="post.id">-->
+<!--  </app-comment>-->
+  <app-comment [postId]="post.id"></app-comment>
+</div>

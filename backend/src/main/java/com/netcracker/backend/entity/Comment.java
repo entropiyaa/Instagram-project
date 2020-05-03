@@ -1,12 +1,12 @@
 package com.netcracker.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Comment {
     private Long id;
     private String text;
@@ -14,9 +14,9 @@ public class Comment {
     private Post post;
     private User user;
 
-    @JsonBackReference(value = "post-comment")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Post getPost() {
         return post;
     }

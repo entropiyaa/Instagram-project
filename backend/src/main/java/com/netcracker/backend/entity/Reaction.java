@@ -14,7 +14,7 @@ public class Reaction {
     private Post post;
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     @JsonBackReference(value = "post-reaction")
     public Post getPost() {
@@ -25,7 +25,7 @@ public class Reaction {
         this.post = post;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference(value = "user-reaction")
     public User getUser() {

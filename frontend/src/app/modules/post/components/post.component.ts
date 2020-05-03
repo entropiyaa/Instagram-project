@@ -34,6 +34,12 @@ export class PostComponent implements OnInit, OnDestroy {
         params.getAll('id'))).subscribe(data => this.postId = +data ));
   }
 
+  public deletePost(post: Post): void {
+    this.subscriptions.push(this.postService.deletePost(post.id).subscribe(() => {
+      console.log("delete post!!");
+    }));
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach(
       (subscription) => subscription.unsubscribe());

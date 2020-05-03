@@ -9,18 +9,9 @@ public class Post {
     private String description;
     private Date date;
     private String hashtag;
-    private List<Comment> comments;
 //    private List<Reaction> reactions;
 //    private List<Complaint> complaints;
     private User user;
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 
 //    public List<Reaction> getReactions() {
 //        return reactions;

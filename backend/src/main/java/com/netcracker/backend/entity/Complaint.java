@@ -15,7 +15,7 @@ public class Complaint {
     private Post post;
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     @JsonBackReference(value = "post-complaint")
     public Post getPost() {
@@ -26,7 +26,7 @@ public class Complaint {
         this.post = post;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference(value = "user-complaint")
     public User getUser() {

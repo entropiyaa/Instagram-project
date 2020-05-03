@@ -8,5 +8,5 @@ export class Post {
   date: string;
   hashtag: string[];
   user: User = new User();
-  comments: Comment[] = [];
+  // comments: Comment[] = [];
 }

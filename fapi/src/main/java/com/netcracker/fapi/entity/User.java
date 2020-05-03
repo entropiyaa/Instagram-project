@@ -14,7 +14,6 @@ public class User {
     private UserRole role;
     private UserStatus status;
     private List<Post> posts;
-    private List<Comment> comments;
 //    private List<Reaction> reactions;
 //    private List<Complaint> complaints;
 //    private Login login;
@@ -33,14 +32,6 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
 //    public List<Reaction> getReactions() {

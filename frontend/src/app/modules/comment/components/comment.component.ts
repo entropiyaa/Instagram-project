@@ -12,16 +12,46 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
   public commentId: number;
-  @Input() public comment: Comment = new Comment();
+  // @Input() public comments: Comment[] = [];
+  public comments: Comment[] = [];
+  @Input() private postId: number;
 
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {
+    this.getCommentsByPostId();
   }
 
   public getComment(): void {
-    this.subscriptions.push(this.commentService.getComment(this.commentId).subscribe(comment => {
-      this.comment = comment;
+    // this.subscriptions.push(this.commentService.getComment(this.commentId).subscribe(comment => {
+    //   this.comment = comment;
+    // }));
+  }
+
+  public getCommentsByPostId(): void {
+    this.subscriptions.push(this.commentService.getCommentsByPostId(this.postId).subscribe(comments => {
+      this.comments = comments;
+    }));
+  }
+
+  public saveComment(text: string): void {
+    const comment = new Comment();
+    comment.user.id = 1;
+    comment.post.id = this.postId;
+    comment.text = text;
+    this.subscriptions.push(this.commentService.saveComment(comment).subscribe(comment => {
+      console.log(comment);
+      this.comments.push(comment);
+    }))
+  }
+
+  public deleteComment(comment: Comment): void {
+    this.subscriptions.push(this.commentService.deleteComment(comment.id).subscribe(() => {
+      console.log("delete success");
+      const index: number = this.comments.indexOf(comment);
+      if(index !== -1) {
+        this.comments.splice(index, 1);
+      }
     }));
   }
 

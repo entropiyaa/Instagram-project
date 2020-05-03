@@ -1,7 +1,6 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -13,7 +12,7 @@ public class Login {
     private User user;
 
     @JsonBackReference(value = "login-user")
-    @OneToOne (fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;

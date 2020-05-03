@@ -24,4 +24,12 @@ export class CommentService {
     return this.http.get<Comment[]>(this.commentUrl + "?post=" + postId);
   }
 
+  public saveComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(this.commentUrl, comment);
+  }
+
+  public deleteComment(commentId: number): Observable<{}>{
+    return this.http.delete( this.commentUrl+ '/' + commentId);
+  }
+
 }

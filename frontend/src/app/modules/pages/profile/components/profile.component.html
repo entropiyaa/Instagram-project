@@ -5,8 +5,8 @@
     <app-post [post]="post"></app-post>
   </li>
 </ul>
-<app-paging [page]="page" (onChanged)="onChanged()"></app-paging>
-Добавление поста
+<app-paging [page]="page" (onChanged)="getPostsByUserId()"></app-paging>
+<h3>Добавление поста</h3>
 <div>
   <input type="file" (change)="onFileChanged($event)">
   <img [src]="imgURL" width="360" height="450" *ngIf="imgURL" alt="image">

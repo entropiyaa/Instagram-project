@@ -25,8 +25,7 @@ export class PostService {
 
   public getPostsByUserId(userId: number, page: Page<Post>): Observable<Page<Post>> {
     const params = PostService.getParams(page);
-    params.set('user', userId.toString());
-    return this.http.get<Page<Post>>(this.postsUrl, {params});
+    return this.http.get<Page<Post>>(this.postsUrl + "?user=" + userId, {params});
   }
 
   public getPost(postId: number): Observable<Post> {
@@ -35,6 +34,10 @@ export class PostService {
 
   public savePost(post: Post): Observable<Post> {
     return this.http.post<Post>(this.postsUrl, post);
+  }
+
+  public deletePost(postId: number): Observable<{}> {
+    return this.http.delete(this.postsUrl + '/' + postId);
   }
 
   private static getParams(page: Page<Post>): HttpParams {

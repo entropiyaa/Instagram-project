@@ -56,6 +56,7 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   public getPosts(): void {
     this.subscriptions.push(this.postService.getPosts(this.page).subscribe(postPage => {
         console.log(postPage);
+        console.log(postPage.content);
         this.page.content = postPage.content;
         this.page.totalPages = postPage.totalPages; }));
   }

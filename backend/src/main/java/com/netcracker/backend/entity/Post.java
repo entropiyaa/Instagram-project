@@ -1,31 +1,22 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Post {
     private Long id;
     private String photo;
     private String description;
     private Date date;
     private String hashtag;
-    private List<Comment> comments;
     private List<Reaction> reactions;
     private List<Complaint> complaints;
     private User user;
-
-    @JsonManagedReference(value = "post-comment")
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 
     @JsonManagedReference(value = "post-reaction")
     @OneToMany(mappedBy = "post",  cascade = CascadeType.ALL, orphanRemoval = true)
