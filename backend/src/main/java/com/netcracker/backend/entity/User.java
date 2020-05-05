@@ -1,6 +1,7 @@
 package com.netcracker.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.netcracker.backend.entity.enums.UserRole;
 import com.netcracker.backend.entity.enums.UserStatus;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     private Long id;
     private String username;
@@ -18,7 +20,6 @@ public class User {
     private UserRole role;
     private UserStatus status;
     private List<Post> posts;
-    private List<Complaint> complaints;
     private Login login;
 
     @JsonManagedReference(value = "login-user")
@@ -39,16 +40,6 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
-    }
-
-    @JsonManagedReference(value = "user-complaint")
-    @OneToMany(mappedBy = "user")
-    public List<Complaint> getComplaints() {
-        return complaints;
-    }
-
-    public void setComplaints(List<Complaint> complaints) {
-        this.complaints = complaints;
     }
 
     @Id

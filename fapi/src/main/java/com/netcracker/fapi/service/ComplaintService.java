@@ -1,6 +1,6 @@
-package com.netcracker.backend.service;
+package com.netcracker.fapi.service;
 
-import com.netcracker.backend.entity.Complaint;
+import com.netcracker.fapi.entity.Complaint;
 
 import java.util.List;
 

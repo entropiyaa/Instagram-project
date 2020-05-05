@@ -1,11 +1,12 @@
 import {User} from "./user";
 import {Post} from "./post";
-import {ReactionType} from "./enums/reaction-type";
+import {ComplaintStatus} from "./enums/complaint-status";
 
-export class Reaction {
+export class Complaint {
   id: number;
+  cause: string;
   date: string;
-  reaction: ReactionType;
+  status: ComplaintStatus;
   user: User = new User();
   post: Post = new Post();
 }

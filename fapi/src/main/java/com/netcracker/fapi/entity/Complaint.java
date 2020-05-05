@@ -1,13 +1,9 @@
-package com.netcracker.backend.entity;
+package com.netcracker.fapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.netcracker.backend.entity.enums.ComplainStatus;
+import com.netcracker.fapi.entity.enums.ComplainStatus;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Complaint {
     private Long id;
     private String cause;
@@ -16,8 +12,6 @@ public class Complaint {
     private Post post;
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "post_id")
     public Post getPost() {
         return post;
     }
@@ -26,8 +20,6 @@ public class Complaint {
         this.post = post;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -36,9 +28,6 @@ public class Complaint {
         this.user = user;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -47,8 +36,6 @@ public class Complaint {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "cause")
     public String getCause() {
         return cause;
     }
@@ -57,8 +44,6 @@ public class Complaint {
         this.cause = cause;
     }
 
-    @Basic
-    @Column(name = "date")
     public Date getDate() {
         return date;
     }
@@ -67,9 +52,6 @@ public class Complaint {
         this.date = date;
     }
 
-    @Basic
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
     public ComplainStatus getStatus() {
         return status;
     }

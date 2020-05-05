@@ -1,7 +1,7 @@
-package com.netcracker.backend.controller;
+package com.netcracker.fapi.controller;
 
-import com.netcracker.backend.entity.Complaint;
-import com.netcracker.backend.service.ComplaintService;
+import com.netcracker.fapi.entity.Complaint;
+import com.netcracker.fapi.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

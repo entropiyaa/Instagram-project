@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Reaction} from "../models/reaction";
-import {ReactionType} from "../models/reaction-type";
+import {ReactionType} from "../models/enums/reaction-type";
 
 @Injectable({
   providedIn: 'root'

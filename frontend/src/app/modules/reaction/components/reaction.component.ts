@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ReactionService} from "../../../services/reaction.service";
 import {Reaction} from "../../../models/reaction";
-import {ReactionType} from "../../../models/reaction-type";
+import {ReactionType} from "../../../models/enums/reaction-type";
 import {User} from "../../../models/user";
 import {UserService} from "../../../services/user.service";
 

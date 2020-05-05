@@ -4,6 +4,7 @@ import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {CommentModule} from "../comment/comment.module";
 import {ReactionModule} from "../reaction/reaction.module";
+import {ComplaintsModule} from "../complaints/complaints.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {ReactionModule} from "../reaction/reaction.module";
     CommonModule,
     RouterModule,
     CommentModule,
-    ReactionModule
+    ReactionModule,
+    ComplaintsModule
   ],
   providers: [],
   exports: [PostComponent]

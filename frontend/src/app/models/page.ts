@@ -1,5 +1,5 @@
-import {Sort} from "./sort";
-import {Order} from "./order";
+import {Sort} from "./enums/sort";
+import {Order} from "./enums/order";
 
 export class Page<T> {
   content: T[] = [];

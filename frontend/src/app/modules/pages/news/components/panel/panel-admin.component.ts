@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {DataService} from "../../../../../services/data.service";
 import {Subscription} from "rxjs";
-import {Item} from "../../../../../models/item";
+import {Item} from "../../../../../models/enums/item";
 
 @Component({
   selector: 'app-panel-admin',

@@ -3,7 +3,7 @@ import {PostService} from "../../../services/post.service";
 import {Post} from "../../../models/post";
 import {Subscription} from "rxjs";
 import {DataService} from "../../../services/data.service";
-import {Item} from "../../../models/item";
+import {Item} from "../../../models/enums/item";
 import {Page} from "../../../models/page";
 import {User} from "../../../models/user";
 import {UserService} from "../../../services/user.service";
