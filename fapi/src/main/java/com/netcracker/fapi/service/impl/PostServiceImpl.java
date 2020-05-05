@@ -22,7 +22,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post findById(Long postId) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(backendUrl + "/api/posts/" + postId, Post.class);
+        return restTemplate.getForObject(backendUrl + "/api/posts?id=" + postId, Post.class);
     }
 
     @Override
@@ -58,6 +58,6 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(Long postId) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(backendUrl + "/api/posts/" + postId);
+        restTemplate.delete(backendUrl + "/api/posts?id=" + postId);
     }
 }

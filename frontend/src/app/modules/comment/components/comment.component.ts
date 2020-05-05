@@ -11,8 +11,6 @@ import {Comment} from "../../../models/comment";
 export class CommentComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  public commentId: number;
-  // @Input() public comments: Comment[] = [];
   public comments: Comment[] = [];
   @Input() private postId: number;
 
@@ -20,12 +18,6 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCommentsByPostId();
-  }
-
-  public getComment(): void {
-    // this.subscriptions.push(this.commentService.getComment(this.commentId).subscribe(comment => {
-    //   this.comment = comment;
-    // }));
   }
 
   public getCommentsByPostId(): void {

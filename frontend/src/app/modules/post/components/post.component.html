@@ -4,11 +4,10 @@
     <img [src]="post.photo"  width="360" height="450" alt="image">
     <button (click)="deletePost(post)">delete</button>
   </div>
-<!--  {{post?.comments?.length}} comments-->
+</div>
+<div class="reactions">
+  <app-reaction [postId]="post.id"></app-reaction>
 </div>
 <div class="comments">
-<!--  <app-comment [comments]="post.comments"-->
-<!--               [postId]="post.id">-->
-<!--  </app-comment>-->
   <app-comment [postId]="post.id"></app-comment>
 </div>

@@ -20,7 +20,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment findById(Long commentId) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(backendUrl + "/api/comments/" + commentId, Comment.class);
+        return restTemplate.getForObject(backendUrl + "/api/comments?id=" + commentId, Comment.class);
     }
 
     @Override
@@ -46,6 +46,6 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(Long commentId) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(backendUrl + "/api/comments/" + commentId);
+        restTemplate.delete(backendUrl + "/api/comments?id=" + commentId);
     }
 }

@@ -7,7 +7,6 @@ import com.netcracker.backend.entity.enums.UserStatus;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class User {
@@ -19,7 +18,6 @@ public class User {
     private UserRole role;
     private UserStatus status;
     private List<Post> posts;
-    private List<Reaction> reactions;
     private List<Complaint> complaints;
     private Login login;
 
@@ -41,16 +39,6 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
-    }
-
-    @JsonManagedReference(value = "user-reaction")
-    @OneToMany(mappedBy = "user")
-    public List<Reaction> getReactions() {
-        return reactions;
-    }
-
-    public void setReactions(List<Reaction> reactions) {
-        this.reactions = reactions;
     }
 
     @JsonManagedReference(value = "user-complaint")
@@ -134,28 +122,5 @@ public class User {
 
     public void setStatus(UserStatus status) {
         this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(bio, user.bio) &&
-                role == user.role &&
-                status == user.status &&
-                Objects.equals(posts, user.posts) &&
-                Objects.equals(reactions, user.reactions) &&
-                Objects.equals(complaints, user.complaints) &&
-                Objects.equals(login, user.login);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, firstName, lastName, bio, role, status, posts, reactions, complaints, login);
     }
 }

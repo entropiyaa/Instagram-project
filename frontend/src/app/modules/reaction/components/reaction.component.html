@@ -1,0 +1,12 @@
+<ul class="likes">
+  <h5>likes {{reactionsLike?.length}}</h5>
+  <button (click)="like()">like</button>
+  <li *ngFor="let like of reactionsLike">
+    {{like?.id}} {{like?.reaction}} {{like?.date | date: 'medium'}} {{like?.user?.username}}
+</ul>
+<ul class="dislikes">
+  <h5>dislikes {{reactionsDislike?.length}}</h5>
+  <button (click)="dislike()">dislike</button>
+  <li *ngFor="let dislike of reactionsDislike" >
+    {{dislike?.id}} {{dislike?.reaction}} {{dislike?.date | date: 'medium'}} {{dislike?.user?.username}}
+</ul>

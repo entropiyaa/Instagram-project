@@ -13,7 +13,7 @@ export class CommentService {
   constructor(private http: HttpClient) {}
 
   public getComment(commentId: number): Observable<Comment> {
-    return this.http.get<Comment>(this.commentUrl + "/" + commentId);
+    return this.http.get<Comment>(this.commentUrl + "?id=" + commentId);
   }
 
   public getComments(): Observable<Comment[]> {
@@ -29,7 +29,7 @@ export class CommentService {
   }
 
   public deleteComment(commentId: number): Observable<{}>{
-    return this.http.delete( this.commentUrl+ '/' + commentId);
+    return this.http.delete( this.commentUrl+ '?id=' + commentId);
   }
 
 }

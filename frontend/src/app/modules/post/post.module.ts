@@ -3,6 +3,7 @@ import {PostComponent} from "./components/post.component";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {CommentModule} from "../comment/comment.module";
+import {ReactionModule} from "../reaction/reaction.module";
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {CommentModule} from "../comment/comment.module";
   imports: [
     CommonModule,
     RouterModule,
-    CommentModule
+    CommentModule,
+    ReactionModule
   ],
   providers: [],
   exports: [PostComponent]

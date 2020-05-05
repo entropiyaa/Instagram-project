@@ -14,19 +14,8 @@ public class Post {
     private String description;
     private Date date;
     private String hashtag;
-    private List<Reaction> reactions;
     private List<Complaint> complaints;
     private User user;
-
-    @JsonManagedReference(value = "post-reaction")
-    @OneToMany(mappedBy = "post",  cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Reaction> getReactions() {
-        return reactions;
-    }
-
-    public void setReactions(List<Reaction> reactions) {
-        this.reactions = reactions;
-    }
 
     @JsonManagedReference(value = "post-complaint")
     @OneToMany(mappedBy = "post",  cascade = CascadeType.ALL, orphanRemoval = true)

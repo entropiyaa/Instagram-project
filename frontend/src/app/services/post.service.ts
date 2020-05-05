@@ -29,7 +29,7 @@ export class PostService {
   }
 
   public getPost(postId: number): Observable<Post> {
-    return this.http.get<Post>(this.postsUrl + '/' + postId);
+    return this.http.get<Post>(this.postsUrl + '?id=' + postId);
   }
 
   public savePost(post: Post): Observable<Post> {
@@ -37,7 +37,7 @@ export class PostService {
   }
 
   public deletePost(postId: number): Observable<{}> {
-    return this.http.delete(this.postsUrl + '/' + postId);
+    return this.http.delete(this.postsUrl + '?id=' + postId);
   }
 
   private static getParams(page: Page<Post>): HttpParams {

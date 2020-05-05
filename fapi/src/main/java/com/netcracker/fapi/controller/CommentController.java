@@ -14,8 +14,8 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping(value = "/{commentId}")
-    public Comment getCommentById(@PathVariable(name = "commentId") Long commentId) {
+    @GetMapping(params = {"id"})
+    public Comment getCommentById(@RequestParam("id") Long commentId) {
         return commentService.findById(commentId);
     }
 
@@ -34,8 +34,8 @@ public class CommentController {
         return commentService.save(comment);
     }
 
-    @DeleteMapping(value = "/{commentId}")
-    public void deleteComment(@PathVariable(name = "commentId") Long commentId) {
+    @DeleteMapping(params = {"id"})
+    public void deleteComment(@RequestParam("id") Long commentId) {
         commentService.delete(commentId);
     }
 }

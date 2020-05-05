@@ -15,8 +15,8 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping(value = "/{postId}")
-    public Post getPostById(@PathVariable(name = "postId") Long postId) {
+    @GetMapping(params = {"id"})
+    public Post getPostById(@RequestParam("id") Long postId) {
         return postService.findById(postId);
     }
 
@@ -50,8 +50,8 @@ public class PostController {
         return postService.save(post);
     }
 
-    @DeleteMapping(value = "/{postId}")
-    public void deletePost(@PathVariable(name = "postId") Long postId) {
+    @DeleteMapping(params = {"id"})
+    public void deletePost(@RequestParam("id") Long postId) {
         postService.delete(postId);
     }
 }

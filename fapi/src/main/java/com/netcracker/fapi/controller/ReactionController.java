@@ -1,8 +1,8 @@
-package com.netcracker.backend.controller;
+package com.netcracker.fapi.controller;
 
-import com.netcracker.backend.entity.Reaction;
-import com.netcracker.backend.entity.enums.UserReaction;
-import com.netcracker.backend.service.ReactionService;
+import com.netcracker.fapi.entity.Reaction;
+import com.netcracker.fapi.entity.enums.UserReaction;
+import com.netcracker.fapi.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/reactions")
 public class ReactionController {
-
     @Autowired
     private ReactionService reactionService;
 
@@ -26,9 +25,9 @@ public class ReactionController {
         return reactionService.findByUserIdAndPostId(userId, postId);
     }
 
-    @GetMapping(params = {"post", "reaction"})
-    public List<Reaction> getAllReactionByPostId(@RequestParam("post") Long postId,
-                                                 @RequestParam("reaction") UserReaction reaction) {
+    @RequestMapping(params = {"post", "reaction"})
+    public List<Reaction> getAllReactionByPostIdAndReaction(@RequestParam("post") Long postId,
+                                                            @RequestParam("reaction") UserReaction reaction) {
         return reactionService.findAllByPostIdAndReaction(postId, reaction);
     }
 

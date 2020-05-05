@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,8 @@ public class CommentServiceImpl implements CommentService {
         }
         User user = userService.findById(comment.getUser().getId());
         comment.setUser(user);
+        Date date = new Date();
+        comment.setDate(date);
         return commentRepository.save(comment);
     }
 
