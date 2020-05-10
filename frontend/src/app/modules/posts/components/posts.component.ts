@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.userService.getUser(1).subscribe(user => { this.user = user; }));
+    this.subscriptions.push(this.userService.getUser(2).subscribe(user => { this.user = user; }));
     this.getItem();
   }
 
@@ -70,6 +70,10 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onChanged(): void {
+    this.getCurrentPosts();
+  }
+
+  removeFromArray(): void {
     this.getCurrentPosts();
   }
 

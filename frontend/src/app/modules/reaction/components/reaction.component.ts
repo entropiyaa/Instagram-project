@@ -5,6 +5,7 @@ import {Reaction} from "../../../models/reaction";
 import {ReactionType} from "../../../models/enums/reaction-type";
 import {User} from "../../../models/user";
 import {UserService} from "../../../services/user.service";
+import {StorageService} from "../../../services/storage.service";
 
 @Component({
   selector: 'app-reaction',
@@ -23,19 +24,25 @@ export class ReactionComponent implements OnInit, OnDestroy {
   private currentReaction: Reaction = new Reaction();
 
   constructor(private reactionService: ReactionService,
-              private userService: UserService) {}
+              private storageService: StorageService) {}
 
   ngOnInit(): void {
-    this.getUser();
+    // this.getUser();
+    this.getCurrentUser();
     this.getReactionsByPostIdLike();
     this.getReactionsByPostIdDislike();
   }
 
-  public getUser(): void {
-    this.subscriptions.push(this.userService.getUser(2).subscribe(user => {
-      this.user = user;
-      this.getCurrentReaction();
-    }))
+  // public getUser(): void {
+  //   this.subscriptions.push(this.userService.getUser(2).subscribe(user => {
+  //     this.user = user;
+  //     this.getCurrentReaction();
+  //   }))
+  // }
+
+  public getCurrentUser(): void {
+    this.user = this.storageService.getCurrentUser();
+    this.getCurrentReaction();
   }
 
   public getCurrentReaction(): void {

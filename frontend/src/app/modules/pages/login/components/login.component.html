@@ -1,7 +1,24 @@
 <h1>Login component!!</h1>
-<label>
-  <input [(ngModel)]="userId" placeholder="user">
-</label>
-<button (click)="onClick(userId)">Select</button>
-<p *ngIf="this.userId">{{user.id}} {{user.username}}</p>
+<ng-container *ngIf="storageService.getCurrentUser() as currentLoggedUser">
+  You are logged as {{currentLoggedUser.username}} <br>
+  Role is {{currentLoggedUser.role}} <br>
+</ng-container>
+<ng-container *ngIf="!storageService.getCurrentUser()">
+  <div class="login-form__container">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Login</label>
+      <input (focus)="showCheckYourSetDataAlert = false" type="email" class="form-control" [(ngModel)]="login.username" id="exampleInputEmail1" placeholder="Enter Username">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input (focus)="showCheckYourSetDataAlert = false" type="password" class="form-control"  [(ngModel)]="login.password" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    <div *ngIf="showCheckYourSetDataAlert" class="login-form__danger-alert alert alert-danger" role="alert">
+      Check Your set Data!
+    </div>
+  </div>
+</ng-container>
+
+<button *ngIf="storageService.getCurrentUser()" (click)="logout()" type="button" class="btn btn-dark">Logout</button>
 

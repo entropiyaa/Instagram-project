@@ -1,19 +1,11 @@
-package com.netcracker.backend.entity;
+package com.netcracker.fapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
-
-@Entity
 public class Login {
     private Long id;
     private String email;
     private String password;
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @JsonManagedReference(value = "login-user")
     public User getUser() {
         return user;
     }
@@ -22,9 +14,6 @@ public class Login {
         this.user = user;
     }
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -33,8 +22,6 @@ public class Login {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -43,8 +30,6 @@ public class Login {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }

@@ -1,7 +1,7 @@
-package com.netcracker.backend.service;
+package com.netcracker.fapi.service;
 
-import com.netcracker.backend.entity.Login;
-import com.netcracker.backend.entity.User;
+import com.netcracker.fapi.entity.Login;
+import com.netcracker.fapi.entity.User;
 
 import java.util.List;
 

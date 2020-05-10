@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {Post} from "../../../../models/post";
 import {PostService} from "../../../../services/post.service";
 import {Page} from "../../../../models/page";
+import {StorageService} from "../../../../services/storage.service";
 
 @Component({
   selector: 'app-profile',
@@ -17,14 +18,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public page: Page<Post> = new Page();
   public user: User = new User();
   public imgURL: any;
+  public description: string;
 
-  constructor(private userService: UserService,
+  constructor(private storageService: StorageService,
               private postService: PostService) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(this.userService.getUser(2).subscribe(user => {
-      this.user = user;
-      this.getPostsByUserId(); }));
+    this.user = this.storageService.getCurrentUser();
+    this.getPostsByUserId();
   }
 
   public getPostsByUserId(): void {
@@ -45,7 +46,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public savePost(): void {
     const post: Post = new Post();
-    post.description = "test";
+    post.description = this.description;
     post.photo = this.imgURL;
     post.user.id = this.user.id;
     console.log(post);
@@ -57,6 +58,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onChanged(): void {
+    this.getPostsByUserId();
+  }
+
+  removeFromArray(): void {
     this.getPostsByUserId();
   }
 

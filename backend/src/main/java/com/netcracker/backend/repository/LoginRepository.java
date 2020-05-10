@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface LoginRepository extends CrudRepository<Login, Long> {
+    Login findByEmail(String email);
     List<Login> findAll();
+    Login save(Login login);
 }

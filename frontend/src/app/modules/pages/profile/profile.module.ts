@@ -5,6 +5,7 @@ import {PostsModule} from "../../posts/posts.module";
 import {RouterModule} from "@angular/router";
 import {PostModule} from "../../post/post.module";
 import {PagingModule} from "../../paging/paging.module";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {PagingModule} from "../../paging/paging.module";
     PostsModule,
     RouterModule,
     PostModule,
-    PagingModule
+    PagingModule,
+    FormsModule
   ],
   providers: [],
   exports: [ProfileComponent]

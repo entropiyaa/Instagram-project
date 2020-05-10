@@ -1,5 +1,6 @@
 package com.netcracker.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,8 +23,8 @@ public class User {
     private List<Post> posts;
     private Login login;
 
-    @JsonManagedReference(value = "login-user")
-    @OneToOne (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference(value = "login-user")
+    @OneToOne (mappedBy = "user")
     public Login getLogin() {
         return login;
     }

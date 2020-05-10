@@ -2,12 +2,15 @@
 {{user.username}}
 <ul class="posts">
   <li *ngFor="let post of page.content">
-    <app-post [post]="post"></app-post>
+    <app-post [post]="post" (onDelete)="removeFromArray()"></app-post>
   </li>
 </ul>
 <app-paging [page]="page" (onChanged)="getPostsByUserId()"></app-paging>
 <h3>Добавление поста</h3>
 <div>
+  <label>
+    <input class="form-control" name="text" [(ngModel)]="description" />
+  </label>
   <input type="file" (change)="onFileChanged($event)">
   <img [src]="imgURL" width="360" height="450" *ngIf="imgURL" alt="image">
 </div>
