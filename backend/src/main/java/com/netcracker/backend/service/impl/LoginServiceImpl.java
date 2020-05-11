@@ -12,8 +12,12 @@ import java.util.List;
 @Component
 public class LoginServiceImpl implements LoginService {
 
-    @Autowired
     private LoginRepository loginRepository;
+
+    @Autowired
+    public LoginServiceImpl(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
+    }
 
     @Override
     public Login findLoginByEmail(String email) {

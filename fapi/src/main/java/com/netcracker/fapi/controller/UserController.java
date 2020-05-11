@@ -3,6 +3,7 @@ package com.netcracker.fapi.controller;
 import com.netcracker.fapi.entity.User;
 import com.netcracker.fapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,12 +12,17 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
     private UserService userService;
 
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable(name = "userId") Long userId) {
-        return userService.findById(userId);
+    public ResponseEntity<User> getUserById(@PathVariable(name = "userId") Long userId) {
+        User user =  userService.findById(userId);
+        return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
     }
 
     @RequestMapping(method = RequestMethod.GET)

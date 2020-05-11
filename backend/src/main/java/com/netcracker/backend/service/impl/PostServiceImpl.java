@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,19 +21,19 @@ import java.util.Optional;
 @Transactional
 public class PostServiceImpl implements PostService {
 
-    @Autowired
     private PostRepository postRepository;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public PostServiceImpl(PostRepository postRepository, UserService userService) {
+        this.postRepository = postRepository;
+        this.userService = userService;
+    }
 
     @Override
     public Post findById(Long postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
-        if(!optionalPost.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found");
-        }
-        return optionalPost.get();
+        return optionalPost.orElse(null);
     }
 
     @Override
@@ -60,7 +58,7 @@ public class PostServiceImpl implements PostService {
 
     private PageRequest createRequest(int pageNumber, int pageSize, String sortBy, String order) {
         Sort sort;
-        if(order.equals("desc")) {
+        if("desc".equals(order)) {
             sort = Sort.by(sortBy).descending();
         } else {
             sort = Sort.by(sortBy).ascending();
@@ -70,13 +68,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(Post post) {
-        if(post.getUser() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(user) is missing");
-        }
         User user = userService.findById(post.getUser().getId());
         post.setUser(user);
-        Date date = new Date();
-        post.setDate(date);
+        post.setDate(new Date());
         return postRepository.save(post);
     }
 

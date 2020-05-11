@@ -9,9 +9,7 @@ import com.netcracker.backend.service.PostService;
 import com.netcracker.backend.service.ReactionService;
 import com.netcracker.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -20,22 +18,21 @@ import java.util.Optional;
 @Component
 public class ReactionServiceImpl implements ReactionService {
 
-    @Autowired
     private ReactionRepository reactionRepository;
-
-    @Autowired
     private PostService postService;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public ReactionServiceImpl(ReactionRepository reactionRepository, PostService postService, UserService userService) {
+        this.reactionRepository = reactionRepository;
+        this.postService = postService;
+        this.userService = userService;
+    }
 
     @Override
     public Reaction findById(Long reactionId) {
         Optional<Reaction> optionalReaction = reactionRepository.findById(reactionId);
-        if(!optionalReaction.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Reaction not found");
-        }
-        return optionalReaction.get();
+        return optionalReaction.orElse(null);
     }
 
     @Override
@@ -51,25 +48,19 @@ public class ReactionServiceImpl implements ReactionService {
 
     @Override
     public Reaction save(Reaction reaction) {
-        checkReaction(reaction);
         Optional<Reaction> optionalReaction = reactionRepository.findByUserIdAndPostId(
                 reaction.getUser().getId(), reaction.getPost().getId());
         if(optionalReaction.isPresent()) {
             return updateReaction(optionalReaction.get(), reaction);
         } else {
+            setUserAndPost(reaction);
             return saveReaction(reaction);
         }
     }
 
-    private void checkReaction(Reaction reaction) {
-        if(reaction.getPost() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(post) is missing");
-        }
+    private void setUserAndPost(Reaction reaction) {
         Post post = postService.findById(reaction.getPost().getId());
         reaction.setPost(post);
-        if(reaction.getUser() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(user) is missing");
-        }
         User user = userService.findById(reaction.getUser().getId());
         reaction.setUser(user);
     }

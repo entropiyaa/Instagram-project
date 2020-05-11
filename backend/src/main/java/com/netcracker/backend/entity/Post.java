@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "post")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Post {
     private Long id;

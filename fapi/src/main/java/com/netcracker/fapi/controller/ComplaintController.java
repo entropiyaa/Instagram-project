@@ -11,8 +11,12 @@ import java.util.List;
 @RequestMapping("/api/complaints")
 public class ComplaintController {
 
-    @Autowired
     private ComplaintService complaintService;
+
+    @Autowired
+    public ComplaintController(ComplaintService complaintService) {
+        this.complaintService = complaintService;
+    }
 
     @GetMapping
     public List<Complaint> getAllComplaints() {

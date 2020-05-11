@@ -4,20 +4,24 @@ import com.netcracker.fapi.dto.pagination.PageWrapper;
 import com.netcracker.fapi.entity.Post;
 import com.netcracker.fapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
 
-    @Autowired
     private PostService postService;
 
+    @Autowired
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
+
     @GetMapping(params = {"id"})
-    public Post getPostById(@RequestParam("id") Long postId) {
-        return postService.findById(postId);
+    public ResponseEntity<Post> getPostById(@RequestParam("id") Long postId) {
+        Post post = postService.findById(postId);
+        return post == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(post);
     }
 
     @GetMapping(params = {"page", "size", "sort", "order"})

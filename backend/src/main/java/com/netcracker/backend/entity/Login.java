@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "login")
 public class Login {
     private Long id;
     private String email;

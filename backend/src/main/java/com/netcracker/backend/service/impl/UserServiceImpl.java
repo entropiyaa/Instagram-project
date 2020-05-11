@@ -14,16 +14,17 @@ import java.util.Optional;
 @Component
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User findById(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if(!optionalUser.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        }
-        return optionalUser.get();
+        return optionalUser.orElse(null);
     }
 
     @Override

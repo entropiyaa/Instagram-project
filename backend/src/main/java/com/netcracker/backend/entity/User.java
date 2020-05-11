@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "user")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     private Long id;

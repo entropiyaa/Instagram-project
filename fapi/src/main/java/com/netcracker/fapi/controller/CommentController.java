@@ -3,7 +3,7 @@ package com.netcracker.fapi.controller;
 import com.netcracker.fapi.entity.Comment;
 import com.netcracker.fapi.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,12 +12,17 @@ import java.util.List;
 @RequestMapping("/api/comments")
 public class CommentController {
 
-    @Autowired
     private CommentService commentService;
 
+    @Autowired
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
+    }
+
     @GetMapping(params = {"id"})
-    public Comment getCommentById(@RequestParam("id") Long commentId) {
-        return commentService.findById(commentId);
+    public ResponseEntity<Comment> getCommentById(@RequestParam("id") Long commentId) {
+        Comment comment = commentService.findById(commentId);
+        return comment == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(comment);
     }
 
     @GetMapping

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "reaction")
 public class Reaction {
     private Long id;
     private UserReaction reaction;

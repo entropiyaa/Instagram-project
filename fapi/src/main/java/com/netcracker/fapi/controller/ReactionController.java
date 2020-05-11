@@ -4,6 +4,7 @@ import com.netcracker.fapi.entity.Reaction;
 import com.netcracker.fapi.entity.enums.UserReaction;
 import com.netcracker.fapi.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,12 +12,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/reactions")
 public class ReactionController {
-    @Autowired
+
     private ReactionService reactionService;
 
+    @Autowired
+    public ReactionController(ReactionService reactionService) {
+        this.reactionService = reactionService;
+    }
+
     @GetMapping(params = {"id"})
-    public Reaction getReactionById(@RequestParam("id") Long reactionId) {
-        return reactionService.findById(reactionId);
+    public ResponseEntity<Reaction> getReactionById(@RequestParam("id") Long reactionId) {
+        Reaction reaction = reactionService.findById(reactionId);
+        return reaction == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(reaction);
     }
 
     @GetMapping(params = {"user", "post"})

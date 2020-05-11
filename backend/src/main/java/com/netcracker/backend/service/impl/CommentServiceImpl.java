@@ -7,12 +7,9 @@ import com.netcracker.backend.repository.CommentRepository;
 import com.netcracker.backend.service.CommentService;
 import com.netcracker.backend.service.PostService;
 import com.netcracker.backend.service.UserService;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -22,14 +19,16 @@ import java.util.Optional;
 @Transactional
 public class CommentServiceImpl implements CommentService {
 
-    @Autowired
     private CommentRepository commentRepository;
-
-    @Autowired
     private PostService postService;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public CommentServiceImpl(CommentRepository commentRepository, PostService postService, UserService userService) {
+        this.commentRepository = commentRepository;
+        this.postService = postService;
+        this.userService = userService;
+    }
 
     @Override
     public Comment findById(Long commentId) {
@@ -49,18 +48,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment save(Comment comment) {
-        if(comment.getPost() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(post) is missing");
-        }
         Post post = postService.findById(comment.getPost().getId());
         comment.setPost(post);
-        if(comment.getUser() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required parameter(user) is missing");
-        }
         User user = userService.findById(comment.getUser().getId());
         comment.setUser(user);
-        Date date = new Date();
-        comment.setDate(date);
+        comment.setDate(new Date());
         return commentRepository.save(comment);
     }
 

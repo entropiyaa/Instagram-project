@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/api/logins")
 public class LoginController {
 
-    @Autowired
     private LoginService loginService;
+
+    @Autowired
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @GetMapping(value = "/login/{email}")
     public ResponseEntity<Login> getLoginByEmail(@PathVariable(name = "email") String email) {
