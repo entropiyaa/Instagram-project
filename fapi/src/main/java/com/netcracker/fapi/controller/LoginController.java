@@ -33,17 +33,16 @@ public class LoginController {
         return  loginService.findUserByEmail(email);
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<Login> getAllLogins() {
         return loginService.findAll();
     }
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/current")
+    @GetMapping(value = "/current")
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // todo exclude password from model!
         return loginService.findUserByEmail(((org.springframework.security.core.userdetails.User)
                 authentication.getPrincipal()).getUsername());
     }

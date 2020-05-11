@@ -29,4 +29,9 @@ public class UserController {
     public List<User> getUsers() {
         return userService.findAll();
     }
+
+    @PostMapping
+    public User saveUser(@RequestBody User user) {
+        return userService.save(user);
+    }
 }

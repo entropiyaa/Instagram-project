@@ -14,7 +14,6 @@ public class Login {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference(value = "login-user")
     public User getUser() {
         return user;
     }

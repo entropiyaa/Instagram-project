@@ -6,7 +6,7 @@ import {DataService} from "../../../services/data.service";
 import {Item} from "../../../models/enums/item";
 import {Page} from "../../../models/page";
 import {User} from "../../../models/user";
-import {UserService} from "../../../services/user.service";
+import {StorageService} from "../../../services/storage.service";
 
 @Component({
   selector: 'app-posts',
@@ -22,11 +22,11 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(private postService: PostService,
               private data: DataService,
-              private userService: UserService) {
+              private storageService: StorageService) {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.userService.getUser(2).subscribe(user => { this.user = user; }));
+    this.user = this.storageService.getCurrentUser();
     this.getItem();
   }
 

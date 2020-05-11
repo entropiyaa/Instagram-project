@@ -13,14 +13,6 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  public generateToken(login: Login): Observable<AuthToken> {
-    return this.http.post<AuthToken>("/api/token/generate-token", login);
-  }
-
-  public getAuthorizedUser(): Observable<User> {
-    return this.http.get<User>("/api/logins/current");
-  }
-
   public getUser(userId: number): Observable<User> {
     return this.http.get<User>(this.userUrl + '/' + userId);
   }
@@ -28,8 +20,4 @@ export class UserService {
   public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.userUrl);
   }
-}
-
-export interface AuthToken {
-  readonly token: string;
 }

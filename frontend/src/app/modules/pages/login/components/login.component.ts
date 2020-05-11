@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../models/user";
-import {AuthToken, UserService} from "../../../../services/user.service";
 import {Subscription} from "rxjs";
 import {Login} from "../../../../models/login";
 import {StorageService} from "../../../../services/storage.service";
+import {LoginService} from "../../../../services/login.service";
+import {AuthToken} from "../../../../models/authToken";
+import {LoginUser} from "../../../../models/loginUser";
 
 @Component({
   selector: 'app-login',
@@ -12,63 +14,66 @@ import {StorageService} from "../../../../services/storage.service";
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  // public users: User[] = [];
-  // public userId: number;
-  public user: User = new User();
-  //
-  public getUser(userId: number): void {
-    this.subscriptions.push(this.userService.getUser(userId).subscribe(user => {
-      this.user = user;
-      console.log(user);
-    }));
-  }
-  //
-  // public getUsers(): void {
-  //   this.subscriptions.push(this.userService.getUsers().subscribe(users => {
-  //     this.users = users;
-  //   }));
-  // }
-  //
-  // public onClick(userId: number): void {
-  //   this.userId = userId;
-  //   this.getUser(userId);
-  // }
-
-  public login: Login = {};
+  public login: LoginUser = {};
+  user: User;
   public showCheckYourSetDataAlert: boolean = false;
   private subscriptions: Subscription[] = [];
 
-  constructor(public storageService: StorageService,
-              private userService: UserService) {
+  visibleRegistration: boolean = false;
+  newLogin: Login;
+
+  constructor(private storageService: StorageService,
+              private loginService: LoginService) {
   }
 
   ngOnInit() {
+    this.user = this.storageService.getCurrentUser();
   }
 
   public onSubmit(): void {
-    this.userService.generateToken(this.login)
+    this.getToken();
+  }
+
+  private getToken(): void {
+    this.subscriptions.push(this.loginService.generateToken(this.login)
       .subscribe((authToken: AuthToken) => {
-        if (authToken.token) {
+        if(authToken) {
           this.storageService.setToken(authToken.token);
-          this.userService.getAuthorizedUser()
-            .subscribe((user: User) => {
-              console.log(user);
-              this.storageService.setCurrentUser(user);
-            });
+          this.getAuthorizedUser();
         }
-      }, (error) => {
+    }, (error) => {
         if (error.status === 401) {
           this.showCheckYourSetDataAlert = true;
         } else {
           alert(error.message);
         }
-      });
+      }))
+  }
 
+  private getAuthorizedUser(): void {
+    this.subscriptions.push(this.loginService.getAuthorizedUser().subscribe((user: User) => {
+      console.log(user);
+      this.storageService.setCurrentUser(user);
+      this.user = user;
+    }));
+  }
+
+  public onRegistration(): void {
+    this.visibleRegistration = true;
+    this.newLogin = new Login();
+    this.newLogin.user = new User();
+  }
+
+  public registration(): void {
+    this.subscriptions.push(this.loginService.register(this.newLogin).subscribe(login => {
+      console.log(login);
+    }))
   }
 
   public logout(): void {
     this.storageService.clearToken();
     this.storageService.setCurrentUser(null);
+    this.user = null;
   }
 
   ngOnDestroy() {

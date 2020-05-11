@@ -4,6 +4,7 @@ import com.netcracker.backend.entity.Login;
 import com.netcracker.backend.entity.User;
 import com.netcracker.backend.repository.LoginRepository;
 import com.netcracker.backend.service.LoginService;
+import com.netcracker.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +14,12 @@ import java.util.List;
 public class LoginServiceImpl implements LoginService {
 
     private LoginRepository loginRepository;
+    private UserService userService;
 
     @Autowired
-    public LoginServiceImpl(LoginRepository loginRepository) {
+    public LoginServiceImpl(LoginRepository loginRepository, UserService userService) {
         this.loginRepository = loginRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -31,11 +34,19 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public List<Login> findAll() {
-        return loginRepository.findAll();
+        List<Login> logins = loginRepository.findAll();
+        for(Login login : logins) {
+            login.setPassword("");
+        }
+        return logins;
     }
 
     @Override
     public Login save(Login login) {
-        return loginRepository.save(login);
+        User user = userService.save(login.getUser());
+        login.setUser(user);
+        Login newLogin = loginRepository.save(login);
+        newLogin.setPassword("");
+        return newLogin;
     }
 }

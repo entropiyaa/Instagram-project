@@ -22,17 +22,6 @@ public class User {
     private UserRole role;
     private UserStatus status;
     private List<Post> posts;
-    private Login login;
-
-    @JsonBackReference(value = "login-user")
-    @OneToOne (mappedBy = "user")
-    public Login getLogin() {
-        return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
 
     @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

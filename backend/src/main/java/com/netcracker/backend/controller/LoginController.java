@@ -37,7 +37,7 @@ public class LoginController {
         return loginService.findAll();
     }
 
-    @PostMapping
+    @PostMapping(value = "/signup")
     public Login saveLogin(@RequestBody Login login) {
         return loginService.save(login);
     }

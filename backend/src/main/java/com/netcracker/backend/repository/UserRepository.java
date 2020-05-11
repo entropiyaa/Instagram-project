@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User,Long> {
     Optional<User> findById(Long userId);
     List<User> findAll();
+    User save(User user);
     void deleteById(Long userId);
 }

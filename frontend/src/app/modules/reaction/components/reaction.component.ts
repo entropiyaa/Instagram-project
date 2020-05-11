@@ -27,18 +27,10 @@ export class ReactionComponent implements OnInit, OnDestroy {
               private storageService: StorageService) {}
 
   ngOnInit(): void {
-    // this.getUser();
     this.getCurrentUser();
     this.getReactionsByPostIdLike();
     this.getReactionsByPostIdDislike();
   }
-
-  // public getUser(): void {
-  //   this.subscriptions.push(this.userService.getUser(2).subscribe(user => {
-  //     this.user = user;
-  //     this.getCurrentReaction();
-  //   }))
-  // }
 
   public getCurrentUser(): void {
     this.user = this.storageService.getCurrentUser();

@@ -20,9 +20,12 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
 
     @Value("${backend.server.url}")
     private String backendUrl;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public LoginServiceImpl(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     public Login findLoginByEmail(String email) {
@@ -47,18 +50,17 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
     public Login save(Login login) {
         login.setPassword(bCryptPasswordEncoder.encode(login.getPassword()));
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(backendUrl + "/api/logins", login, Login.class);
+        return restTemplate.postForObject(backendUrl + "/api/logins/signup", login, Login.class);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = findUserByEmail(email);
         Login login = findLoginByEmail(email);
-        if (user == null) {
+        if (login == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(
-                login.getEmail(), login.getPassword(), getAuthority(user));
+                login.getEmail(), login.getPassword(), getAuthority(login.getUser()));
     }
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
