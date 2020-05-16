@@ -9,7 +9,6 @@ import {RouterModule} from "@angular/router";
   ],
   imports: [
     RouterModule
-
   ],
   providers: [],
   exports: [HeaderComponent]

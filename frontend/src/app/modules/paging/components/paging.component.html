@@ -1,17 +1,19 @@
-<button [disabled]="page.pageNumber < 1"
-        (click)="previous()" mat-icon-button>
-  <mat-icon>chevron_left</mat-icon>
-</button>
-<button [disabled]="page.pageNumber == page.totalPages-1"
-        (click)="next()" mat-icon-button>
-  <mat-icon>chevron_right</mat-icon>
-</button>
-<mat-form-field>
-  <label>
-    <input [(ngModel)]="selectedPage" matInput placeholder="number of page">
-  </label>
-</mat-form-field>
-<button (click)="goOver(selectedPage)" mat-icon-button>
-  <mat-icon>arrow_forward</mat-icon>
-</button>
-{{page.pageNumber+1}}/{{page.totalPages}}
+<div class="paging-content">
+  <button [disabled]="page.pageNumber < 1"
+          (click)="previous()" mat-icon-button>
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button [disabled]="page.pageNumber == page.totalPages-1"
+          (click)="next()" mat-icon-button>
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+  <mat-form-field>
+    <label>
+      <input [(ngModel)]="selectedPage" matInput placeholder="number of page">
+    </label>
+  </mat-form-field>
+  <button (click)="goOver(selectedPage)" mat-icon-button>
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+  {{page.pageNumber+1}}/{{page.totalPages}}
+</div>

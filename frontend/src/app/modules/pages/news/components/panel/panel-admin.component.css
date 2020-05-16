@@ -1,25 +1,22 @@
 .panel {
   font-family: 'Times New Roman', fantasy;
-  background-color: #DB7093;
+  background-color: plum;
   height: 60px;
   display: flex;
   border-radius: 10px;
   position: absolute;
-  left: 280px;
-  right: 280px;
+  width: 1200px;
+  max-width: 1200px;
+  z-index: 1;
 }
 
 .items {
   display: flex;
-  list-style-type: none;
-  align-items: center;
 }
 
 .items li {
   cursor: pointer;
   font-size: 18px;
-  margin-left: 2%;
-  margin-right: 2%;
   padding: 0 3em .3em 0;
 }
 

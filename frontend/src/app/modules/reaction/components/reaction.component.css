@@ -1,0 +1,20 @@
+.reactions {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  width: 365px;
+  margin-left: 0;
+}
+
+ul  {
+  display: flex;
+  padding: 0;
+}
+
+.reactions-buttons li {
+  margin: auto 5px;
+}
+
+button:hover {
+  background-color: lightgray;
+}

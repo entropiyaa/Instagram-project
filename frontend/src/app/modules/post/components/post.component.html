@@ -1,16 +1,47 @@
-<div class="post">
-  {{post?.id}} {{post?.user?.username}} {{post?.description}} {{post?.date | date: 'medium'}}
-  <div>
-    <img [src]="post.photo"  width="360" height="450" alt="image">
-    <button (click)="deletePost(post)">delete</button>
+<div class="post-container">
+  <div class="post-header">
+    <ul>
+      <li class="left">
+        <i class="post-username">{{post?.user?.username}}</i>
+      </li>
+      <li class="right">
+        <button>button</button>
+      </li>
+      <li class="centre-right">
+        <i class="date"> {{post?.date | date: 'dd/MM/yyyy'}} at {{post?.date | date: 'hh:mm'}}</i>
+      </li>
+    </ul>
+  </div>
+  <div class="post-content">
+    <img class="photo" [src]="post.photo" width="435" height="508" alt="image">
+    <div class="post-detail-container">
+      <div class="comment-container">
+        <div class="post-description">
+          <i>{{post?.description}}</i>
+        </div>
+        <app-comment [postId]="post.id"></app-comment>
+      </div>
+      <div class="post-actions">
+        <app-reaction [postId]="post.id"></app-reaction>
+      </div>
+    </div>
   </div>
 </div>
-<div class="reactions">
-  <app-reaction [postId]="post.id"></app-reaction>
-</div>
-<div class="comments">
-  <app-comment [postId]="post.id"></app-comment>
-</div>
-<div class="complaints">
-  <app-complaints [postId]="post.id"></app-complaints>
-</div>
+
+
+<!--<div class="post">-->
+<!--  {{post?.id}} {{post?.user?.username}} {{post?.description}} {{post?.date | date: 'medium'}}-->
+<!--  <div>-->
+<!--    <img [src]="post.photo"  width="360" height="450" alt="image">-->
+<!--    <button (click)="deletePost(post)">delete</button>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="reactions">-->
+<!--  <app-reaction [postId]="post.id"></app-reaction>-->
+<!--</div>-->
+<!--<div class="comments">-->
+<!--  <app-comment [postId]="post.id"></app-comment>-->
+<!--</div>-->
+<!--<div class="complaints">-->
+<!--  <app-complaints [postId]="post.id"></app-complaints>-->
+<!--</div>-->

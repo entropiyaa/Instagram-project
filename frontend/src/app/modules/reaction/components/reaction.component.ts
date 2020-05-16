@@ -19,8 +19,8 @@ export class ReactionComponent implements OnInit, OnDestroy {
   public reactionsDislike: Reaction[] = [];
   @Input() private postId: number;
   private user: User = new User();
-  private isLike: boolean = false;
-  private isDislike: boolean = false;
+  public isLike: boolean = false;
+  public isDislike: boolean = false;
   private currentReaction: Reaction = new Reaction();
 
   constructor(private reactionService: ReactionService,

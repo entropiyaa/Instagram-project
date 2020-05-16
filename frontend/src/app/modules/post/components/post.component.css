@@ -1,1 +1,93 @@
+.post-container {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 20px 0;
+  border-radius: 32px;
+  height: 553px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  margin-left: 14%;
+}
 
+.post-header {
+  height: 45px;
+  width: 800px;
+  border-radius: 32px 32px 0 0;
+  background-color: thistle;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 20px 0;
+}
+
+.post-username {
+  font-size: 25px;
+  font-family: 'Georgia', fantasy;
+}
+
+.post-username:hover {
+  color: #8f246b;
+}
+
+.post-content {
+  height: 508px;
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 0 0 32px 32px;
+}
+
+.photo {
+  height: 508px;
+  border-radius: 0 0 0 32px;
+  width: 435px;
+}
+
+.post-detail-container {
+  height: 508px;
+  width: 365px;
+  border-radius: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 20px 0;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+ul .left {
+  width: 10%;
+  float: left;
+  cursor: pointer;
+}
+
+ul .right {
+  width: 10%;
+  float: right;
+}
+
+ul .centre-right {
+  width: 25%;
+  float: right;
+  font-family: 'Cambria', fantasy;
+}
+
+li {
+  margin-top: 10px;
+}
+
+.post-actions {
+  height: 60px;
+  width: 365px;
+  border-radius: 0 0 32px 0;
+  background-color: aliceblue;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 20px 0;
+  min-height: 60px;
+  display: flex;
+  flex-direction: row;
+}
+
+.comment-container {
+  min-height: 448px;
+  overflow-y: scroll;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 20px 0;
+}

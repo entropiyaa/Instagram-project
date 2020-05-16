@@ -1,11 +1,28 @@
 .content {
   display: flex;
   margin: 82px auto 32px;
-  /*padding: 0 16px;*/
-  max-width: 960px;
+  max-width: 1200px;
   flex-direction: column;
   background-color: #f5f3f8;
   border-radius: 10px;
   height: 800px;
   overflow-y: scroll;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/*.main-container {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.main-content {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  overflow-y: scroll;*/
+/*}*/
