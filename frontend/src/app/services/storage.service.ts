@@ -1,15 +1,17 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnDestroy} from "@angular/core";
 import {User} from "../models/user";
+import {LoginService} from "./login.service";
+import {Observable, Subscription} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
+export class StorageService implements OnDestroy {
 
   private readonly TOKEN_KEY: string = "token";
-  private readonly CURRENT_USER: string = "currentUser";
+  private subscriptions: Subscription[] = [];
 
-  private currentUser: User;
+  constructor(private loginService: LoginService) {}
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem("token");
@@ -20,13 +22,8 @@ export class StorageService {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
 
-  public setCurrentUser(currentUser: User): void {
-    this.currentUser = currentUser;
-    localStorage.setItem(this.CURRENT_USER, JSON.stringify(currentUser));
-  }
-
-  public getCurrentUser(): User {
-    return this.currentUser || JSON.parse(localStorage.getItem(this.CURRENT_USER));
+  public getCurrentUser(): Observable<User> {
+    return this.loginService.getAuthorizedUser();
   }
 
   public getToken(): string {
@@ -35,5 +32,11 @@ export class StorageService {
 
   public clearToken(): void {
     localStorage.setItem(this.TOKEN_KEY, null);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe());
+    this.subscriptions = [];
   }
 }

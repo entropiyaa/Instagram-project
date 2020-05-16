@@ -4,7 +4,6 @@ import {ReactionService} from "../../../services/reaction.service";
 import {Reaction} from "../../../models/reaction";
 import {ReactionType} from "../../../models/enums/reaction-type";
 import {User} from "../../../models/user";
-import {UserService} from "../../../services/user.service";
 import {StorageService} from "../../../services/storage.service";
 
 @Component({
@@ -33,8 +32,10 @@ export class ReactionComponent implements OnInit, OnDestroy {
   }
 
   public getCurrentUser(): void {
-    this.user = this.storageService.getCurrentUser();
-    this.getCurrentReaction();
+    this.subscriptions.push(this.storageService.getCurrentUser().subscribe((user: User) => {
+      this.user = user;
+      this.getCurrentReaction();
+    }));
   }
 
   public getCurrentReaction(): void {

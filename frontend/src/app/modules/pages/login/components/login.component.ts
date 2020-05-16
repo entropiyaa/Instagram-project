@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.user = this.storageService.getCurrentUser();
+    this.getAuthorizedUser();
   }
 
   public onSubmit(): void {
@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private getAuthorizedUser(): void {
     this.subscriptions.push(this.loginService.getAuthorizedUser().subscribe((user: User) => {
-      console.log(user);
-      this.storageService.setCurrentUser(user);
       this.user = user;
     }));
   }
@@ -72,7 +70,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public logout(): void {
     this.storageService.clearToken();
-    this.storageService.setCurrentUser(null);
     this.user = null;
   }
 

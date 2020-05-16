@@ -3,6 +3,7 @@ import {Subscription} from "rxjs";
 import {CommentService} from "../../../services/comment.service";
 import {Comment} from "../../../models/comment";
 import {StorageService} from "../../../services/storage.service";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'app-comment',
@@ -14,12 +15,20 @@ export class CommentComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public comments: Comment[] = [];
   @Input() private postId: number;
+  private user: User;
 
   constructor(private commentService: CommentService,
               private storageService: StorageService) {}
 
   ngOnInit(): void {
+    this.getCurrentUser();
     this.getCommentsByPostId();
+  }
+
+  private getCurrentUser(): void {
+    this.subscriptions.push(this.storageService.getCurrentUser().subscribe((user: User) => {
+      this.user = user;
+    }));
   }
 
   public getCommentsByPostId(): void {
@@ -30,7 +39,7 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   public saveComment(text: string): void {
     const comment = new Comment();
-    comment.user.id = this.storageService.getCurrentUser().id;
+    comment.user.id = this.user.id;
     comment.post.id = this.postId;
     comment.text = text;
     this.subscriptions.push(this.commentService.saveComment(comment).subscribe(comment => {

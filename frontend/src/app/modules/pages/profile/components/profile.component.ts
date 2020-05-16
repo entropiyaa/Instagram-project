@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../models/user";
-import {UserService} from "../../../../services/user.service";
 import {Subscription} from "rxjs";
 import {Post} from "../../../../models/post";
 import {PostService} from "../../../../services/post.service";
 import {Page} from "../../../../models/page";
 import {StorageService} from "../../../../services/storage.service";
+import {switchMap} from "rxjs/operators";
+import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../../../../services/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -17,19 +19,46 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public page: Page<Post> = new Page();
   public user: User = new User();
+  private currentUser: User;
   public imgURL: any;
   public description: string;
+  private profileId: number;
 
   constructor(private storageService: StorageService,
-              private postService: PostService) {}
+              private postService: PostService,
+              private route: ActivatedRoute,
+              private userService: UserService) {}
 
   ngOnInit(): void {
-    this.user = this.storageService.getCurrentUser();
-    this.getPostsByUserId();
+    this.getCurrentUser();
+    this.getRouteParam();
+  }
+
+  public getRouteParam(): void {
+    this.subscriptions.push(this.route.paramMap.pipe(
+      switchMap(params =>
+        params.getAll('id'))).subscribe(data => {
+      this.profileId = +data;
+      this.getUserProfile();
+    }));
+  }
+
+  private getUserProfile(): void {
+    this.subscriptions.push(this.userService.getUser(this.profileId).subscribe(user => {
+      this.user = user;
+      this.getPostsByUserId();
+    }));
+  }
+
+  private getCurrentUser(): void {
+    this.subscriptions.push(this.storageService.getCurrentUser().subscribe((user: User) => {
+      this.currentUser = user;
+    }));
   }
 
   public getPostsByUserId(): void {
-    this.subscriptions.push(this.postService.getPostsByUserId(this.user.id, this.page).subscribe(page => {
+    this.subscriptions.push(this.postService.getPostsByUserId(this.profileId, this.page)
+      .subscribe(page => {
       this.page.content = page.content;
       this.page.totalPages = page.totalPages;
       console.log(page);

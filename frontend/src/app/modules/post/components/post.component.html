@@ -1,8 +1,9 @@
+<ng-container *ngIf="post" >
 <div class="post-container">
   <div class="post-header">
     <ul>
       <li class="left">
-        <i class="post-username">{{post?.user?.username}}</i>
+        <i class="post-username" [routerLink]="'profile/' + post.user.id">{{post?.user?.username}}</i>
       </li>
       <li class="right">
         <button>button</button>
@@ -27,6 +28,7 @@
     </div>
   </div>
 </div>
+</ng-container>
 
 
 <!--<div class="post">-->

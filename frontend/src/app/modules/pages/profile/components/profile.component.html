@@ -1,7 +1,7 @@
 <h1>Profile!!</h1>
-{{user.username}}
+{{user?.username}}
 <ul class="posts">
-  <li *ngFor="let post of page.content">
+  <li *ngFor="let post of page?.content">
     <app-post [post]="post" (onDelete)="removeFromArray()"></app-post>
   </li>
 </ul>

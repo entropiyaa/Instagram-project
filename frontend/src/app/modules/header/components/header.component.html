@@ -3,7 +3,9 @@
     <div class="spacer"></div>
   <ul class="items">
     <li routerLink="/login">Login</li>
-    <li routerLink="/profile">Profile</li>
+    <ng-container *ngIf="getCurrentUserId()">
+    <li [routerLink] ="'profile/' + getCurrentUserId()">Profile</li>
+    </ng-container>
     <li routerLink="/news">News</li>
     <li>Logout</li>
   </ul>

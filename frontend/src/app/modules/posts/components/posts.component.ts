@@ -18,15 +18,12 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   private subscriptions: Subscription[] = [];
   public page: Page<Post> = new Page();
   private selectedItem: Item;
-  private user: User = new User();
 
   constructor(private postService: PostService,
-              private data: DataService,
-              private storageService: StorageService) {
+              private data: DataService) {
   }
 
   ngOnInit(): void {
-    this.user = this.storageService.getCurrentUser();
     this.getItem();
   }
 
