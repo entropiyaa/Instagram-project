@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/news', pathMatch: 'full' },
   { path: 'news', component: NewsComponent},
   { path: 'news/profile/:id', component: ProfileComponent},
-  { path: 'profile', component: ProfileComponent},
   { path: 'profile/:id', component: ProfileComponent},
   { path: 'login', component: LoginComponent},
   { path: 'post/:id', component: PostComponent},

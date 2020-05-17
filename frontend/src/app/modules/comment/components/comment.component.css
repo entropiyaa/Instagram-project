@@ -1,0 +1,73 @@
+.comment-main-container {
+  width: 365px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-header {
+  height: 20px;
+  width: 365px;
+  display: flex;
+}
+
+.comment-content {
+  width: 365px;
+  min-height: 40px;
+  overflow-y: visible;
+}
+
+.comment-username {
+  margin-left: 2%;
+  font-size: 16px;
+  font-family: 'Georgia', fantasy;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.comment-username:hover {
+  color: #8f246b;
+}
+
+.items {
+  display: flex;
+}
+
+.items li {
+  font-size: 16px;
+  padding: 0 1em 0 0;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.comment-content {
+  margin-left: 2%;
+  margin-top: 12px;
+  font-family: 'Cambria', cursive;
+}
+
+hr {
+  margin-top: 8px;
+  background-color: aliceblue;
+}
+
+.mat-icon-button.small {
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
+.mat-icon, .mat-icon-button i {
+  line-height: 14px;
+}
+
+.mat-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.material-icons {
+  font-size: 14px;
+}
+

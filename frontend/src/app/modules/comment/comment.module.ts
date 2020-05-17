@@ -2,6 +2,9 @@ import { NgModule } from "@angular/core";
 import {CommentComponent} from "./components/comment.component";
 import {CommonModule} from "@angular/common";
 import {CreateCommentModule} from "../create-comment/create-comment.module";
+import {RouterModule} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -10,7 +13,10 @@ import {CreateCommentModule} from "../create-comment/create-comment.module";
   ],
   imports: [
     CommonModule,
-    CreateCommentModule
+    CreateCommentModule,
+    RouterModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   exports: [CommentComponent]

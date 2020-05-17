@@ -3,10 +3,24 @@
   <div class="post-header">
     <ul>
       <li class="left">
-        <i class="post-username" [routerLink]="'profile/' + post.user.id">{{post?.user?.username}}</i>
+        <i class="post-username" routerLink="profile/{{post.user.id}}">{{post?.user?.username}}</i>
       </li>
       <li class="right">
-        <button>button</button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu>
       </li>
       <li class="centre-right">
         <i class="date"> {{post?.date | date: 'dd/MM/yyyy'}} at {{post?.date | date: 'hh:mm'}}</i>
@@ -20,6 +34,7 @@
         <div class="post-description">
           <i>{{post?.description}}</i>
         </div>
+        <hr>
         <app-comment [postId]="post.id"></app-comment>
       </div>
       <div class="post-actions">

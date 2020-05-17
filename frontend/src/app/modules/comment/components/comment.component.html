@@ -1,7 +1,29 @@
-<ul class="comments">
-  <h5>comments {{comments?.length}}</h5>
-  <li *ngFor="let comment of comments" >
-    {{comment?.id}} {{comment?.text}} {{comment?.date | date: 'medium'}} {{comment?.user?.username}}
-    <button (click)="deleteComment(comment)">delete</button>
-</ul>
-<app-create-comment (newComment)="saveComment($event)"></app-create-comment>
+<!--<ul class="comments">-->
+<!--  <h5>comments {{comments?.length}}</h5>-->
+<!--  <li *ngFor="let comment of comments" >-->
+<!--    {{comment?.id}} {{comment?.text}} {{comment?.date | date: 'medium'}} {{comment?.user?.username}}-->
+<!--    <button (click)="deleteComment(comment)">delete</button>-->
+<!--</ul>-->
+<!--<app-create-comment (newComment)="saveComment($event)"></app-create-comment>-->
+<ng-container *ngFor="let comment of comments">
+<div class="comment-main-container">
+  <div class="comment-header">
+    <div class="comment-username" routerLink ="profile/{{comment.user.id}}">
+      <i>{{comment?.user?.username}}</i>
+    </div>
+    <div class="spacer"></div>
+    <ul class="items">
+      <li class="comment-date">{{comment?.date | date: 'dd/MM/yy'}}</li>
+      <li>
+        <button mat-icon-button class="small" (click)="deleteComment(comment)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="comment-content">
+    {{comment?.text}}
+  </div>
+</div>
+<hr>
+</ng-container>
