@@ -32,7 +32,7 @@ import {APIInterceptor} from "./interceptors/api-interceptor";
     ProfileModule,
     LoginModule,
     BrowserAnimationsModule,
-    PostModule
+    PostModule,
   ],
   providers: [UserService, APIInterceptor, {
     provide: HTTP_INTERCEPTORS,

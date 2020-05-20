@@ -18,6 +18,10 @@
 
 .comment-username {
   margin-left: 2%;
+
+
+
+
   font-size: 16px;
   font-family: 'Georgia', fantasy;
   cursor: pointer;
@@ -42,7 +46,7 @@
 }
 
 .comment-content {
-  margin-left: 2%;
+  /*margin-left: 8%;*/
   margin-top: 12px;
   font-family: 'Cambria', cursive;
 }
@@ -58,16 +62,30 @@ hr {
   line-height: 18px;
 }
 
+
+
+/*mmm*/
 .mat-icon, .mat-icon-button i {
   line-height: 14px;
 }
 
+
+
+
+
+
 .mat-icon {
   width: 14px;
   height: 14px;
+  line-height: 14px;
+  /*font-size: 14px;*/
 }
 
 .material-icons {
   font-size: 14px;
+}
+
+span {
+  font-weight: bold;
 }
 

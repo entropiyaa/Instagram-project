@@ -3,7 +3,7 @@
   <div class="post-header">
     <ul>
       <li class="left">
-        <i class="post-username" routerLink="profile/{{post.user.id}}">{{post?.user?.username}}</i>
+        <i class="post-username" routerLink ="../profile" [queryParams]="{'id': post.user.id}">{{post?.user?.username}}</i>
       </li>
       <li class="right">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

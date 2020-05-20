@@ -8,21 +8,29 @@
 <ng-container *ngFor="let comment of comments">
 <div class="comment-main-container">
   <div class="comment-header">
-    <div class="comment-username" routerLink ="profile/{{comment.user.id}}">
+    <div class="comment-username" routerLink ="../profile" [queryParams]="{'id': comment.user.id}">
       <i>{{comment?.user?.username}}</i>
+<!--      <button mat-icon-button>-->
+<!--        <mat-icon>face</mat-icon>-->
+<!--      </button>-->
+<!--      <i>{{comment?.user?.username}}</i>-->
     </div>
     <div class="spacer"></div>
     <ul class="items">
       <li class="comment-date">{{comment?.date | date: 'dd/MM/yy'}}</li>
       <li>
         <button mat-icon-button class="small" (click)="deleteComment(comment)">
-          <mat-icon>clear</mat-icon>
+          <mat-icon class="clear">clear</mat-icon>
         </button>
       </li>
     </ul>
   </div>
   <div class="comment-content">
-    {{comment?.text}}
+<!--    <button mat-icon-button>-->
+<!--      <mat-icon>face</mat-icon>-->
+<!--    </button>-->
+<!--    <span>{{comment.user.username}}</span>-->
+     {{comment?.text}}
   </div>
 </div>
 <hr>

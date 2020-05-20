@@ -3,3 +3,46 @@
   list-style-type: none;
   margin-top: 75px;
 }
+
+input {
+  background-color: transparent;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.post-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.new-post {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30%;
+}
+
+.save-button {
+  margin-right: 2%;
+}
+
+.new-post-image {
+  margin-top: 5%;
+  margin-left: 14%;
+}
+
+.new-post-buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2%;
+  margin-left: 43%;
+}

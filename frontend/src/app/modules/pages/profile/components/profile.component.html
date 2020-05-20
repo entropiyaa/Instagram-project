@@ -1,18 +1,45 @@
 <h1>Profile!!</h1>
 {{user?.username}}
+
+<ng-container *ngIf="checkUsers()">
+  <button mat-stroked-button color="primary" (click)="createForm()">New post</button>
+</ng-container>
+
+<div class="new-post">
+<ng-container class="new-post" *ngIf="visibilityNewPost">
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="post-form-container">
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="Some info about your post.."
+             id="description" type="text" formControlName="description" required>
+    </mat-form-field>
+    <mat-error *ngIf="hasError('description', 'required')">
+      Description is required
+    </mat-error>
+    <mat-error *ngIf="hasError('description', 'maxlength')">
+      Description must be at least 300 characters long
+    </mat-error>
+    <label for="file-upload" class="custom-file-upload">
+      <span>Upload photo</span>
+    </label>
+    <input id="file-upload" type="file" accept=".png, .jpg, .jpeg" formControlName="imgUrl"
+           (change)="onFileChanged($event)" required>
+    <img class="new-post-image" [src]="imgURL" width="360" height="450" *ngIf="imgURL">
+    </div>
+  </form>
+  <div class="new-post-buttons">
+  <button mat-stroked-button color="primary" class="save-button"
+          type="submit" [disabled]="!postForm.valid" (click)="onSubmit()">Save</button>
+  <button mat-stroked-button color="primary" (click)="clear()">Close</button>
+  </div>
+</ng-container>
+</div>
+
 <ul class="posts">
   <li *ngFor="let post of page?.content">
     <app-post [post]="post" (onDelete)="removeFromArray()"></app-post>
   </li>
 </ul>
 <app-paging [page]="page" (onChanged)="getPostsByUserId()"></app-paging>
-<h3>Добавление поста</h3>
-<div>
-  <label>
-    <input class="form-control" name="text" [(ngModel)]="description" />
-  </label>
-  <input type="file" (change)="onFileChanged($event)">
-  <img [src]="imgURL" width="360" height="450" *ngIf="imgURL" alt="image">
-</div>
-<button (click)="savePost()">Save post</button>
 

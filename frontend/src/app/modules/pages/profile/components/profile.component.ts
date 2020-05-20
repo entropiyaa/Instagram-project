@@ -8,6 +8,8 @@ import {StorageService} from "../../../../services/storage.service";
 import {switchMap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../../services/user.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {createHasError, HasErrorFunction} from "../../../../util/has-error";
 
 @Component({
   selector: 'app-profile',
@@ -18,27 +20,40 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
   public page: Page<Post> = new Page();
-  public user: User = new User();
+  public user: User;
   private currentUser: User;
-  public imgURL: any;
-  public description: string;
   private profileId: number;
+
+  public postForm: FormGroup;
+  public imgURL: any;
+  public hasError: HasErrorFunction;
+  public visibilityNewPost: boolean = false;
 
   constructor(private storageService: StorageService,
               private postService: PostService,
               private route: ActivatedRoute,
-              private userService: UserService) {}
+              private userService: UserService,
+              private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.getCurrentUser();
     this.getRouteParam();
   }
 
-  public getRouteParam(): void {
-    this.subscriptions.push(this.route.paramMap.pipe(
+  public createForm(): void {
+    this.postForm = this.fb.group({
+      description: ['',  [Validators.required, Validators.maxLength(300)]],
+      imgUrl: ['', Validators.required],
+    });
+    this.hasError = createHasError(this.postForm);
+    this.visibilityNewPost = true;
+  }
+
+  private getRouteParam(): void {
+    this.subscriptions.push(this.route.queryParamMap.pipe(
       switchMap(params =>
-        params.getAll('id'))).subscribe(data => {
-      this.profileId = +data;
+        params.getAll('id'))).subscribe( id => {
+      this.profileId = Number(id);
       this.getUserProfile();
     }));
   }
@@ -65,6 +80,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }));
   }
 
+  public checkUsers(): boolean {
+    if(this.user && this.currentUser) {
+      return this.user.id === this.currentUser.id;
+    }
+  }
+
   public onFileChanged(event) {
     let reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
@@ -73,24 +94,31 @@ export class ProfileComponent implements OnInit, OnDestroy {
     };
   }
 
-  public savePost(): void {
+  private savePost(): void {
+    const formValue = this.postForm.value;
     const post: Post = new Post();
-    post.description = this.description;
+    post.description = formValue.description;
     post.photo = this.imgURL;
     post.user.id = this.user.id;
-    console.log(post);
     this.subscriptions.push(this.postService.savePost(post).subscribe(post => {
-      console.log(post);
       this.getPostsByUserId();
-      this.imgURL = null;
+      this.clear();
     }));
   }
 
-  onChanged(): void {
-    this.getPostsByUserId();
+  public clear(): void {
+    this.visibilityNewPost = false;
+    this.imgURL = null;
+    this.postForm.reset();
   }
 
-  removeFromArray(): void {
+  public onSubmit() {
+    if(this.postForm.valid && this.imgURL != null) {
+      this.savePost();
+    }
+  }
+
+  public removeFromArray(): void {
     this.getPostsByUserId();
   }
 

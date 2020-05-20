@@ -5,7 +5,10 @@ import {PostsModule} from "../../posts/posts.module";
 import {RouterModule} from "@angular/router";
 import {PostModule} from "../../post/post.module";
 import {PagingModule} from "../../paging/paging.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -18,7 +21,11 @@ import {FormsModule} from "@angular/forms";
     RouterModule,
     PostModule,
     PagingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [],
   exports: [ProfileComponent]

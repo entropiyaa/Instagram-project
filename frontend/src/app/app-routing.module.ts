@@ -9,8 +9,7 @@ import {PostComponent} from "./modules/post/components/post.component";
 const routes: Routes = [
   { path: '', redirectTo: '/news', pathMatch: 'full' },
   { path: 'news', component: NewsComponent},
-  { path: 'news/profile/:id', component: ProfileComponent},
-  { path: 'profile/:id', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent},
   { path: 'login', component: LoginComponent},
   { path: 'post/:id', component: PostComponent},
   { path: 'profile/post/:id', component: PostComponent}
