@@ -10,15 +10,21 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
           <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
+            <mat-icon>tag_faces</mat-icon>
+            <span>See reactions</span>
           </button>
           <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon>
-            <span>Disable alerts</span>
+            <mat-icon>feedback</mat-icon>
+            <span>See complaints</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>create</mat-icon>
+            <span>Write a complaint</span>
+          </button>
+          <button mat-menu-item *ngIf="checkUser()" (click)="deletePost(post)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete post</span>
           </button>
         </mat-menu>
       </li>

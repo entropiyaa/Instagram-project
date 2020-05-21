@@ -1,9 +1,13 @@
-<div class="newComment">
-      <label>
-        <input class="form-control" name="text" [(ngModel)]="text" />
-      </label>
-      <div class="button">
-        <button (click)="addComment(text)">create comment</button>
-      </div>
+<div class="new-comment">
+  <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+  <mat-form-field class="comment-form">
+    <mat-label>Comment</mat-label>
+    <input matInput placeholder="Your opinion" class="form-control"
+           type="text" formControlName="comment">
+  </mat-form-field>
+  </form>
+  <button class="creat-comment-button" type="submit" [disabled]="!commentForm.valid" (click)="addComment()" mat-icon-button>
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
 </div>
 <!--(keydown)="" -->

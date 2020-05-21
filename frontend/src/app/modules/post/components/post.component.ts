@@ -4,6 +4,9 @@ import {Post} from "../../../models/post";
 import {PostService} from "../../../services/post.service";
 import {ActivatedRoute} from "@angular/router";
 import {switchMap} from "rxjs/operators";
+import {User} from "../../../models/user";
+import {Role} from "../../../models/enums/role";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-post',
@@ -14,6 +17,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
   @Input() public post: Post;
+  @Input() public currentUser: User;
   // @Input() public post: Post = new Post();
   @Output() public onDelete: EventEmitter<void> = new EventEmitter<void>();
   public postId: number;
@@ -40,15 +44,20 @@ export class PostComponent implements OnInit, OnDestroy {
         }));
   }
 
+  public checkUser(): boolean {
+    return this.currentUser.id === this.post.user.id || this.currentUser.role === Role.ADMIN;
+  }
+
   delete() {
     this.onDelete.emit();
   }
 
   public deletePost(post: Post): void {
-    this.subscriptions.push(this.postService.deletePost(post.id).subscribe(() => {
-      console.log("delete post!!");
-      this.delete();
-    }));
+    if(this.checkUser()) {
+      this.subscriptions.push(this.postService.deletePost(post.id).subscribe(() => {
+        this.delete();
+      }));
+    }
   }
 
   ngOnDestroy() {

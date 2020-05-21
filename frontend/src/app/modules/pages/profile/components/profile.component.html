@@ -38,7 +38,7 @@
 
 <ul class="posts">
   <li *ngFor="let post of page?.content">
-    <app-post [post]="post" (onDelete)="removeFromArray()"></app-post>
+    <app-post [post]="post" [currentUser]="currentUser" (onDelete)="removeFromArray()"></app-post>
   </li>
 </ul>
 <app-paging [page]="page" (onChanged)="getPostsByUserId()"></app-paging>

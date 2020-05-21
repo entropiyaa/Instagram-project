@@ -35,3 +35,9 @@
 </div>
 <hr>
 </ng-container>
+
+<ng-container>
+  <div class="new-comment-container">
+    <app-create-comment (newComment)="saveComment($event)"></app-create-comment>
+  </div>
+</ng-container>

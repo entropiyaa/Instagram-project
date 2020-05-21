@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from "rxjs";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Comment} from "../../../models/comment";
 
 @Component({
   selector: 'app-create-comment',
@@ -9,16 +11,30 @@ import {Subscription} from "rxjs";
 export class CreateCommentComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  public text: string;
-  @Output() newComment: EventEmitter<string> = new EventEmitter<string>();
+  @Output() newComment: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  public commentForm: FormGroup;
 
   constructor() {}
 
   ngOnInit(): void {
+    this.createForm();
   }
 
-  public addComment(text: string): void {
-    this.newComment.emit(text);
+  public createForm(): void {
+    this.commentForm = new FormGroup({
+      comment: new FormControl('', [Validators.required, Validators.maxLength(100)])
+    });
+  }
+
+  public addComment(): void {
+    if(this.commentForm.valid) {
+      this.newComment.emit(this.commentForm);
+      this.clear();
+    }
+  }
+
+  public clear(): void {
+    this.commentForm.reset();
   }
 
   ngOnDestroy() {

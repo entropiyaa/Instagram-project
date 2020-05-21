@@ -11,6 +11,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {AppRoutingModule} from "../../app-routing.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {BrowserModule} from "@angular/platform-browser";
+import {CreateCommentModule} from "../create-comment/create-comment.module";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {BrowserModule} from "@angular/platform-browser";
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    CreateCommentModule
   ],
   providers: [],
   exports: [PostComponent]

@@ -1,0 +1,12 @@
+.comment-form {
+  width: 170px;
+}
+
+.new-comment {
+  display: flex;
+  flex-direction: row;
+}
+
+.creat-comment-button {
+  margin-top: 4%;
+}

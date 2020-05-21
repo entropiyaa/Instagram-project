@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public page: Page<Post> = new Page();
   public user: User;
-  private currentUser: User;
+  public currentUser: User;
   private profileId: number;
 
   public postForm: FormGroup;
@@ -76,7 +76,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(page => {
       this.page.content = page.content;
       this.page.totalPages = page.totalPages;
-      console.log(page);
     }));
   }
 

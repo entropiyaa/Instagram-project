@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {PostService} from "../../../services/post.service";
 import {Post} from "../../../models/post";
 import {Subscription} from "rxjs";
@@ -6,7 +6,6 @@ import {DataService} from "../../../services/data.service";
 import {Item} from "../../../models/enums/item";
 import {Page} from "../../../models/page";
 import {User} from "../../../models/user";
-import {StorageService} from "../../../services/storage.service";
 
 @Component({
   selector: 'app-posts',
@@ -18,6 +17,7 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   private subscriptions: Subscription[] = [];
   public page: Page<Post> = new Page();
   private selectedItem: Item;
+  @Input() public currentUser: User;
 
   constructor(private postService: PostService,
               private data: DataService) {
@@ -52,8 +52,6 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
 
   public getPosts(): void {
     this.subscriptions.push(this.postService.getPosts(this.page).subscribe(postPage => {
-        console.log(postPage);
-        console.log(postPage.content);
         this.page.content = postPage.content;
         this.page.totalPages = postPage.totalPages; }));
   }
@@ -61,7 +59,6 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
 
   public getLatestPosts(): void {
     this.subscriptions.push(this.postService.getLatestPosts(this.page).subscribe(postPage => {
-      console.log(postPage);
       this.page.content = postPage.content;
       this.page.totalPages = postPage.totalPages; }));
   }

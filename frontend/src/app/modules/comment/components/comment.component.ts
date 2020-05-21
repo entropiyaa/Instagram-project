@@ -4,6 +4,7 @@ import {CommentService} from "../../../services/comment.service";
 import {Comment} from "../../../models/comment";
 import {StorageService} from "../../../services/storage.service";
 import {User} from "../../../models/user";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-comment',
@@ -37,20 +38,18 @@ export class CommentComponent implements OnInit, OnDestroy {
     }));
   }
 
-  public saveComment(text: string): void {
+  public saveComment(formComment: FormGroup): void {
     const comment = new Comment();
     comment.user.id = this.user.id;
     comment.post.id = this.postId;
-    comment.text = text;
+    comment.text = formComment.value.comment;
     this.subscriptions.push(this.commentService.saveComment(comment).subscribe(comment => {
-      console.log(comment);
       this.comments.push(comment);
     }))
   }
 
   public deleteComment(comment: Comment): void {
     this.subscriptions.push(this.commentService.deleteComment(comment.id).subscribe(() => {
-      console.log("delete success");
       const index: number = this.comments.indexOf(comment);
       if(index !== -1) {
         this.comments.splice(index, 1);

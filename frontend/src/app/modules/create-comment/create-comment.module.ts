@@ -1,6 +1,10 @@
 import { NgModule } from "@angular/core";
 import {CreateCommentComponent} from "./components/create-comment.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -8,7 +12,12 @@ import {FormsModule} from "@angular/forms";
     CreateCommentComponent
   ],
   imports: [
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [],
   exports: [CreateCommentComponent]
