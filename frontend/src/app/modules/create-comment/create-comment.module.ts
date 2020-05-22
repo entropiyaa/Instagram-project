@@ -5,6 +5,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {CommonModule} from "@angular/common";
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatSnackBarModule
   ],
   providers: [],
   exports: [CreateCommentComponent]

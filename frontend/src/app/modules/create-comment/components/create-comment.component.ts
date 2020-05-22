@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Comment} from "../../../models/comment";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-comment',
@@ -14,7 +14,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   @Output() newComment: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   public commentForm: FormGroup;
 
-  constructor() {}
+  constructor(private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -22,19 +22,24 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
 
   public createForm(): void {
     this.commentForm = new FormGroup({
-      comment: new FormControl('', [Validators.required, Validators.maxLength(100)])
+      comment: new FormControl('', [Validators.maxLength(100)])
     });
   }
 
   public addComment(): void {
     if(this.commentForm.valid) {
-      this.newComment.emit(this.commentForm);
-      this.clear();
+      if(this.commentForm.value.comment !== "") {
+        this.newComment.emit(this.commentForm);
+        this.clear();
+      } else {
+        this._snackBar.open('Empty comment', '', {duration: 3000});
+      }
     }
   }
 
   public clear(): void {
     this.commentForm.reset();
+    this.commentForm.value.comment = "";
   }
 
   ngOnDestroy() {
