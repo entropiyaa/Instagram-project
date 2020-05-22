@@ -8,5 +8,13 @@ export const validation = {
     minlength: 8,
     maxlength: 20,
     pattern: '(?=.*[:.,/!?+%]).{8,20}'
+  },
+  name: {
+    minlength: 2,
+    maxlength: 20,
+    pattern: '[a-zA-Z]+'
+  },
+  text: {
+    maxlength: 300
   }
 };

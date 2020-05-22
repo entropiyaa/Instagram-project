@@ -1,1 +1,105 @@
-Registration!!
+<mat-card>
+  <mat-card-title>Sign up to Instagram</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="registrationForm">
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Email" id="email" formControlName="email" required>
+          </mat-form-field>
+          <mat-error *ngIf="hasError('email', 'required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="hasError('email', 'minlength')">
+            Email must be longer then {{validation.email.minlength}} characters
+          </mat-error>
+          <mat-error *ngIf="hasError('email', 'maxlength')">
+            Email must be at least {{validation.email.maxlength}} characters long
+          </mat-error>
+          <mat-error *ngIf="hasError('email', 'pattern')">
+            Incorrect email
+          </mat-error>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password" id="password" formControlName="password" required>
+          </mat-form-field>
+          <mat-error *ngIf="hasError('password', 'required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="hasError('password', 'minlength')">
+            Password must be longer then {{validation.password.minlength}} characters
+          </mat-error>
+          <mat-error *ngIf="hasError('password', 'maxlength')">
+            Password must be at least {{validation.password.maxlength}} characters long
+          </mat-error>
+          <mat-error *ngIf="hasError('password', 'pattern')">
+            Incorrect password, insert special character like :.,/!?+%]
+          </mat-error>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Username" id="username" formControlName="username" required>
+          </mat-form-field>
+          <mat-error *ngIf="hasError('username', 'required')">
+            Username is required
+          </mat-error>
+          <mat-error *ngIf="hasError('username', 'minlength')">
+            Username must be longer then {{validation.name.minlength}} characters
+          </mat-error>
+          <mat-error *ngIf="hasError('username', 'maxlength')">
+            Username must be at least {{validation.name.maxlength}} characters long
+          </mat-error>
+          <mat-error *ngIf="hasError('username', 'pattern')">
+            Incorrect username, only letters
+          </mat-error>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="First name" id="firstName" formControlName="firstName" required>
+          </mat-form-field>
+          <mat-error *ngIf="hasError('firstName', 'required')">
+            First name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('firstName', 'minlength')">
+            First name must be longer then {{validation.name.minlength}} characters
+          </mat-error>
+          <mat-error *ngIf="hasError('firstName', 'maxlength')">
+            First name must be at least {{validation.name.maxlength}} characters long
+          </mat-error>
+          <mat-error *ngIf="hasError('firstName', 'pattern')">
+            Incorrect first name, only letters
+          </mat-error>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Last name" id="lastName" formControlName="lastName" required>
+          </mat-form-field>
+          <mat-error *ngIf="hasError('lastName', 'required')">
+            Last name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('lastName', 'minlength')">
+            Last name must be longer then {{validation.name.minlength}} characters
+          </mat-error>
+          <mat-error *ngIf="hasError('lastName', 'maxlength')">
+            Last name must be at least {{validation.name.maxlength}} characters long
+          </mat-error>
+          <mat-error *ngIf="hasError('lastName', 'pattern')">
+            Incorrect last name, only letters
+          </mat-error>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Some info about yourself" id="bio" formControlName="bio">
+          </mat-form-field>
+          <mat-error *ngIf="hasError('bio', 'maxlength')">
+            Info must be at least {{validation.text.maxlength}} characters long
+          </mat-error>
+        </p>
+        <div class="button">
+          <button class="sign-button" mat-stroked-button color="basic"
+                  type="submit" [disabled]="!registrationForm.valid" (click)="onSubmit()">Sign up</button>
+          <button routerLink="/login" type="button" mat-stroked-button color="basic">Sign in</button>
+        </div>
+      </form>
+    </mat-card-content>
+</mat-card>

@@ -1,6 +1,8 @@
 package com.netcracker.backend.service.impl;
 
 import com.netcracker.backend.entity.User;
+import com.netcracker.backend.entity.enums.UserRole;
+import com.netcracker.backend.entity.enums.UserStatus;
 import com.netcracker.backend.repository.UserRepository;
 import com.netcracker.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
+        user.setRole(UserRole.USER);
+        user.setStatus(UserStatus.ACTIVE);
         return userRepository.save(user);
     }
 }

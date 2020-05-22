@@ -1,0 +1,31 @@
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card-title{
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -.5px;
+}
+
+mat-card {
+  width: 50%;
+  margin: 5% auto;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 2%;
+}
+
+.sign-button {
+  margin-right: 2%;
+}

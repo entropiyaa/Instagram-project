@@ -3,4 +3,6 @@
     <app-post [post]="post" [currentUser]="currentUser" (onDelete)="removeFromArray()"></app-post>
   </li>
 </ul>
-<app-paging [page]="page" (onChanged)="onChanged()"></app-paging>
+<ng-container *ngIf="page.content.length">
+  <app-paging [page]="page" (onChanged)="onChanged()"></app-paging>
+</ng-container>

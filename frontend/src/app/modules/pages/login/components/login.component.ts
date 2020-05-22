@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../models/user";
 import {Subscription} from "rxjs";
-import {Login} from "../../../../models/login";
 import {StorageService} from "../../../../services/storage.service";
 import {LoginService} from "../../../../services/login.service";
 import {AuthToken} from "../../../../models/authToken";
@@ -24,9 +23,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   public user: User;
   public showCheckYourSetDataAlert: boolean = false;
   private subscriptions: Subscription[] = [];
-
-  public visibleRegistration: boolean = false;
-  public newLogin: Login;
 
   public loginForm: FormGroup;
   public hasError: HasErrorFunction;
@@ -82,29 +78,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.user = this.authService.getCurrentUser();
   }
 
-  public onRegistration(): void {
-    this.visibleRegistration = true;
-    this.newLogin = new Login();
-    this.newLogin.user = new User();
-  }
-
-  public registration(): void {
-    this.subscriptions.push(this.loginService.register(this.newLogin).subscribe(login => {
-      console.log(login);
-    }))
-  }
-
-  public logout(): void {
-    this.storageService.clearToken();
-    this.user = null;
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(
-      (subscription) => subscription.unsubscribe());
-    this.subscriptions = [];
-  }
-
   private createForm(): void {
     this.loginForm = this.fb.group({
       email: ['',  [Validators.required,
@@ -114,6 +87,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', Validators.required],
     });
     this.hasError = createHasError(this.loginForm);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe());
+    this.subscriptions = [];
   }
 
 }

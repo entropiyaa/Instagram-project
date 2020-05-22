@@ -2,7 +2,7 @@ import {User} from "./user";
 
 export class Login {
   id: number;
-  username: string;
+  email: string;
   password: string;
   user: User;
 }
