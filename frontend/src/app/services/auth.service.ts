@@ -18,6 +18,12 @@ export class AuthService {
     return this.currentUser;
   }
 
+  public logout(): void {
+    if(!this.storageService.isAuthenticated()) {
+      this.currentUser = null;
+    }
+  }
+
   public getCurrentUserFromServer(): Promise<any> {
     if(this.storageService.isAuthenticated()) {
       const userPromise = this.http.get<User>(this.loginsUrl + "/current").toPromise();
