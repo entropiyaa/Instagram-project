@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PostModule} from "./modules/post/post.module";
 import {UserService} from "./services/user.service";
 import {APIInterceptor} from "./interceptors/api-interceptor";
+import {AuthService} from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,14 @@ import {APIInterceptor} from "./interceptors/api-interceptor";
     provide: HTTP_INTERCEPTORS,
     useClass: APIInterceptor,
     multi: true
-  }],
+  },
+    AuthService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => () => authService.getCurrentUserFromServer(),
+      deps: [AuthService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

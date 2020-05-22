@@ -6,7 +6,6 @@ import {ActivatedRoute} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {User} from "../../../models/user";
 import {Role} from "../../../models/enums/role";
-import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-post',
@@ -18,7 +17,6 @@ export class PostComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   @Input() public post: Post;
   @Input() public currentUser: User;
-  // @Input() public post: Post = new Post();
   @Output() public onDelete: EventEmitter<void> = new EventEmitter<void>();
   public postId: number;
 

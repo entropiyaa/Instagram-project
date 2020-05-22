@@ -1,7 +1,6 @@
 import {Injectable, OnDestroy} from "@angular/core";
-import {User} from "../models/user";
-import {LoginService} from "./login.service";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
+import {AuthToken} from "../models/authToken";
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +10,16 @@ export class StorageService implements OnDestroy {
   private readonly TOKEN_KEY: string = "token";
   private subscriptions: Subscription[] = [];
 
-  constructor(private loginService: LoginService) {}
+  constructor() {
+  }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem("token");
-    return token && token !== "null" && !!this.getCurrentUser(); // todo it would be better to add parsing toke. Check expiration!
+    return token && token !== "null";
   }
 
-  public setToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
-  }
-
-  public getCurrentUser(): Observable<User> {
-    return this.loginService.getAuthorizedUser();
+  public setToken(token: AuthToken): void {
+    localStorage.setItem(this.TOKEN_KEY, token.token);
   }
 
   public getToken(): string {
@@ -31,7 +27,7 @@ export class StorageService implements OnDestroy {
   }
 
   public clearToken(): void {
-    localStorage.setItem(this.TOKEN_KEY, null);
+    localStorage.removeItem(this.TOKEN_KEY);
   }
 
   ngOnDestroy() {

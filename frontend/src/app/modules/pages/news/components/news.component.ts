@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../models/user";
-import {StorageService} from "../../../../services/storage.service";
 import {Subscription} from "rxjs";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-news',
@@ -13,16 +13,10 @@ export class NewsComponent implements OnInit, OnDestroy {
   public currentUser: User;
   private subscriptions: Subscription[] = [];
 
-  constructor(private storageService: StorageService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.getCurrentUser();
-  }
-
-  private getCurrentUser(): void {
-    this.subscriptions.push(this.storageService.getCurrentUser().subscribe((user: User) => {
-      this.currentUser = user;
-    }));
+    this.currentUser = this.authService.getCurrentUser();
   }
 
   ngOnDestroy() {

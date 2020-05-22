@@ -1,7 +1,7 @@
 <h1>Login component!!</h1>
-<ng-container *ngIf="user as currentLoggedUser">
-  You are logged as {{currentLoggedUser.username}} <br>
-  Role is {{currentLoggedUser.role}} <br>
+<ng-container *ngIf="user">
+  You are logged as {{user.username}} <br>
+  Role is {{user.role}} <br>
 </ng-container>
 <ng-container *ngIf="!user && !visibleRegistration">
   <div class="login-form__container">

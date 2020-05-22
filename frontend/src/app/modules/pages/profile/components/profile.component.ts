@@ -10,6 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../../services/user.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {createHasError, HasErrorFunction} from "../../../../util/has-error";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-profile',
@@ -32,11 +33,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private storageService: StorageService,
               private postService: PostService,
               private route: ActivatedRoute,
+              private authService: AuthService,
               private userService: UserService,
               private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.getCurrentUser();
+    this.currentUser = this.authService.getCurrentUser();
     this.getRouteParam();
   }
 
@@ -62,12 +64,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.userService.getUser(this.profileId).subscribe(user => {
       this.user = user;
       this.getPostsByUserId();
-    }));
-  }
-
-  private getCurrentUser(): void {
-    this.subscriptions.push(this.storageService.getCurrentUser().subscribe((user: User) => {
-      this.currentUser = user;
     }));
   }
 

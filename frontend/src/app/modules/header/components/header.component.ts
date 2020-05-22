@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../models/user";
 import {Subscription} from "rxjs";
 import {StorageService} from "../../../services/storage.service";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -10,22 +11,18 @@ import {StorageService} from "../../../services/storage.service";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  private user: User = new User();
+  private user: User;
   private subscriptions: Subscription[] = [];
 
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService,
+              private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.getCurrentUser();
-  }
-
-  private getCurrentUser(): void {
-    this.subscriptions.push(this.storageService.getCurrentUser().subscribe((user: User) => {
-      this.user = user;
-    }));
+    this.user = this.authService.getCurrentUser();
   }
 
   public getCurrentUserId(): number {
+    this.user = this.authService.getCurrentUser();
     return this.user.id;
   }
 

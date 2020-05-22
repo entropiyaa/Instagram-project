@@ -6,6 +6,7 @@ import {StorageService} from "../../../../services/storage.service";
 import {LoginService} from "../../../../services/login.service";
 import {AuthToken} from "../../../../models/authToken";
 import {LoginUser} from "../../../../models/loginUser";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -15,19 +16,20 @@ import {LoginUser} from "../../../../models/loginUser";
 export class LoginComponent implements OnInit, OnDestroy {
 
   public login: LoginUser = {};
-  user: User;
+  public user: User;
   public showCheckYourSetDataAlert: boolean = false;
   private subscriptions: Subscription[] = [];
 
-  visibleRegistration: boolean = false;
-  newLogin: Login;
+  public visibleRegistration: boolean = false;
+  public newLogin: Login;
 
-  constructor(private storageService: StorageService,
-              private loginService: LoginService) {
+  constructor(public storageService: StorageService,
+              private loginService: LoginService,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.getAuthorizedUser();
+    this.getCurrentUser();
   }
 
   public onSubmit(): void {
@@ -38,8 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.loginService.generateToken(this.login)
       .subscribe((authToken: AuthToken) => {
         if(authToken) {
-          this.storageService.setToken(authToken.token);
-          this.getAuthorizedUser();
+          this.storageService.setToken(authToken);
+          this.authService.getCurrentUserFromServer().then(data => this.getCurrentUser());
         }
     }, (error) => {
         if (error.status === 401) {
@@ -50,10 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       }))
   }
 
-  private getAuthorizedUser(): void {
-    this.subscriptions.push(this.loginService.getAuthorizedUser().subscribe((user: User) => {
-      this.user = user;
-    }));
+  private getCurrentUser(): void {
+    this.user = this.authService.getCurrentUser();
   }
 
   public onRegistration(): void {

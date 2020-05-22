@@ -10,7 +10,7 @@ import {Item} from "../../../../../models/enums/item";
 })
 export class PanelAdminComponent implements OnInit, OnDestroy {
 
-  public username: string;
+  // public username: string;
   private subscriptions: Subscription[] = [];
   private selectedItem: Item;
   Item = Item;

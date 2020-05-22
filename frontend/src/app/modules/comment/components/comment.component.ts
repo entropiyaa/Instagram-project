@@ -2,9 +2,9 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {CommentService} from "../../../services/comment.service";
 import {Comment} from "../../../models/comment";
-import {StorageService} from "../../../services/storage.service";
 import {User} from "../../../models/user";
 import {FormGroup} from "@angular/forms";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-comment',
@@ -19,17 +19,11 @@ export class CommentComponent implements OnInit, OnDestroy {
   private user: User;
 
   constructor(private commentService: CommentService,
-              private storageService: StorageService) {}
+              private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.getCurrentUser();
+    this.user = this.authService.getCurrentUser();
     this.getCommentsByPostId();
-  }
-
-  private getCurrentUser(): void {
-    this.subscriptions.push(this.storageService.getCurrentUser().subscribe((user: User) => {
-      this.user = user;
-    }));
   }
 
   public getCommentsByPostId(): void {

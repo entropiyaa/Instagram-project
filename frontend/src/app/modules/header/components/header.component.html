@@ -3,10 +3,10 @@
     <div class="spacer"></div>
   <ul class="items">
     <li routerLink="/login">Login</li>
-    <ng-container *ngIf="getCurrentUserId()">
+<!--    <ng-container *ngIf="getCurrentUserId()">-->
     <li [routerLink] = "['profile']"
         [queryParams]="{'id': getCurrentUserId().toString()}">Profile</li>
-    </ng-container>
+<!--    </ng-container>-->
     <li routerLink="/news">News</li>
     <li>Logout</li>
   </ul>
