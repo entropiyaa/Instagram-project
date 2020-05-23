@@ -108,7 +108,7 @@
         </p>
         <div class="button">
           <button class="sign-button" mat-stroked-button color="basic"
-                  type="submit" [disabled]="!registrationForm.valid" (click)="onSubmit()">Sign up</button>
+                  type="submit" [disabled]="registrationForm.invalid" (click)="onSubmit()">Sign up</button>
           <button routerLink="/login" type="button" mat-stroked-button color="basic">Sign in</button>
         </div>
       </form>

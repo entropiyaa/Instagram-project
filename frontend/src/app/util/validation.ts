@@ -39,5 +39,8 @@ export const validation = {
   ],
   textValid: [
     Validators.maxLength(300)
+  ],
+  digitsValid: [
+    Validators.pattern('[0-9]+')
   ]
 };

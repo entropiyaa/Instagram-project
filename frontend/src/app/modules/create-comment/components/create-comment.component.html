@@ -6,7 +6,7 @@
            type="text" formControlName="comment">
   </mat-form-field>
   </form>
-  <button class="creat-comment-button" type="submit" [disabled]="!commentForm.valid" (click)="addComment()" mat-icon-button>
+  <button class="creat-comment-button" type="submit" [disabled]="commentForm.invalid" (click)="addComment()" mat-icon-button>
     <mat-icon>arrow_forward</mat-icon>
   </button>
 </div>
