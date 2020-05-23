@@ -8,6 +8,7 @@ import {createHasError, HasErrorFunction} from "../../../../util/has-error";
 import {validation} from "../../../../util/validation";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {UserService} from "../../../../services/user.service";
 
 @Component({
   selector: 'app-registration',
@@ -23,6 +24,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   public validation = validation;
 
   constructor(private loginService: LoginService,
+              private userService: UserService,
               private fb: FormBuilder,
               private router: Router,
               private _snackBar: MatSnackBar) {
@@ -78,7 +80,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.loginService
       .getLoginByEmail(this.registrationForm.value.email).subscribe(login => {
         if(!login) {
-          this.createLoginModel();
+          this.existUsername();
         } else {
           this.emailErr();
         }
@@ -88,6 +90,22 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   private emailErr(): void {
     this._snackBar.open('This email already exists', '', {duration: 4000});
     this.registrationForm.get('email').reset();
+  }
+
+  private existUsername(): void {
+    this.subscriptions.push(this.userService
+      .getUserByUsername(this.registrationForm.value.username).subscribe(user => {
+        if(!user) {
+          this.createLoginModel();
+        } else {
+          this.usernameErr();
+        }
+      }))
+  }
+
+  private usernameErr(): void {
+    this._snackBar.open('This username already exists', '', {duration: 4000});
+    this.registrationForm.get('username').reset();
   }
 
   private createLoginModel(): void {

@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public login: LoginUser = {};
   public user: User;
-  public showCheckYourSetDataAlert: boolean = false;
   private subscriptions: Subscription[] = [];
 
   public loginForm: FormGroup;
@@ -60,7 +59,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
     }, (error) => {
         if (error.status === 401) {
-          this.showCheckYourSetDataAlert = true;
           this._snackBar.open('Incorrect data', '', {duration: 3000});
         } else {
           alert(error.message);
@@ -71,7 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private clear(): void {
     this.loginForm.reset();
-    this.login = null;
+    this.login = {};
   }
 
   private getCurrentUser(): void {

@@ -23,6 +23,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendUrl + "api/users/user/" + username, User.class);
+    }
+
+    @Override
     public List<User> findAll() {
         RestTemplate restTemplate = new RestTemplate();
         User[] users = restTemplate.getForObject(backendUrl + "/api/users", User[].class);

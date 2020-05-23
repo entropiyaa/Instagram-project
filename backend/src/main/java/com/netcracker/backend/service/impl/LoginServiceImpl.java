@@ -26,12 +26,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Login findLoginByEmail(String email) {
         Optional<Login> optionalLogin = loginRepository.findByEmail(email);
-        if(optionalLogin.isPresent()) {
-            Login login = optionalLogin.get();
-            login.setPassword("");
-            return login;
-        }
-        return null;
+        return optionalLogin.orElse(null);
     }
 
     @Override
