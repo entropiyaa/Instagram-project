@@ -27,6 +27,9 @@ export class PagingComponent implements OnInit, OnDestroy {
   public next(): void {
     if(this.page.pageNumber < this.page.totalPages - 1) {
       this.page.pageNumber++;
+      if(this.selectedPage) {
+        this.selectedPage++;
+      }
       this.changePage();
     }
   }
@@ -34,6 +37,9 @@ export class PagingComponent implements OnInit, OnDestroy {
   public previous(): void {
     if(this.page.pageNumber > 0) {
       this.page.pageNumber--;
+      if(this.selectedPage) {
+        this.selectedPage--;
+      }
       this.changePage();
     }
   }
@@ -46,6 +52,7 @@ export class PagingComponent implements OnInit, OnDestroy {
     } else {
       this.page.pageNumber = selectedPage - 1;
     }
+    this.selectedPage = this.page.pageNumber + 1;
     this.changePage();
   }
 

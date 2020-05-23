@@ -2,6 +2,8 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ComplaintService} from "../../../services/complaint.service";
 import {Complaint} from "../../../models/complaint";
+import {switchMap} from "rxjs/operators";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-complaints',
@@ -11,31 +13,32 @@ import {Complaint} from "../../../models/complaint";
 export class ComplaintsComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  @Input() public postId: number;
+  // @Input() public postId: number;
+  private postId: number;
   public postComplaints: Complaint[] = [];
-  public visibility: boolean = false;
 
-  constructor(private complaintService: ComplaintService) {}
+  constructor(private complaintService: ComplaintService,
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.getRouteParam();
   }
 
-  public getComplaintsByPostId(): void {
+  public getRouteParam(): void {
+    this.subscriptions.push(this.route.paramMap.pipe(
+      switchMap(params =>
+        params.getAll('id'))).subscribe(data => {
+      this.postId = +data;
+      this.getComplaintsByPostId();
+    }));
+  }
+
+  private getComplaintsByPostId(): void {
     this.subscriptions.push(this.complaintService.getComplaintsByPostId(this.postId)
       .subscribe(complaints => {
+        console.log(complaints);
       this.postComplaints = complaints;
-    }))
-  }
-
-  public showComplaints(): void {
-    this.visibility = !this.visibility;
-    this.checkComplaints();
-  }
-
-  public checkComplaints() {
-    if(this.visibility) {
-      this.getComplaintsByPostId();
-    }
+    }));
   }
 
   ngOnDestroy() {

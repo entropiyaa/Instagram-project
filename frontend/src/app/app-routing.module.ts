@@ -7,6 +7,7 @@ import {PostComponent} from "./modules/post/components/post.component";
 import {CanActivateService} from "./services/can-activate.service";
 import {RegistrationComponent} from "./modules/pages/registration/components/registration.component";
 import {CanSignInService} from "./services/can-sign-in.service";
+import {ComplaintsComponent} from "./modules/complaints/components/complaints.component";
 
 
 const routes: Routes = [
@@ -14,9 +15,10 @@ const routes: Routes = [
   { path: 'news', component: NewsComponent,  canActivate: [CanActivateService]},
   { path: 'profile', component: ProfileComponent,  canActivate: [CanActivateService]},
   { path: 'login', component: LoginComponent, canActivate: [CanSignInService]},
-  { path: 'register', component: RegistrationComponent},
+  { path: 'register', component: RegistrationComponent,  canActivate: [CanSignInService]},
   { path: 'post/:id', component: PostComponent,  canActivate: [CanActivateService]},
-  { path: 'profile/post/:id', component: PostComponent, canActivate: [CanActivateService]}
+  { path: 'profile/post/:id', component: PostComponent, canActivate: [CanActivateService]},
+  { path: 'complaints/:id', component: ComplaintsComponent, canActivate: [CanActivateService]}
 ];
 
 @NgModule({

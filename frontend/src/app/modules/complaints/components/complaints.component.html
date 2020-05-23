@@ -1,5 +1,4 @@
-<button (click)="showComplaints()">Show Complaints</button>
-<ul *ngIf="visibility" class="comments">
+<ul>
   <h5>complaints {{postComplaints?.length}}</h5>
   <li *ngFor="let complaint of postComplaints" >
     {{complaint?.id}} {{complaint?.cause}}

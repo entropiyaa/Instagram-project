@@ -1,5 +1,8 @@
 <h1>Profile!!</h1>
 {{user?.username}}
+{{user?.firstName}}
+{{user?.lastName}}
+{{user?.bio}}
 
 <ng-container *ngIf="checkUsers()">
   <button mat-stroked-button color="primary" (click)="createForm()">New post</button>
