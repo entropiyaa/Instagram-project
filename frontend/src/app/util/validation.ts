@@ -1,3 +1,5 @@
+import {Validators} from "@angular/forms";
+
 export const validation = {
   email: {
     minlength: 6,
@@ -16,5 +18,26 @@ export const validation = {
   },
   text: {
     maxlength: 300
-  }
+  },
+  emailValid: [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(30),
+    Validators.pattern( '[a-zA-Z0-9._]+@[a-zA-Z]+.[a-z]{2,6}')
+  ],
+  passwordValid: [
+    Validators.required,
+    Validators.minLength(8),
+    Validators.maxLength(20),
+    Validators.pattern('(?=.*[:.,/!?+%]).{8,20}')
+  ],
+  nameValid: [
+    Validators.required,
+    Validators.minLength(2),
+    Validators.maxLength(20),
+    Validators.pattern('[a-zA-Z]+')
+  ],
+  textValid: [
+    Validators.maxLength(300)
+  ]
 };

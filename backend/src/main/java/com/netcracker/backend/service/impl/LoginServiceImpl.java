@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class LoginServiceImpl implements LoginService {
@@ -24,19 +25,28 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Login findLoginByEmail(String email) {
-        return loginRepository.findByEmail(email);
+        Optional<Login> optionalLogin = loginRepository.findByEmail(email);
+        if(optionalLogin.isPresent()) {
+            Login login = optionalLogin.get();
+            login.setPassword("");
+            return login;
+        }
+        return null;
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return loginRepository.findByEmail(email).getUser();
+        Optional<Login> optionalLogin = loginRepository.findByEmail(email);
+        return optionalLogin.map(Login::getUser).orElse(null);
     }
 
     @Override
     public List<Login> findAll() {
         List<Login> logins = loginRepository.findAll();
-        for(Login login : logins) {
-            login.setPassword("");
+        if(!logins.isEmpty()) {
+            for (Login login : logins) {
+                login.setPassword("");
+            }
         }
         return logins;
     }

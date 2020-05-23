@@ -21,7 +21,7 @@
         </p>
         <p>
           <mat-form-field>
-            <input type="password" matInput placeholder="Password" id="password" formControlName="password" required>
+            <input type="password" matInput placeholder="Password" id="password" formControlName="password" (keyup)="updatePasswordConfirmation()" required>
           </mat-form-field>
           <mat-error *ngIf="hasError('password', 'required')">
             Password is required
@@ -34,6 +34,17 @@
           </mat-error>
           <mat-error *ngIf="hasError('password', 'pattern')">
             Incorrect password, insert special character like :.,/!?+%]
+          </mat-error>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password Confirmation" formControlName="passwordConfirmation" required>
+          </mat-form-field>
+          <mat-error *ngIf="hasError('passwordConfirmation', 'required')">
+            Password confirmation is required
+          </mat-error>
+          <mat-error *ngIf="hasError('passwordConfirmation', 'confirmation')">
+            Passwords don't match
           </mat-error>
         </p>
         <p>

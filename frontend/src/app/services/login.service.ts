@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Login} from "../models/login";
-import {User} from "../models/user";
 import {AuthToken} from "../models/authToken";
 import {LoginUser} from "../models/loginUser";
 
@@ -19,11 +18,11 @@ export class LoginService {
     return this.http.post<AuthToken>("/api/token/generate-token", loginUser);
   }
 
-  public getAuthorizedUser(): Observable<User> {
-    return this.http.get<User>(this.loginsUrl + "/current");
-  }
-
   public register(login: Login): Observable<Login> {
     return this.http.post<Login>(this.loginsUrl + '/signup', login);
+  }
+
+  public getLoginByEmail(email: string): Observable<Login> {
+    return this.http.get<Login>(this.loginsUrl + '/login/' + email);
   }
 }

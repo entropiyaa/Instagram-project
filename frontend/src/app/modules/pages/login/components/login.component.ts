@@ -80,10 +80,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private createForm(): void {
     this.loginForm = this.fb.group({
-      email: ['',  [Validators.required,
-                    Validators.maxLength(validation.email.maxlength),
-                    Validators.minLength(validation.email.minlength),
-                    Validators.pattern(validation.email.pattern)]],
+      email: ['', validation.emailValid],
       password: ['', Validators.required],
     });
     this.hasError = createHasError(this.loginForm);
