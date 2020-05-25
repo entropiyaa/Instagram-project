@@ -5,6 +5,7 @@
 .new-comment {
   display: flex;
   flex-direction: row;
+  margin-left: 2%;
 }
 
 .creat-comment-button {

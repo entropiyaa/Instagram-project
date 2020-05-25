@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Subscription} from "rxjs";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Page} from "../../../models/page";
 import {Post} from "../../../models/post";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -12,9 +11,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   templateUrl: './paging.component.html',
   styleUrls: ['./paging.component.css']
 })
-export class PagingComponent implements OnInit, OnDestroy {
+export class PagingComponent implements OnInit {
 
-  private subscriptions: Subscription[] = [];
   public selectedPage: number = null;
   public pageForm: FormGroup;
   public hasError: HasErrorFunction;
@@ -78,12 +76,6 @@ export class PagingComponent implements OnInit, OnDestroy {
     } else {
       this._snackBar.open('Empty value', '', {duration: 3000});
     }
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(
-      (subscription) => subscription.unsubscribe());
-    this.subscriptions = [];
   }
 
 }

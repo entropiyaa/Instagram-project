@@ -3,13 +3,14 @@
     <div class="spacer"></div>
   <ul class="items">
     <ng-container *ngIf="!getCurrentUserId()">
-    <li routerLink="/login">Login</li>
+      <li routerLink="/login">Login</li>
     </ng-container>
     <ng-container *ngIf="getCurrentUserId()">
-    <li [routerLink] = "['profile']"
-        [queryParams]="{'id': getCurrentUserId()}">Profile</li>
-    <li routerLink="/news">News</li>
-    <li (click)="logout()">Logout</li>
+      <li [routerLink] = "['profile']"
+          [queryParams]="{'id': getCurrentUserId()}">Profile</li>
+      <li routerLink="/news">News
+      <li routerLink="/users">Users</li>
+      <li (click)="logout()">Logout</li>
     </ng-container>
   </ul>
 </div>

@@ -4,21 +4,6 @@
   margin-top: 75px;
 }
 
-input {
-  background-color: transparent;
-}
-
-input[type="file"] {
-  display: none;
-}
-.custom-file-upload {
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  text-align: center;
-}
-
 .post-form-container {
   display: flex;
   flex-direction: column;
@@ -45,4 +30,9 @@ input[type="file"] {
   flex-direction: row;
   margin-top: 2%;
   margin-left: 43%;
+}
+
+.user-info {
+  margin-top: 3%;
+  margin-left: 10%;
 }

@@ -8,6 +8,7 @@ import {CanActivateService} from "./services/can-activate.service";
 import {RegistrationComponent} from "./modules/pages/registration/components/registration.component";
 import {CanSignInService} from "./services/can-sign-in.service";
 import {ComplaintsComponent} from "./modules/complaints/components/complaints.component";
+import {UsersComponent} from "./modules/pages/users/component/users.component";
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent,  canActivate: [CanActivateService]},
   { path: 'login', component: LoginComponent, canActivate: [CanSignInService]},
   { path: 'register', component: RegistrationComponent,  canActivate: [CanSignInService]},
+  { path: 'users', component: UsersComponent,  canActivate: [CanActivateService]},
   { path: 'post/:id', component: PostComponent,  canActivate: [CanActivateService]},
   { path: 'profile/post/:id', component: PostComponent, canActivate: [CanActivateService]},
   { path: 'complaints/:id', component: ComplaintsComponent, canActivate: [CanActivateService]}

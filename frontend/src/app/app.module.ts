@@ -17,6 +17,8 @@ import {UserService} from "./services/user.service";
 import {APIInterceptor} from "./interceptors/api-interceptor";
 import {AuthService} from "./services/auth.service";
 import {RegistrationModule} from "./modules/pages/registration/registration.module";
+import {UserInfoModule} from "./modules/user-info/user-info.module";
+import {UsersModule} from "./modules/pages/users/users.module";
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import {RegistrationModule} from "./modules/pages/registration/registration.modu
     LoginModule,
     BrowserAnimationsModule,
     PostModule,
-    RegistrationModule
+    RegistrationModule,
+    UserInfoModule,
+    UsersModule
   ],
   providers: [UserService, APIInterceptor, {
     provide: HTTP_INTERCEPTORS,

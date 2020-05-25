@@ -12,6 +12,8 @@ import {AppRoutingModule} from "../../app-routing.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {BrowserModule} from "@angular/platform-browser";
 import {CreateCommentModule} from "../create-comment/create-comment.module";
+import {MatCardModule} from "@angular/material/card";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {CreateCommentModule} from "../create-comment/create-comment.module";
     AppRoutingModule,
     MatButtonModule,
     MatCheckboxModule,
-    CreateCommentModule
+    CreateCommentModule,
+    MatCardModule,
+    MatDividerModule
   ],
   providers: [],
   exports: [PostComponent]

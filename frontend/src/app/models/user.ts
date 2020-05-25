@@ -8,13 +8,13 @@ export class User {
  bio: string;
  role: Role;
  status: string;
+ photo: any = null;
 
- // constructor() {}
-
- constructor(username?: string, firstName?: string, lastName?: string, bio?: string) {
+ constructor(username?: string, firstName?: string, lastName?: string, bio?: string, photo?: any) {
    this.username = username;
    this.firstName = firstName;
    this.lastName = lastName;
    this.bio = bio;
+   this.photo = photo;
  }
 }

@@ -13,41 +13,15 @@ public class User {
     private String bio;
     private UserRole role;
     private UserStatus status;
-    private List<Post> posts;
-//    private List<Reaction> reactions;
-//    private List<Complaint> complaints;
-//    private Login login;
-
-//    public Login getLogin() {
-//        return login;
+    private String photo;
+//    private List<Post> posts;
+//
+//    public List<Post> getPosts() {
+//        return posts;
 //    }
 //
-//    public void setLogin(Login login) {
-//        this.login = login;
-//    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-//    public List<Reaction> getReactions() {
-//        return reactions;
-//    }
-//
-//    public void setReactions(List<Reaction> reactions) {
-//        this.reactions = reactions;
-//    }
-//
-//    public List<Complaint> getComplaints() {
-//        return complaints;
-//    }
-//
-//    public void setComplaints(List<Complaint> complaints) {
-//        this.complaints = complaints;
+//    public void setPosts(List<Post> posts) {
+//        this.posts = posts;
 //    }
 
     public Long getId() {
@@ -104,6 +78,14 @@ public class User {
 
     public void setStatus(UserStatus status) {
         this.status = status;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String  photo) {
+        this.photo = photo;
     }
 }
 

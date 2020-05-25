@@ -1,5 +1,4 @@
 import {User} from "./user";
-import {Comment} from "./comment";
 
 export class Post {
   id: number;
@@ -8,5 +7,4 @@ export class Post {
   date: string;
   hashtag: string[];
   user: User = new User();
-  // comments: Comment[] = [];
 }

@@ -1,0 +1,8 @@
+<mat-card>
+<mat-card-title>Users</mat-card-title>
+</mat-card>
+<ul class="users">
+  <li *ngFor="let user of users">
+    <app-user-info [user]="user"></app-user-info>
+  </li>
+</ul>

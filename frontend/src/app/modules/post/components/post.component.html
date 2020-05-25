@@ -38,9 +38,15 @@
     <div class="post-detail-container">
       <div class="comment-container">
         <div class="post-description">
-          <i>{{post?.description}}</i>
+          <mat-card class="description">
+            <mat-card-content>
+              <p>
+                {{post?.description}}
+              </p>
+            </mat-card-content>
+          </mat-card>
         </div>
-        <hr>
+        <mat-divider></mat-divider>
         <app-comment [postId]="post.id"></app-comment>
       </div>
       <div class="post-actions">
@@ -51,20 +57,3 @@
 </div>
 </ng-container>
 
-
-<!--<div class="post">-->
-<!--  {{post?.id}} {{post?.user?.username}} {{post?.description}} {{post?.date | date: 'medium'}}-->
-<!--  <div>-->
-<!--    <img [src]="post.photo"  width="360" height="450" alt="image">-->
-<!--    <button (click)="deletePost(post)">delete</button>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<div class="reactions">-->
-<!--  <app-reaction [postId]="post.id"></app-reaction>-->
-<!--</div>-->
-<!--<div class="comments">-->
-<!--  <app-comment [postId]="post.id"></app-comment>-->
-<!--</div>-->
-<!--<div class="complaints">-->
-<!--  <app-complaints [postId]="post.id"></app-complaints>-->
-<!--</div>-->

@@ -9,6 +9,7 @@ import {validation} from "../../../../util/validation";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../../../services/user.service";
+import {validateFile} from "../../../../util/image-validation";
 
 @Component({
   selector: 'app-registration',
@@ -22,6 +23,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   public registrationForm: FormGroup;
   public hasError: HasErrorFunction;
   public validation = validation;
+  public imgURL: any;
 
   constructor(private loginService: LoginService,
               private userService: UserService,
@@ -42,7 +44,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       username: ['', validation.nameValid],
       firstName: ['', validation.nameValid],
       lastName: ['', validation.nameValid],
-      bio: ['', validation.textValid]
+      bio: ['', validation.textValid],
+      imgUrl: [''],
     });
     this.hasError = createHasError(this.registrationForm);
     this.registrationForm.get('passwordConfirmation').setValidators(this.passwordConfirmation());
@@ -111,7 +114,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   private createLoginModel(): void {
     const formValues = this.registrationForm.value;
     const login: Login = new Login(formValues.email, formValues.password,
-      new User(formValues.username, formValues.firstName, formValues.lastName, formValues.bio));
+      new User(formValues.username, formValues.firstName, formValues.lastName, formValues.bio, this.imgURL));
     this.registration(login);
   }
 
@@ -121,6 +124,25 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   private clear(): void {
     this.registrationForm.reset();
+    this.imgURL = null;
+  }
+
+  private onFileChanged(event) {
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = () => {
+      this.imgURL = reader.result;
+    };
+  }
+
+  public upload(event: any): void {
+    let files = event.target.files;
+    if(!validateFile(files[0].name)) {
+      this.registrationForm.get('imgUrl').reset();
+      this._snackBar.open('Selected file format is not supported', '', {duration: 3000});
+    } else {
+      this.onFileChanged(event);
+    }
   }
 
   ngOnDestroy() {

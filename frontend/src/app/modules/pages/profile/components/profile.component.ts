@@ -11,6 +11,8 @@ import {UserService} from "../../../../services/user.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {createHasError, HasErrorFunction} from "../../../../util/has-error";
 import {AuthService} from "../../../../services/auth.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {validateFile} from "../../../../util/image-validation";
 
 @Component({
   selector: 'app-profile',
@@ -35,7 +37,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private authService: AuthService,
               private userService: UserService,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
@@ -81,12 +84,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onFileChanged(event) {
+  private onFileChanged(event) {
     let reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = () => {
       this.imgURL = reader.result;
     };
+  }
+
+  public upload(event: any): void {
+    let files = event.target.files;
+    if(!validateFile(files[0].name)) {
+      this.postForm.get('imgUrl').reset();
+      this._snackBar.open('Selected file format is not supported', '', {duration: 3000});
+    } else {
+      this.onFileChanged(event);
+    }
   }
 
   private savePost(): void {

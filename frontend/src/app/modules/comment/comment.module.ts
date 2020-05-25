@@ -5,6 +5,8 @@ import {CreateCommentModule} from "../create-comment/create-comment.module";
 import {RouterModule} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import {MatButtonModule} from "@angular/material/button";
     CreateCommentModule,
     RouterModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
   ],
   providers: [],
   exports: [CommentComponent]

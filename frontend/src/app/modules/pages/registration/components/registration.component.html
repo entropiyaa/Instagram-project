@@ -105,6 +105,11 @@
           <mat-error *ngIf="hasError('bio', 'maxlength')">
             Info must be at least {{validation.text.maxlength}} characters long
           </mat-error>
+          <label for="file-upload" class="custom-file-upload">
+            <span>Upload photo</span>
+          </label>
+          <input id="file-upload" (change)="upload($event)" type="file" accept=".png, .jpg, .jpeg" formControlName="imgUrl" required>
+          <img [src]="imgURL" width="360" height="450" *ngIf="imgURL">
         </p>
         <div class="button">
           <button class="sign-button" mat-stroked-button color="basic"

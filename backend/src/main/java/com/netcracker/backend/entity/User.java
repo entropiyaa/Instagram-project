@@ -1,14 +1,10 @@
 package com.netcracker.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.netcracker.backend.entity.enums.UserRole;
 import com.netcracker.backend.entity.enums.UserStatus;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -21,17 +17,18 @@ public class User {
     private String bio;
     private UserRole role;
     private UserStatus status;
-    private List<Post> posts;
+    private String photo;
+//    private List<Post> posts;
 
-    @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
+//    @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+//    public List<Post> getPosts() {
+//        return posts;
+//    }
+//
+//    public void setPosts(List<Post> posts) {
+//        this.posts = posts;
+//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -104,5 +101,16 @@ public class User {
 
     public void setStatus(UserStatus status) {
         this.status = status;
+    }
+
+    @Lob
+    @Basic
+    @Column(name = "photo")
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

@@ -1,7 +1,6 @@
 package com.netcracker.fapi.entity;
 
 import java.util.Date;
-import java.util.List;
 
 public class Post {
     private Long id;
@@ -9,25 +8,7 @@ public class Post {
     private String description;
     private Date date;
     private String hashtag;
-//    private List<Reaction> reactions;
-//    private List<Complaint> complaints;
     private User user;
-
-//    public List<Reaction> getReactions() {
-//        return reactions;
-//    }
-//
-//    public void setReactions(List<Reaction> reactions) {
-//        this.reactions = reactions;
-//    }
-//
-//    public List<Complaint> getComplaints() {
-//        return complaints;
-//    }
-//
-//    public void setComplaints(List<Complaint> complaints) {
-//        this.complaints = complaints;
-//    }
 
     public User getUser() {
         return user;
