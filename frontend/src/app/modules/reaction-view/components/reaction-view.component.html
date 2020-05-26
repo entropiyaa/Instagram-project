@@ -1,0 +1,20 @@
+<mat-card class="reactions-action">
+  <span>Likes: {{reactionsLike.length}}</span>
+  <span>Dislikes: {{reactionsDislike.length}}</span>
+  <button class="like-button" (click)="like()" mat-stroked-button>Like</button>
+  <button mat-stroked-button (click)="dislike()">Dislike</button>
+</mat-card>
+<div class="reactions-wrapper">
+  <div>
+    <ul class="likes">
+      <li *ngFor="let like of reactionsLike">
+        <app-reaction-view-card [reaction]="like"></app-reaction-view-card>
+    </ul>
+  </div>
+  <div>
+    <ul class="dislikes">
+      <li *ngFor="let dislike of reactionsDislike" >
+        <app-reaction-view-card [reaction]="dislike"></app-reaction-view-card>
+    </ul>
+  </div>
+</div>

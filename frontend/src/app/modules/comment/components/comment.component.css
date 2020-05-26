@@ -19,29 +19,7 @@
   font-size: 14px;
 }
 
-.avatar {
-  background-size: cover;
-}
-
 .comment-card {
   box-shadow: none;
-}
-
-mat-card-title {
-  font-size: 24px;
-  font-weight: 300;
-  letter-spacing: -.5px;
-  cursor: pointer;
-  outline: none;
-}
-
-mat-card-title:hover {
-  color: plum;
-}
-
-p {
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: -.5px;
 }
 

@@ -8,4 +8,10 @@ export class Reaction {
   reaction: ReactionType;
   user: User = new User();
   post: Post = new Post();
+
+  constructor(reaction?: ReactionType, userId?: number, postId?: number) {
+    this.reaction = reaction;
+    this.user.id = userId;
+    this.post.id = postId;
+  }
 }

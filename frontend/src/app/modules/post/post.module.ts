@@ -14,6 +14,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {CreateCommentModule} from "../create-comment/create-comment.module";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import {ReactionViewModule} from "../reaction-view/reaction-view.module";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatCheckboxModule,
     CreateCommentModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    ReactionViewModule
   ],
   providers: [],
   exports: [PostComponent]

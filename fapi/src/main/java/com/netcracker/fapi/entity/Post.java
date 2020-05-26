@@ -7,7 +7,6 @@ public class Post {
     private String photo;
     private String description;
     private Date date;
-    private String hashtag;
     private User user;
 
     public User getUser() {
@@ -48,13 +47,5 @@ public class Post {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getHashtag() {
-        return hashtag;
-    }
-
-    public void setHashtag(String hashtag) {
-        this.hashtag = hashtag;
     }
 }

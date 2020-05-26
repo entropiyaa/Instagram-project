@@ -18,17 +18,6 @@ public class User {
     private UserRole role;
     private UserStatus status;
     private String photo;
-//    private List<Post> posts;
-
-//    @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
-//    public List<Post> getPosts() {
-//        return posts;
-//    }
-//
-//    public void setPosts(List<Post> posts) {
-//        this.posts = posts;
-//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

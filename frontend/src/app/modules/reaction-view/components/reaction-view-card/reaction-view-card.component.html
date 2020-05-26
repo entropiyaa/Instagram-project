@@ -1,0 +1,15 @@
+<mat-card class="reaction-card">
+  <mat-card-header>
+    <img *ngIf="reaction.user.photo" mat-card-avatar [src]="reaction.user.photo" class="avatar">
+    <img mat-card-avatar *ngIf="!reaction.user.photo" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="avatar">
+    <mat-card-title class="username-title" routerLink ="../../profile" [queryParams]="{'id': reaction.user.id}">
+      {{reaction.user.username}}
+    </mat-card-title>
+    <mat-card-subtitle>{{reaction.date | date: 'dd/MM/yyyy, H:mm'}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="card-gap">
+      {{reaction.reaction}}
+    </p>
+  </mat-card-content>
+</mat-card>

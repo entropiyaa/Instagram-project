@@ -25,6 +25,10 @@ export class ReactionService {
     return this.http.get<Reaction[]>(this.reactionUrl + "?post=" + postId + "&reaction=" + type);
   }
 
+  public getReactionsCount(postId: number, type: ReactionType): Observable<number> {
+    return this.http.get<number>(this.reactionUrl + "/count?post=" + postId + "&reaction=" + type);
+  }
+
   public saveReaction(reaction: Reaction): Observable<Reaction> {
     return this.http.post<Reaction>(this.reactionUrl, reaction);
   }

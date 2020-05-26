@@ -58,9 +58,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   private registration(login: Login): void {
-    console.log(login);
     this.subscriptions.push(this.loginService.register(login).subscribe(login => {
-      console.log(login);
       this.clear();
       this._snackBar.open('Registration completed', '', {duration: 3000});
       this.router.navigate(['login']);

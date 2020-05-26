@@ -1,18 +1,18 @@
 <ng-container *ngFor="let comment of comments">
   <mat-card class="comment-card">
     <mat-card-header>
-      <button mat-icon-button class="small" (click)="deleteComment(comment)">
+      <button mat-icon-button class="small" *ngIf="checkUser(comment)" (click)="deleteComment(comment)">
         <mat-icon class="clear">clear</mat-icon>
       </button>
       <img *ngIf="comment.user.photo" mat-card-avatar [src]="comment.user.photo" class="avatar">
       <img mat-card-avatar *ngIf="!comment.user.photo" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="avatar">
-      <mat-card-title  routerLink ="../profile" [queryParams]="{'id': comment.user.id}">
+      <mat-card-title class="username-title" routerLink ="../profile" [queryParams]="{'id': comment.user.id}">
         {{comment.user.username}}
       </mat-card-title>
       <mat-card-subtitle>{{comment.date | date: 'dd/MM/yyyy, H:mm'}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <p>
+      <p class="card-gap">
         {{comment.text}}
       </p>
     </mat-card-content>

@@ -14,15 +14,6 @@ public class User {
     private UserRole role;
     private UserStatus status;
     private String photo;
-//    private List<Post> posts;
-//
-//    public List<Post> getPosts() {
-//        return posts;
-//    }
-//
-//    public void setPosts(List<Post> posts) {
-//        this.posts = posts;
-//    }
 
     public Long getId() {
         return id;

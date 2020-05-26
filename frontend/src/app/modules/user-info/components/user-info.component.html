@@ -1,6 +1,6 @@
 <ng-container *ngIf="user">
   <mat-card routerLink ="../profile" [queryParams]="{'id': user.id}">
-    <mat-card-title>
+    <mat-card-title class="username-title">
       {{user?.username}}
     </mat-card-title>
     <mat-card-subtitle>{{user?.firstName}} {{user?.lastName}}</mat-card-subtitle>

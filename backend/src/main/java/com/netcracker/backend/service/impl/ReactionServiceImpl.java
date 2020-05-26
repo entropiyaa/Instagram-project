@@ -47,6 +47,11 @@ public class ReactionServiceImpl implements ReactionService {
     }
 
     @Override
+    public Long countAllByPostIdAndReaction(Long postId, UserReaction reaction) {
+        return reactionRepository.countAllByPostIdAndReaction(postId, reaction);
+    }
+
+    @Override
     public Reaction save(Reaction reaction) {
         Optional<Reaction> optionalReaction = reactionRepository.findByUserIdAndPostId(
                 reaction.getUser().getId(), reaction.getPost().getId());

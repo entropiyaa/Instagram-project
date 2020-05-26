@@ -5,6 +5,7 @@ import {Comment} from "../../../models/comment";
 import {User} from "../../../models/user";
 import {FormGroup} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {Role} from "../../../models/enums/role";
 
 @Component({
   selector: 'app-comment',
@@ -32,23 +33,26 @@ export class CommentComponent implements OnInit, OnDestroy {
     }));
   }
 
+  public checkUser(comment): boolean {
+    return this.user.id === comment.user.id || this.user.role === Role.ADMIN;
+  }
+
   public saveComment(formComment: FormGroup): void {
-    const comment = new Comment();
-    comment.user.id = this.user.id;
-    comment.post.id = this.postId;
-    comment.text = formComment.value.comment;
+    const comment = new Comment(formComment.value.comment, this.user.id, this.postId);
     this.subscriptions.push(this.commentService.saveComment(comment).subscribe(comment => {
       this.comments.push(comment);
     }))
   }
 
   public deleteComment(comment: Comment): void {
-    this.subscriptions.push(this.commentService.deleteComment(comment.id).subscribe(() => {
-      const index: number = this.comments.indexOf(comment);
-      if(index !== -1) {
-        this.comments.splice(index, 1);
-      }
-    }));
+    if(this.checkUser(comment)) {
+      this.subscriptions.push(this.commentService.deleteComment(comment.id).subscribe(() => {
+        const index: number = this.comments.indexOf(comment);
+        if (index !== -1) {
+          this.comments.splice(index, 1);
+        }
+      }));
+    }
   }
 
   ngOnDestroy() {

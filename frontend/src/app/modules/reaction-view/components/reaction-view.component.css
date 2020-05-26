@@ -1,0 +1,26 @@
+.reactions-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 2%;
+}
+
+.like-button {
+  margin-right: 2%;
+}
+
+.reactions-action {
+  width: 1073px;
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: -.5px;
+  margin: 3% auto;
+}
+
+span {
+  margin-right: 3%;
+}

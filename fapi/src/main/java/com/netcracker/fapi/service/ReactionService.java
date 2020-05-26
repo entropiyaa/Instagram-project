@@ -9,6 +9,7 @@ public interface ReactionService {
     Reaction findById(Long reactionId);
     Reaction findByUserIdAndPostId(Long userId, Long postId);
     List<Reaction> findAllByPostIdAndReaction(Long postId, UserReaction userReaction);
+    Long countAllByPostIdAndReaction(Long postId, UserReaction reaction);
     Reaction save(Reaction reaction);
     void delete(Long reactionId);
 }

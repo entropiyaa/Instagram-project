@@ -12,21 +12,5 @@ mat-card-title {
 
 mat-card {
   width: 50%;
-  margin: 15% auto;
+  margin: 20% auto;
 }
-
-.mat-form-field {
-  width: 100%;
-  min-width: 300px;
-}
-
-.button {
-  display: flex;
-  justify-content: flex-end;
-  margin-left: 2%;
-}
-
-.sign-button {
-  margin-right: 2%;
-}
-

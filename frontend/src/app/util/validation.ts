@@ -17,7 +17,7 @@ export const validation = {
     pattern: '[a-zA-Z]+'
   },
   text: {
-    maxlength: 300
+    maxlength: 250
   },
   emailValid: [
     Validators.required,
@@ -38,7 +38,7 @@ export const validation = {
     Validators.pattern('[a-zA-Z]+')
   ],
   textValid: [
-    Validators.maxLength(300)
+    Validators.maxLength(250)
   ],
   digitsValid: [
     Validators.pattern('[0-9]+')

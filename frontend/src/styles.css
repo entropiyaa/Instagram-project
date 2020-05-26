@@ -25,3 +25,25 @@ input[type="file"] {
   cursor: pointer;
   text-align: center;
 }
+
+.username-title {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -.5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.username-title:hover {
+  color: plum;
+}
+
+.avatar {
+  background-size: cover;
+}
+
+.card-gap {
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: -.5px;
+}

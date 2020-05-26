@@ -39,6 +39,13 @@ public class ReactionServiceImpl implements ReactionService {
     }
 
     @Override
+    public Long countAllByPostIdAndReaction(Long postId, UserReaction reaction) {
+        RestTemplate restTemplate = new RestTemplate();
+        String path = backendUrl + "/api/reactions/count?post=" + postId + "&reaction=" + reaction;
+        return restTemplate.getForObject(path, Long.class);
+    }
+
+    @Override
     public Reaction save(Reaction reaction) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForObject(backendUrl + "/api/reactions", reaction, Reaction.class);

@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {Subscription} from "rxjs";
 import {Post} from "../../../models/post";
 import {PostService} from "../../../services/post.service";
-import {ActivatedRoute} from "@angular/router";
-import {switchMap} from "rxjs/operators";
 import {User} from "../../../models/user";
 import {Role} from "../../../models/enums/role";
 
@@ -20,26 +18,10 @@ export class PostComponent implements OnInit, OnDestroy {
   @Output() public onDelete: EventEmitter<void> = new EventEmitter<void>();
   public postId: number;
 
-  constructor(private postService: PostService,
-              private route: ActivatedRoute) {
+  constructor(private postService: PostService) {
   }
 
   ngOnInit(): void {
-  }
-
-  public getPost(): void {
-    this.subscriptions.push(this.postService.getPost(this.postId).subscribe(post => {
-      this.post = post;
-    }));
-  }
-
-  public getRouteParam(): void {
-    this.subscriptions.push(this.route.paramMap.pipe(
-      switchMap(params =>
-        params.getAll('id'))).subscribe(data => {
-          this.postId = +data;
-          this.getPost()
-        }));
   }
 
   public checkUser(): boolean {

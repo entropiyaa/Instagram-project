@@ -67,7 +67,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.userService.getUser(this.profileId).subscribe(user => {
       this.user = user;
       this.getPostsByUserId();
-    }));
+    },
+      (error => console.log("error"))
+    ));
   }
 
   public getPostsByUserId(): void {

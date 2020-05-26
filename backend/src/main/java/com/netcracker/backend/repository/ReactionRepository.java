@@ -13,6 +13,7 @@ public interface ReactionRepository extends CrudRepository<Reaction, Long> {
     Optional<Reaction> findById(Long reactionId);
     Optional<Reaction> findByUserIdAndPostId(Long userId, Long postId);
     List<Reaction> findAllByPostIdAndReaction(Long postId, UserReaction reaction);
+    Long countAllByPostIdAndReaction(Long postId, UserReaction reaction);
     Reaction save(Reaction reaction);
     void deleteById(Long reactionId);
 }

@@ -13,6 +13,10 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
+  public getPostById(postId: number): Observable<Post> {
+    return this.http.get<Post>(this.postsUrl + '?' + postId);
+  }
+
   public getPosts(page: Page<Post>): Observable<Page<Post>> {
     const params = PostService.getParams(page);
     return this.http.get<Page<Post>>(this.postsUrl, {params});

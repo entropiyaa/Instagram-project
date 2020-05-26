@@ -38,6 +38,12 @@ public class ReactionController {
         return reactionService.findAllByPostIdAndReaction(postId, reaction);
     }
 
+    @GetMapping(value = "/count", params = {"post", "reaction"})
+    public Long getReactionsCount(@RequestParam("post") Long postId,
+                                 @RequestParam("reaction") UserReaction reaction) {
+        return reactionService.countAllByPostIdAndReaction(postId, reaction);
+    }
+
     @PostMapping
     public Reaction saveReaction(@RequestBody Reaction reaction) {
         return reactionService.save(reaction);
