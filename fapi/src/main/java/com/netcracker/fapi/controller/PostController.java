@@ -5,10 +5,12 @@ import com.netcracker.fapi.entity.Post;
 import com.netcracker.fapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/posts")
+@PreAuthorize("isAuthenticated()")
 public class PostController {
 
     private PostService postService;

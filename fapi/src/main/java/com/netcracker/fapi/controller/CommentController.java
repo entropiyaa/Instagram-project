@@ -4,12 +4,14 @@ import com.netcracker.fapi.entity.Comment;
 import com.netcracker.fapi.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/comments")
+@PreAuthorize("isAuthenticated()")
 public class CommentController {
 
     private CommentService commentService;

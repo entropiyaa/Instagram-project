@@ -3,12 +3,14 @@ package com.netcracker.fapi.controller;
 import com.netcracker.fapi.entity.Complaint;
 import com.netcracker.fapi.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/complaints")
+@PreAuthorize("isAuthenticated()")
 public class ComplaintController {
 
     private ComplaintService complaintService;
