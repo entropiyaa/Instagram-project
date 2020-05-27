@@ -1,4 +1,5 @@
 import {Role} from "./enums/role";
+import {UserStatus} from "./enums/user-status";
 
 export class User {
  id: number;
@@ -7,7 +8,7 @@ export class User {
  lastName: string;
  bio: string;
  role: Role;
- status: string;
+ status: UserStatus;
  photo: any = null;
 
  constructor(username?: string, firstName?: string, lastName?: string, bio?: string, photo?: any) {

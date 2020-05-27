@@ -34,4 +34,11 @@ public class UserServiceImpl implements UserService {
         User[] users = restTemplate.getForObject(backendUrl + "/api/users", User[].class);
         return users == null ? Collections.emptyList() : Arrays.asList(users);
     }
+
+    @Override
+    public User update(Long userId, User user) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(backendUrl + "api/users/" + userId, user);
+        return findById(userId);
+    }
 }

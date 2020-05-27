@@ -12,6 +12,10 @@ export class ComplaintService {
 
   constructor(private http: HttpClient) {}
 
+  public getComplaintById(complaintId: number): Observable<Complaint> {
+    return this.http.get<Complaint>(this.complaintUrl + '?id=' + complaintId);
+  }
+
   public getComplaints(): Observable<Complaint[]> {
     return this.http.get<Complaint[]>(this.complaintUrl);
   }

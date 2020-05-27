@@ -10,6 +10,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {UserInfoModule} from "../../user-info/user-info.module";
+import {ViewModule} from "../../view/view.module";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {UserInfoModule} from "../../user-info/user-info.module";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    UserInfoModule
+    UserInfoModule,
+    ViewModule
   ],
   providers: [],
   exports: [ProfileComponent]

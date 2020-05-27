@@ -11,6 +11,8 @@ import {ComplaintsComponent} from "./modules/complaints/components/complaints.co
 import {UsersComponent} from "./modules/pages/users/component/users.component";
 import {ReactionViewComponent} from "./modules/reaction-view/components/reaction-view.component";
 import {NotFoundComponent} from "./modules/not-found/component/not-found.component";
+import {SinglePostComponent} from "./modules/post/single-post/single-post.component";
+import {CanActivateRoleService} from "./services/can-activate/can-activate-role.service";
 
 
 const routes: Routes = [
@@ -20,10 +22,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [CanSignInService]},
   { path: 'register', component: RegistrationComponent,  canActivate: [CanSignInService]},
   { path: 'users', component: UsersComponent,  canActivate: [CanActivateService]},
-  { path: 'post/:id', component: PostComponent,  canActivate: [CanActivateService]},
-  { path: 'profile/post/:id', component: PostComponent, canActivate: [CanActivateService]},
-  { path: 'complaints/:id', component: ComplaintsComponent, canActivate: [CanActivateService]},
+  { path: 'complaints/:postId', component: ComplaintsComponent, canActivate: [CanActivateRoleService]},
   { path: 'reactions/:id', component: ReactionViewComponent, canActivate: [CanActivateService]},
+  { path: 'post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
   { path: '**', component: NotFoundComponent }
 ];
 

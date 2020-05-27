@@ -13,6 +13,7 @@ import {createHasError, HasErrorFunction} from "../../../../util/has-error";
 import {AuthService} from "../../../../services/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {validateFile} from "../../../../util/image-validation";
+import {UserStatus} from "../../../../models/enums/user-status";
 
 @Component({
   selector: 'app-profile',
@@ -45,6 +46,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.getRouteParam();
   }
 
+  public blockUser(): void {
+    this.changeStatus();
+    this.subscriptions.push(this.userService.updateUser(this.user.id, this.user)
+      .subscribe(user => {
+        this.user = user;
+      }
+    ));
+  }
+
+  private changeStatus(): void {
+    if(this.user.status === UserStatus.ACTIVE) {
+      this.user.status = UserStatus.LOCKED;
+    } else {
+      this.user.status = UserStatus.ACTIVE;
+    }
+  }
+
   public createForm(): void {
     this.postForm = this.fb.group({
       description: ['',  [Validators.required, Validators.maxLength(300)]],
@@ -67,8 +85,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.userService.getUser(this.profileId).subscribe(user => {
       this.user = user;
       this.getPostsByUserId();
-    },
-      (error => console.log("error"))
+    }
     ));
   }
 
@@ -82,7 +99,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public checkUsers(): boolean {
     if(this.user && this.currentUser) {
-      return this.user.id === this.currentUser.id;
+      return this.user.id === this.currentUser.id && this.user.status === UserStatus.ACTIVE;
     }
   }
 

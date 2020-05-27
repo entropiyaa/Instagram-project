@@ -3,6 +3,7 @@ package com.netcracker.fapi.controller;
 import com.netcracker.fapi.entity.Complaint;
 import com.netcracker.fapi.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,12 @@ public class ComplaintController {
     @Autowired
     public ComplaintController(ComplaintService complaintService) {
         this.complaintService = complaintService;
+    }
+
+    @GetMapping(params = {"id"})
+    public ResponseEntity<Complaint> getComplaintById(@RequestParam("id") Long complaintId) {
+        Complaint complaint = complaintService.findById(complaintId);
+        return complaint == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(complaint);
     }
 
     @GetMapping

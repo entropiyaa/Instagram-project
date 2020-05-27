@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -28,6 +29,12 @@ public class ComplaintServiceImpl implements ComplaintService {
         this.complaintRepository = complaintRepository;
         this.postService = postService;
         this.userService = userService;
+    }
+
+    @Override
+    public Complaint findById(Long complaintId) {
+        Optional<Complaint> optionalComplaint = complaintRepository.findById(complaintId);
+        return optionalComplaint.orElse(null);
     }
 
     @Override

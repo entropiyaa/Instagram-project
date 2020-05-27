@@ -1,6 +1,35 @@
-<ul>
-  <h5>complaints {{postComplaints?.length}}</h5>
-  <li *ngFor="let complaint of postComplaints" >
-    {{complaint?.id}} {{complaint?.cause}}
-    {{complaint?.date | date: 'medium'}} {{complaint?.status}} {{complaint?.user?.username}}
-</ul>
+<app-title [title]="'Complaints'"></app-title>
+<ng-container *ngIf="postComplaints">
+  <mat-table [dataSource]="postComplaints" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cause">
+      <mat-header-cell *matHeaderCellDef> Cause </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cause}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.date | date: 'dd/MM/yyyy, H:mm'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef> Author of complaint </mat-header-cell>
+      <mat-cell class="username" routerLink ="../../profile" [queryParams]="{'id': element.user.id}"
+                *matCellDef="let element"> {{element.user.username}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="post">
+      <mat-header-cell *matHeaderCellDef> Author of post </mat-header-cell>
+      <mat-cell class="username" routerLink ="../../profile" [queryParams]="{'id': element.post.user.id}"
+        *matCellDef="let element"> {{element.post.user.username}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</ng-container>

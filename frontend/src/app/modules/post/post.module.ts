@@ -15,11 +15,13 @@ import {CreateCommentModule} from "../create-comment/create-comment.module";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {ReactionViewModule} from "../reaction-view/reaction-view.module";
+import {SinglePostComponent} from "./single-post/single-post.component";
 
 
 @NgModule({
   declarations: [
-    PostComponent
+    PostComponent,
+    SinglePostComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,6 @@ import {ReactionViewModule} from "../reaction-view/reaction-view.module";
     ReactionViewModule
   ],
   providers: [],
-  exports: [PostComponent]
+  exports: [PostComponent, SinglePostComponent]
 })
 export class PostModule {}

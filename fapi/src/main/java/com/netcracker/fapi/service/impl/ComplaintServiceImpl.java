@@ -17,6 +17,12 @@ public class ComplaintServiceImpl implements ComplaintService {
     private String backendUrl;
 
     @Override
+    public Complaint findById(Long complaintId) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendUrl + "/api/complaints?id=" + complaintId, Complaint.class);
+    }
+
+    @Override
     public List<Complaint> findAll() {
         RestTemplate restTemplate = new RestTemplate();
         Complaint[] complaints = restTemplate.getForObject(backendUrl + "/api/complaints", Complaint[].class);

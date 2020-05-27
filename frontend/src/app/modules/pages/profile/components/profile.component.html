@@ -1,10 +1,17 @@
+<ng-container *ngIf="user">
 <div class="user-info">
   <app-user-info [user]="user"></app-user-info>
-</div>
+  <p></p>
 
-<ng-container *ngIf="checkUsers()">
-  <button mat-stroked-button color="primary" (click)="createForm()">New post</button>
-</ng-container>
+  <ng-container *ngIf="checkUsers()">
+    <button mat-stroked-button (click)="createForm()">New post</button>
+  </ng-container>
+
+  <ng-container *ngIf="currentUser.role === 'ADMIN' && !checkUsers()">
+    <button mat-stroked-button (click)="blockUser()">Change status</button>
+    <span class="status">{{user.status}}</span>
+  </ng-container>
+</div>
 
 <div class="new-post">
 <ng-container class="new-post" *ngIf="visibilityNewPost">
@@ -30,9 +37,9 @@
     </div>
   </form>
   <div class="new-post-buttons">
-  <button mat-stroked-button color="primary" class="save-button"
+  <button mat-stroked-button class="save-button"
           type="submit" [disabled]="postForm.invalid" (click)="onSubmit()">Save</button>
-  <button mat-stroked-button color="primary" (click)="clear()">Close</button>
+  <button mat-stroked-button (click)="clear()">Close</button>
   </div>
 </ng-container>
 </div>
@@ -44,5 +51,6 @@
 </ul>
 <ng-container *ngIf="page.content.length">
   <app-paging [page]="page" (onChanged)="getPostsByUserId()"></app-paging>
+</ng-container>
 </ng-container>
 

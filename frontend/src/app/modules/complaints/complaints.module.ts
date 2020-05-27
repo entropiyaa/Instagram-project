@@ -1,6 +1,9 @@
 import { NgModule } from "@angular/core";
 import {ComplaintsComponent} from "./components/complaints.component";
 import {CommonModule} from "@angular/common";
+import {ViewModule} from "../view/view.module";
+import {MatTableModule} from "@angular/material/table";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -8,7 +11,10 @@ import {CommonModule} from "@angular/common";
     ComplaintsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ViewModule,
+    MatTableModule,
+    RouterModule
 
   ],
   providers: [],

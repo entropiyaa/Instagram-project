@@ -40,4 +40,9 @@ public class UserController {
     public User saveUser(@RequestBody User user) {
         return userService.save(user);
     }
+
+    @PutMapping(value = "/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody User user) {
+        return userService.update(userId, user);
+    }
 }

@@ -16,7 +16,6 @@ export class PostComponent implements OnInit, OnDestroy {
   @Input() public post: Post;
   @Input() public currentUser: User;
   @Output() public onDelete: EventEmitter<void> = new EventEmitter<void>();
-  public postId: number;
 
   constructor(private postService: PostService) {
   }

@@ -45,4 +45,11 @@ public class UserServiceImpl implements UserService {
         user.setStatus(UserStatus.ACTIVE);
         return userRepository.save(user);
     }
+
+    @Override
+    public User update(Long userId, User user) {
+        User updUser = findById(userId);
+        updUser.setStatus(user.getStatus());
+        return userRepository.save(updUser);
+    }
 }

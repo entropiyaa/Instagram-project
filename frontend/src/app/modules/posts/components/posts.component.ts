@@ -6,6 +6,7 @@ import {DataService} from "../../../services/data.service";
 import {Item} from "../../../models/enums/item";
 import {Page} from "../../../models/page";
 import {User} from "../../../models/user";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-posts',
@@ -20,10 +21,12 @@ export class PostsComponent implements OnInit, OnDestroy, OnChanges {
   @Input() public currentUser: User;
 
   constructor(private postService: PostService,
-              private data: DataService) {
+              private data: DataService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.currentUser = this.authService.getCurrentUser();
     this.getItem();
   }
 

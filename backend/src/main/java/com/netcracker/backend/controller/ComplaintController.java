@@ -3,6 +3,7 @@ package com.netcracker.backend.controller;
 import com.netcracker.backend.entity.Complaint;
 import com.netcracker.backend.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,12 @@ public class ComplaintController {
     @Autowired
     public ComplaintController(ComplaintService complaintService) {
         this.complaintService = complaintService;
+    }
+
+    @GetMapping(params = {"id"})
+    public ResponseEntity<Complaint> getComplaintById(@RequestParam("id") Long complaintId) {
+        Complaint complaint = complaintService.findById(complaintId);
+        return ResponseEntity.ok(complaint);
     }
 
     @GetMapping
