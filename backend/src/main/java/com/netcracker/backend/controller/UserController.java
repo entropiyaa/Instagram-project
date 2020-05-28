@@ -45,4 +45,16 @@ public class UserController {
     public User updateUser(@PathVariable Long userId, @RequestBody User user) {
         return userService.update(userId, user);
     }
+
+    @GetMapping(value = "/subscriptions/{id}")
+    public ResponseEntity<List<User>> getSubscriptions(@PathVariable("id") Long userId) {
+        List<User> subscriptions = userService.getSubscriptions(userId);
+        return ResponseEntity.ok(subscriptions);
+    }
+
+    @GetMapping(value = "/subscribers/{id}")
+    public ResponseEntity<List<User>> getSubscribers(@PathVariable("id") Long userId) {
+        List<User> subscribers = userService.getSubscribers(userId);
+        return ResponseEntity.ok(subscribers);
+    }
 }

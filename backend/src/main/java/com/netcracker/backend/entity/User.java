@@ -1,10 +1,12 @@
 package com.netcracker.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.netcracker.backend.entity.enums.UserRole;
 import com.netcracker.backend.entity.enums.UserStatus;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -18,6 +20,8 @@ public class User {
     private UserRole role;
     private UserStatus status;
     private String photo;
+    private List<User> subscribedTo;
+    private List<User> subscribedBy;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,5 +105,30 @@ public class User {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "subscriptions",
+            joinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "subscription_id", referencedColumnName = "id")})
+    @JsonIgnore
+    public List<User> getSubscribedTo() {
+        return subscribedTo;
+    }
+
+    public void setSubscribedTo(List<User> subscribedTo) {
+        this.subscribedTo = subscribedTo;
+    }
+
+    @ManyToMany(mappedBy = "subscribedTo")
+    @JsonIgnore
+    public List<User> getSubscribedBy() {
+        return subscribedBy;
+    }
+
+    public void setSubscribedBy(List<User> subscribedBy) {
+        this.subscribedBy = subscribedBy;
     }
 }

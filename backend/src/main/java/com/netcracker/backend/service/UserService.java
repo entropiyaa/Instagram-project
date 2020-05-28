@@ -10,4 +10,6 @@ public interface UserService {
     List<User> findAll();
     User save(User user);
     User update(Long userId, User user);
+    List<User> getSubscriptions(Long userId);
+    List<User> getSubscribers(Long userId);
 }

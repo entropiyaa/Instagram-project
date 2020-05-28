@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,5 +52,21 @@ public class UserServiceImpl implements UserService {
         User updUser = findById(userId);
         updUser.setStatus(user.getStatus());
         return userRepository.save(updUser);
+    }
+
+    @Override
+    public List<User> getSubscriptions(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        return optionalUser.isPresent()
+                ? optionalUser.get().getSubscribedTo()
+                : new ArrayList<>();
+    }
+
+    @Override
+    public List<User> getSubscribers(Long userId) {
+        Optional <User> optionalUser = userRepository.findById(userId);
+        return optionalUser.isPresent()
+                ? optionalUser.get().getSubscribedBy()
+                : new ArrayList<>();
     }
 }
