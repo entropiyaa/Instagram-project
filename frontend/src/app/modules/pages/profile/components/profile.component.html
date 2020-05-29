@@ -4,11 +4,19 @@
   <p></p>
 
   <ng-container *ngIf="checkUsers()">
-    <button mat-stroked-button (click)="createForm()">New post</button>
+    <span class="status"><button mat-stroked-button (click)="createForm()">New post</button></span>
   </ng-container>
 
+  <span class="status">
+    <button mat-stroked-button routerLink ="../subscriptions" [queryParams]="{'id': user.id}">Subscribers</button>
+  </span>
+
+  <span class="status">
+    <button mat-stroked-button routerLink ="../subscribers" [queryParams]="{'id': user.id}">Subscriptions</button>
+  </span>
+
   <ng-container *ngIf="currentUser.role === 'ADMIN' && !checkUsers()">
-    <button mat-stroked-button (click)="blockUser()">Change status</button>
+    <span class="status"><button mat-stroked-button (click)="blockUser()">Change status</button></span>
     <span class="status">{{user.status}}</span>
   </ng-container>
 </div>

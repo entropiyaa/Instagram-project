@@ -1,0 +1,14 @@
+<app-title [title]="'Subscribers'"></app-title>
+<ng-container *ngIf="!checkUsers()">
+  <ng-container *ngIf="!currentState">
+    <button class="subButton" mat-stroked-button (click)="subscribe()">Subscribe</button>
+  </ng-container>
+  <ng-container *ngIf="currentState">
+    <button class="subButton" mat-stroked-button (click)="unsubscribe()">Unsubscribe</button>
+  </ng-container>
+</ng-container>
+<ul class="users">
+  <li *ngFor="let user of subUsers">
+    <app-user-info [user]="user"></app-user-info>
+  </li>
+</ul>

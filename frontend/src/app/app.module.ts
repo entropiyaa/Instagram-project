@@ -20,6 +20,8 @@ import {RegistrationModule} from "./modules/pages/registration/registration.modu
 import {UserInfoModule} from "./modules/user-info/user-info.module";
 import {UsersModule} from "./modules/pages/users/users.module";
 import {NotFoundModule} from "./modules/not-found/not-found.module";
+import {SubscriptionsModule} from "./modules/subscriptions/subscriptions.module";
+import {SubscribersModule} from "./modules/subscribers/subscribers.module";
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {NotFoundModule} from "./modules/not-found/not-found.module";
     RegistrationModule,
     UserInfoModule,
     UsersModule,
-    NotFoundModule
+    NotFoundModule,
+    SubscriptionsModule,
+    SubscribersModule
   ],
   providers: [UserService, APIInterceptor, {
     provide: HTTP_INTERCEPTORS,

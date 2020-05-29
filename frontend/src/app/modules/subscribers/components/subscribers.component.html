@@ -1,0 +1,6 @@
+<app-title [title]="'Subscriptions'"></app-title>
+<ul class="users">
+  <li *ngFor="let user of subUsers">
+    <app-user-info [user]="user"></app-user-info>
+  </li>
+</ul>

@@ -12,4 +12,6 @@ public interface UserService {
     User update(Long userId, User user);
     List<User> getSubscriptions(Long userId);
     List<User> getSubscribers(Long userId);
+    User saveSubscription(Long userId, User subUser);
+    void deleteSubscription(Long userId, Long subId);
 }

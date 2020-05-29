@@ -13,6 +13,8 @@ import {ReactionViewComponent} from "./modules/reaction-view/components/reaction
 import {NotFoundComponent} from "./modules/not-found/component/not-found.component";
 import {SinglePostComponent} from "./modules/post/single-post/single-post.component";
 import {CanActivateRoleService} from "./services/can-activate/can-activate-role.service";
+import {SubscriptionComponent} from "./modules/subscriptions/components/subscription.component";
+import {SubscribersComponent} from "./modules/subscribers/components/subscribers.component";
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'complaints/:postId', component: ComplaintsComponent, canActivate: [CanActivateRoleService]},
   { path: 'reactions/:id', component: ReactionViewComponent, canActivate: [CanActivateService]},
   { path: 'post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
+  { path: 'subscriptions', component: SubscriptionComponent,  canActivate: [CanActivateService]},
+  { path: 'subscribers', component: SubscribersComponent,  canActivate: [CanActivateService]},
   { path: '**', component: NotFoundComponent }
 ];
 

@@ -41,4 +41,30 @@ public class UserServiceImpl implements UserService {
         restTemplate.put(backendUrl + "api/users/" + userId, user);
         return findById(userId);
     }
+
+    @Override
+    public List<User> getSubscriptions(Long userId) {
+        RestTemplate restTemplate = new RestTemplate();
+        User[] users = restTemplate.getForObject(backendUrl + "/api/users/" + userId + "/subscriptions", User[].class);
+        return users == null ? Collections.emptyList() : Arrays.asList(users);
+    }
+
+    @Override
+    public List<User> getSubscribers(Long userId) {
+        RestTemplate restTemplate = new RestTemplate();
+        User[] users = restTemplate.getForObject(backendUrl + "/api/users/" + userId + "/subscribers", User[].class);
+        return users == null ? Collections.emptyList() : Arrays.asList(users);
+    }
+
+    @Override
+    public User saveSubscription(Long userId, User subUser) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForObject(backendUrl + "/api/users/" + userId + "/subscriptions", subUser, User.class);
+    }
+
+    @Override
+    public void deleteSubscription(Long userId, Long subId) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendUrl + "/api/users/" + userId + "/subscriptions/" + subId);
+    }
 }

@@ -69,4 +69,35 @@ public class UserServiceImpl implements UserService {
                 ? optionalUser.get().getSubscribedBy()
                 : new ArrayList<>();
     }
+
+    // userId - I, subUser - i with to subscribe
+    @Override
+    public User saveSubscription(Long userId, User subUser) {
+        if(!userId.equals(subUser.getId())) {
+            Optional<User> optionalUser = userRepository.findById(userId);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                Optional<User> optionalSubToUser = userRepository.findById(subUser.getId());
+                if (optionalSubToUser.isPresent()) {
+                    User subToUser = optionalSubToUser.get();
+                    subToUser.getSubscribedTo().add(user);
+                    userRepository.save(subToUser);
+                    return user;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteSubscription(Long userId, Long subId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent()) {
+            Optional<User> subToUser = userRepository.findById(subId);
+            if(subToUser.isPresent()) {
+                subToUser.get().getSubscribedTo().remove(user.get());
+                userRepository.save(subToUser.get());
+            }
+        }
+    }
 }
