@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +52,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setPost(post);
         User user = userService.findById(comment.getUser().getId());
         comment.setUser(user);
-        comment.setDate(new Date());
+        comment.setDate(LocalDateTime.now());
         return commentRepository.save(comment);
     }
 
