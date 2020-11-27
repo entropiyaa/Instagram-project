@@ -24,7 +24,7 @@ public class SwaggerConfiguration {
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()
-                .paths(PathSelectors.ant("/api/*"))
+                .paths(PathSelectors.regex(".*/api/.*"))
                 .apis(RequestHandlerSelectors.basePackage("com.netcracker.fapi.controller"))
                 .build();
     }
