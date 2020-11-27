@@ -1,11 +1,14 @@
 package com.netcracker.fapi.entity;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 
 public class Comment {
     private Long id;
     private String text;
-    private Date date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime date;
     private Post post;
     private User user;
 
@@ -41,11 +44,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }
